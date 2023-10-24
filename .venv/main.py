@@ -10,6 +10,10 @@ def index():
 def about():
     return render_template("indexi.html")
 
+@app.route("/about")
+def about():
+    return render_template("first.html")
+
 @app.route("/contact")
 def contact():
     return "<p>Contact Us</p>"
