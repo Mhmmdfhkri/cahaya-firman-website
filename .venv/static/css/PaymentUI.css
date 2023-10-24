@@ -1,0 +1,72 @@
+Body {
+    font-family: 'Poppins', sans-serif;
+    background-color:  #D4D8F0;
+}
+
+.topnav-hd {
+    font-size: 32px;
+    color: #232946;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 3px;
+    padding: 20px 0;
+    font-weight: 600;
+}
+
+.topnav > * {
+    margin: 20px; 
+}
+
+.MainContent {
+    margin-top: 10%;
+}
+
+.bt_confirm{
+    background-color: #232946;
+    font-weight: 600;
+    color: #FF8C98;
+    letter-spacing: 5px;
+    font-size: 32px;
+}
+
+.BP-text{
+ color: #A1A1A1;
+ font-size: 32px;
+ letter-spacing: 1px;
+}
+
+.BP-value{
+    color: #FF8C98;
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+.COD{
+    font-size: 23px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.COD2{
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 100;
+}
+
+.tv-transfer{
+    font-size: 23px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.pay-cash{
+    font-size: 23px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.ch-bank{
+    color: #FF8C98;
+    font-size: 23px;
+    letter-spacing: 1px;
+    text-decoration: none;
+}

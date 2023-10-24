@@ -1,0 +1,143 @@
+.topnav-hd {
+    font-size: 32px;
+    color: #232946;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 3px;
+    padding: 20px 0;
+    font-weight: 600;
+}
+
+.d-flex > * {
+    margin: 20px; 
+}
+
+.ur-address {
+    font-size: 24px;
+    color: #232946;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding-left: 20px;
+    padding-top: 30px;
+}
+
+h3 {
+    font-size: 24px;
+    color: #232946;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+p{
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-address{
+    padding-left: 20px;
+    padding-bottom: 30px;
+}
+
+.ch-address{
+    color: #FF8C98;
+}
+
+
+.item-name{
+    font-size: 15px;
+}
+
+.item-stock{
+    font-size: 15px;
+    color: #787878;
+}
+
+.tv-payment{
+    font-size: 24px;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.payment-method{
+    font-size: 24px;
+    color: #FF8C98;
+    font-family: 'Poppins', sans-serif;
+}
+
+.detail-payment{
+    font-size: 24px;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.top_content {
+    margin-top: 10%;
+}
+
+.Subtotal{
+    color: #696969;
+    font-size: 18px;
+}
+
+.Subtotal-Product{
+    color: #696969;
+    font-size: 18px;
+}
+
+
+.Subtotal-delivery{
+    color: #696969;
+    font-size: 18px;
+}
+
+.service-fee{
+    color: #696969;
+    font-size: 18px;
+}
+
+.handling-fee{
+    color: #696969;
+    font-size: 18px;
+}
+
+.bottom_content{
+    margin-bottom: 8%;
+}
+
+.tvTotal-pay{
+    font-size: 25px;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.Total-pay{
+    font-size: 24px;
+    color: #FF8C98;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; 
+}
+
+.Total-pay2{
+    font-size: 40px;
+    color: #FF8C98;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 500;
+}
+
+.Total-payment{
+    font-size: 24px;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.bottom_flex {
+    height: 10%;
+}
+
+.car-sign {
+    width: 80%; /* Set the width to 80% of the original size */
+    height: auto; /* Maintain the original aspect ratio */
+  }
+  
