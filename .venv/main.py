@@ -32,7 +32,7 @@ def login():
 
 @app.route("/daftar")
 def register():
-    return render_template("login.html")
+    return render_template("daftar.html")
 
 @app.route("/contact")
 def contact():

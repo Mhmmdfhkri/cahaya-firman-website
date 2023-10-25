@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="first.css">
+    <!-- <link rel="stylesheet" type="text/css" href="first.css"> -->
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
 
@@ -241,7 +241,7 @@ nav>div a:hover {
         <nav>
             <div class="container">
                 <label>
-                    <img src="assets/cf.png" alt="Logo" width="50" height="50">
+                    <img src="../static/asset/cf.png" alt="Logo" width="50" height="50">
                     Cahaya Firman
                 </label>
 
@@ -273,15 +273,19 @@ nav>div a:hover {
         </span>
     </main>
 
-    <button class="button-daftar">
-        <span class="daftar-text"><span>REGISTER</span></span>
-    </button>
-
-    <button class="button-login">
-        <span class="login-text"><span>LOGIN</span></span>
-    </button>
-
-    <img src="assets/bangunan.png" alt="bangunan" class="bangunan" />
+    <a href="daftar">
+        <button class="button-daftar">
+            <span class="daftar-text">REGISTER</span>
+        </button>
+    </a>
+    
+    <a href="login">
+        <button class="button-login">
+            <span class="login-text">LOGIN</span>
+        </button>
+    </a>
+    
+    <img src="../static/asset/bangunan.png" alt="bangunan" class="bangunan" />
 </body>
 
 </html>

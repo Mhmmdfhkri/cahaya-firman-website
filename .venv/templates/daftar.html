@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in Form</title>
-    <link rel="stylesheet" type="text/css" href="daftar.css">
+    <title>Sign Up Form</title>
+    <!-- <link rel="stylesheet" type="text/css" href="login.css"> -->
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;');
 *
@@ -18,7 +19,7 @@ section
 {
     position: relative;
     min-height: 100vh;
-    background-image: url('assets/abstract.png');
+    background-image: url('../static/asset/abstract.png');
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,24 +115,27 @@ section .container .user .formBx form .signup a
     text-decoration: none;
     color: #677eff;
 }
+
     </style>
+
 </head>
 <body>
     <section>
         <div class="container">
-            <div class="user singinBx">
-                <div class="imgBx"><img src="assets/Group 6.png"></div>
+            <div class="user singupBx">
                 <div class="formBx">
                     <form>
-                        <h2>Sign In</h2>
+                        <h2>Create an account</h2>
                         <input type="text" name="" placeholder="Username">
-                        <input type="password" name="" placeholder="Password">
-                        <input type="submit" name="" placeholder="Login">
-                        <p class="signup">Don't have an account ? <a href="login.html">Sign Up</a></p>
+                        <input type="email" name="" placeholder="Email Address">
+                        <input type="password" name="" placeholder="Create Password">
+                        <input type="password" name="" placeholder="Confirm Password">
+                        <input type="submit" name="" placeholder="Sign Up">
+                        <p class="signup">Already have an account ? <a href="login">Sign in</a></p>
                     </form>
                 </div>
+                <div class="imgBx"><img src="../static/asset/Group 6.png"></div>
             </div>
-
         </div>
     </section>
 </body>
