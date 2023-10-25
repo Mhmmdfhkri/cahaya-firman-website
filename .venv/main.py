@@ -7,6 +7,10 @@ app = Flask(__name__)
 def index():
     return "<p>Hello, World!</p>"
 
+@app.route("/home")
+def home():
+    return render_template("home.html")
+
 
 @app.route("/about")
 def about():
@@ -25,11 +29,6 @@ def Checkout():
 @app.route("/Payment_Method")
 def Payment():
     return render_template("Payment.html")
-
-@app.route("/about")
-def about():
-    return render_template("first.html")
-
 @app.route("/contact")
 def contact():
     return "<p>Contact Us</p>"
