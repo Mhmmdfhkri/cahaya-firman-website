@@ -1,3 +1,9 @@
+Body {
+    font-family: 'Poppins', sans-serif;
+    background-color:  #D4D8F0;
+}
+
+
 .topnav-hd {
     font-size: 32px;
     color: #232946;
@@ -118,6 +124,12 @@ p{
     font-weight: 500; 
 }
 
+.bt_checkout{
+    background-color: #232946 !important;
+    color: #D4D8F0 !important;
+    font-weight: 500 !important;
+    letter-spacing: 1px !important;
+}
 .Total-pay2{
     font-size: 40px;
     color: #FF8C98;
@@ -131,13 +143,3 @@ p{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
-
-.bottom_flex {
-    height: 10%;
-}
-
-.car-sign {
-    width: 80%; /* Set the width to 80% of the original size */
-    height: auto; /* Maintain the original aspect ratio */
-  }
-  

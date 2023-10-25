@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <style>
+        .circle {
+            background-color: #d4d8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .img-fluid {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .garis {
+            height: 1px;
+            width: 98%;
+            margin: 0% auto;
+            background-color: black;
+        }
+
+        .teks-bold {
+            font-weight: 500;
+        }
+
+        .container-satu {
+            width: 100%;
+            margin: 0% auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .layanan {
+            width: 30%;
+        }
+.slogan {
+  position: absolute;
+  width: 744px;
+  height: 195px;
+  left: 46px;
+  top: 413px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  font-family: 'Besley', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 45px;
+  text-align: center;
+
+  color: #232946;
+}
+
+.build-your-dreams {
+  width: 100%;
+  height: 45px;
+  padding: 0 10px;
+  font-family: 'Besley', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 45px;
+  text-align: center;
+  color: #232946;
+
+  /* ubah posisi teks */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  /* ubah format teks */
+  overflow: visible;
+  white-space: normal;
+
+  /* ubah text-align */
+  text-align: center;
+}
+
+.sculpting-your-dreams {
+  width: 100%;
+  height: 45px;
+  padding: 0 10px;
+  font-family: 'Calistoga', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 45px;
+  text-align: center;
+  color: #232946;
+
+  /* ubah format teks */
+  white-space: nowrap;
+}
+.btn-shop-now {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  left: 318px;
+  top: 650px;
+
+  background-color: #EEBBC3;
+  border-radius: 20px;
+
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  :hover {
+    background-color: #E4A6AE;
+  }
+
+  :active {
+    background-color: #DC91A4;
+  }
+}
+
+.btn-shop-now .text {
+  font-family: 'Caudex';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 50px;
+  text-align: center;
+
+  color: #232946;
+
+  /* ubah posisi teks */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* ubah margin */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+</style>
+</head>
+
+<body>
+    <!-- Navbar Atas Garis -->
+    <div class="container-satu">
+        <div class="layanan satu d-flex align-items-center">
+            <div class="col d-flex justify-content-start">
+                <div class="circle d-flex align-items-center p-1 me-2 ms-3">
+                    <img src="../static/asset/Vector.png">
+                </div>
+                <p class="m-2">Username</p>
+            </div>
+        </div>
+        <div class="layanan dua">
+            <div class="col d-flex justify-content-center align-items-center">
+                <img src="../static/asset/Logo.png" class="img-fluid">
+            </div>
+        </div>
+        <div class="layanan tiga d-flex align-items-center">
+            <div class="col d-flex justify-content-end">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="../static/asset/Shopping Bag.png" class="img-fluid me-3">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Navbar Atas Garis -->
+    <div class="garis"></div>
+    <!-- Navbar Bawah Garis -->
+    <div class="container d-flex justify-content-center mt-3">
+        <div class="row">
+            <div class="col order-last">
+                <img src="../static/asset/lucide_search.png" class="img-fluid">
+            </div>
+            <div class="col">
+                <p class="teks-bold" style="color: #EEBBC3">About</p>
+            </div>
+            <div class="col">
+                <p class="teks-bold">Product</p>
+            </div>
+            <div class="col order-first">
+                <p class="teks-bold">Home</p>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex bd-highlight p-5" style="background-color: #d4d8f0">
+      <div class="p-5 flex-fill bd-highlight" style="width: 40%">
+       <div class="slogan">
+  <div class="build-your-dreams">Build Your Dreams with Us Discover World-Class Building Materials!</div>
+  <div class="sculpting-your-dreams">Sculpting Your Dreams, One Brick at a Time!</div>
+</div>
+
+    <div class="btn-shop-now">
+    <div class="text">SHOP NOW</div>
+    </div>
+    </div>
+      <div class="flex-fill bd-highlight mt-5">
+        <img
+          src="../static/asset/person.png"
+          class="img-fluid float-end me-5"
+        />
+      </div>
+    </div>
+    <!-- End Main Content Home-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>
