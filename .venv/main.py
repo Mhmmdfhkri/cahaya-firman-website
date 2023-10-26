@@ -125,9 +125,6 @@ def register():
 def products():
     return render_template("product.html")
 
-@app.route("/products")
-def products():
-    return render_template("product.html")
 
 @app.route("/contact")
 def contact():
