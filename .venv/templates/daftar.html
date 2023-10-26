@@ -116,22 +116,24 @@ section .container .user .formBx form .signup a
     color: #677eff;
 }
 
+
     </style>
 
 </head>
 <body>
     <section>
         <div class="container">
-            <div class="user singupBx">
+            <div class="user signupBx">
                 <div class="formBx">
-                    <form>
+                    <form method="POST" action="{{ url_for('register') }}">
                         <h2>Create an account</h2>
-                        <input type="text" name="" placeholder="Username">
-                        <input type="email" name="" placeholder="Email Address">
-                        <input type="password" name="" placeholder="Create Password">
-                        <input type="password" name="" placeholder="Confirm Password">
-                        <input type="submit" name="" placeholder="Sign Up">
-                        <p class="signup">Already have an account ? <a href="login">Sign in</a></p>
+                        {{ form.hidden_tag() }} 
+                        <input type="text" name="username" placeholder="Username" value="{{ form.username.data }}">
+                        <input type="email" name="email" placeholder="Email Address" value="{{ form.email.data }}">
+                        <input type="password" name="password" placeholder="Create Password" value="{{ form.password}}">
+                        <input type="password" name="confirm_password" placeholder="Confirm Password">
+                        <input type="submit" name="submit" value="Sign Up">
+                        <p class="signup">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
                     </form>
                 </div>
                 <div class="imgBx"><img src="../static/asset/Group 6.png"></div>
