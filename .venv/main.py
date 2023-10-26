@@ -80,6 +80,7 @@ def index():
 @login_required
 def home():
     return render_template("home.html")
+
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -119,6 +120,14 @@ def register():
         return redirect(url_for('login'))
 
     return render_template("daftar.html",form=form)
+
+@app.route("/products")
+def products():
+    return render_template("product.html")
+
+@app.route("/products")
+def products():
+    return render_template("product.html")
 
 @app.route("/contact")
 def contact():
