@@ -127,18 +127,19 @@ section .container .user .formBx form .signup a
                 <div class="formBx">
                     <form method="POST" action="{{ url_for('register') }}">
                         <h2>Create an account</h2>
-                        {{ form.hidden_tag() }} 
-                        <input type="text" name="username" placeholder="Username" value="{{ form.username.data }}">
-                        <input type="email" name="email" placeholder="Email Address" value="{{ form.email.data }}">
-                        <input type="password" name="password" placeholder="Create Password" value="{{ form.password}}">
+                        {{ form.hidden_tag() }}
+                        <input type="text" name="username" placeholder="Username" value="{{ form.username.data if form.username.data is not none else '' }}">
+                        <input type="email" name="email" placeholder="Email Address" value="{{ form.email.data if form.email.data is not none else '' }}">
+                        <input type="text" name="password" placeholder="Create Password" value="{{ form.password.data if form.password.data is not none else '' }}">
                         <input type="password" name="confirm_password" placeholder="Confirm Password">
                         <input type="submit" name="submit" value="Sign Up">
                         <p class="signup">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
-                    </form>
+                    </form>                                    
                 </div>
                 <div class="imgBx"><img src="../static/asset/Group 6.png"></div>
             </div>
         </div>
     </section>
 </body>
+
 </html>
