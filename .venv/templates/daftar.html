@@ -115,6 +115,24 @@ section .container .user .formBx form .signup a
     text-decoration: none;
     color: #677eff;
 }
+.pass-wrap{
+    position: relative;
+}
+#show-pass{
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+#show-pass img {
+  width: 100%;
+  height: auto;
+}
 
 
     </style>
@@ -130,7 +148,12 @@ section .container .user .formBx form .signup a
                         {{ form.hidden_tag() }}
                         <input type="text" name="username" placeholder="Username" value="{{ form.username.data if form.username.data is not none else '' }}">
                         <input type="email" name="email" placeholder="Email Address" value="{{ form.email.data if form.email.data is not none else '' }}">
-                        <input type="text" name="password" placeholder="Create Password" value="{{ form.password.data if form.password.data is not none else '' }}">
+                        <div class="pass-wrap">
+                            <input type="password" name="password" placeholder="Password" id="password" value="{{ form.password.data if form.password.data is not none else '' }}">
+                            <button type="button" id="show-pass">
+                                <img src="{{ url_for('static', filename='asset/visibility.svg') }}" alt="visibility">
+                            </button>
+                        </div>
                         <input type="password" name="confirm_password" placeholder="Confirm Password">
                         <input type="submit" name="submit" value="Sign Up">
                         <p class="signup">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
@@ -140,6 +163,22 @@ section .container .user .formBx form .signup a
             </div>
         </div>
     </section>
+
+    <script>
+        const show_pass_bt = document.querySelector('#show-pass');
+        const pw_input = document.querySelector('#password');
+    
+        show_pass_bt.addEventListener('click', () => {
+            if (pw_input.type === 'password') {
+                pw_input.type = 'text';
+                show_pass_bt.innerHTML = '<img src="../static/asset/visibility_off.svg" alt="visibility-off">';
+            } else {
+                pw_input.type = 'password';
+                show_pass_bt.innerHTML = '<img src="../static/asset/visibility.svg" alt="visibility">';
+            }
+        });
+    </script>
+
 </body>
 
 </html>
