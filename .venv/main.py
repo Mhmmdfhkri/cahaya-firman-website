@@ -1,10 +1,10 @@
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin,login_user,LoginManager,login_required,logout_user,current_user
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField
-from wtforms.validators import InputRequired,Length,ValidationError,EqualTo, Email
-from flask_bcrypt import Bcrypt 
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError, EqualTo, Email
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
@@ -24,12 +24,12 @@ login_manager.login_view = 'login'
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False, unique = True)
-    email = db.Column(db.String(120), nullable=False, unique=True) 
+    username = db.Column(db.String(20), nullable=False, unique=True)
+    email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
-    
 
 
 class RegisterForm(FlaskForm):
@@ -60,7 +60,6 @@ class RegisterForm(FlaskForm):
             raise ValidationError(
                 'An account with this email already exists.')
 
-        
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[
@@ -76,26 +75,32 @@ class LoginForm(FlaskForm):
 def index():
     return render_template("first.html")
 
+
 @app.route("/home")
 @login_required
 def home():
     return render_template("home.html")
 
+
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 
 @app.route("/keranjang")
 def keranjang():
     return render_template("keranjang.html")
 
+
 @app.route("/Checkout")
 def Checkout():
-    return render_template("Checkout.html")
+    return render_template("checkout.html")
 
-@app.route("/Payment_Method")
+
+@app.route("/payment")
 def Payment():
     return render_template("Payment.html")
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -106,7 +111,8 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('home'))
-    return render_template("login.html",form=form)
+    return render_template("login.html", form=form)
+
 
 @app.route("/daftar", methods=['GET', 'POST'])
 def register():
@@ -114,12 +120,14 @@ def register():
 
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password=hashed_password,email=form.email.data)
+        new_user = User(username=form.username.data,
+                        password=hashed_password, email=form.email.data)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))
 
-    return render_template("daftar.html",form=form)
+    return render_template("daftar.html", form=form)
+
 
 @app.route("/products")
 def products():
@@ -129,6 +137,7 @@ def products():
 @app.route("/contact")
 def contact():
     return "<p>Contact Us</p>"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
