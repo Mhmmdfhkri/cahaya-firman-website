@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>profile page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .circle {
+            background-color: #d4d8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        body {
+            background-color: #D4D8F1 !important;
+        }
+        .border-bottom {
+            border-width: 3px !important;
+            border-color: black !important;
+        }
+        .card {
+            background-color: #EFF3FB;
+        }
+        .form-check-input {
+            width: 2em;
+            height: 2em;
+        }
+        .form-check-label {
+            margin-left: 10px;
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom" style="background-color: #FFF !important;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <div class="layanan satu d-flex align-items-center">
+                    <div class="col d-flex justify-content-start">
+                        <div class="circle d-flex align-items-center p-1 me-2 ms-3">
+                            <img src="../static/asset/Vector.png">
+                        </div>
+                        <p class="m-2">Username</p>
+                    </div>
+                </div>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <img src="static/asset/Logo.png" width="70%" alt="">
+                </div>
+                <div class="d-flex" role="search">
+                    <img src="static/asset/Shopping Bag.png" width="75%" alt="">
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #FFF !important;"">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav mx-auto mb-2 mb-lg-0 fw-bold">
+                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link" href="#">
+                        <img src="static/asset/lucide_search.png" width="50%" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col align-self-center text-center fw-bold">
+                                <img src="static/asset/profil.png" class="mt-2" width="40%" alt="">
+                                <div class="username mt-3 mb-2">Username</div>
+                                <div class="email">username@gmail.com</div>
+                                <img class="img-fluid" src="static/asset/worker.png" alt="">
+                                <div class="btn btn-danger fw-bold py-1 px-5 fs-3 rounded-4" style="margin-top: -63px;">
+                                    Logout
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card h-100 p-3">
+                    <div class="card-body fw-bold">
+                        <div class="h5 mb-4 fw-bold">Account Settings</div>
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="static/asset/profil.png" width="100%" alt="">
+                            </div>
+                            <div class="col-10">
+                                <div class="username">Username</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label for="full-name" class="form-label">Full Name</label>
+                                <input type="text" id="full-name" placeholder="Your Full Name" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="text" id="phone" placeholder="Input Your Mobile Phone" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label for="date" class="form-label">Date Birth</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" placeholder="Date" id="date" class="form-control">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" placeholder="Month" id="month" class="form-control">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" placeholder="Year" id="year" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="gender" class="form-label">Gender</label><br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" id="email" placeholder="Your Email" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label for="address" class="form-label">Address</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Input Your Address">
+                                    <span class="input-group-text"><i class="fa-solid fa-location-dot text-success"></i></span>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+
+                            </div>
+                            <div class="col">
+                                <div class="w-100 btn btn-success fw-bold fs-3 rounded-4">
+                                    Save
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
