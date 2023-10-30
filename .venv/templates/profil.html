@@ -79,12 +79,12 @@
                         <div class="row">
                             <div class="col align-self-center text-center fw-bold">
                                 <img src="static/asset/profil.png" class="mt-2" width="40%" alt="">
-                                <div class="username mt-3 mb-2">Username</div>
-                                <div class="email">username@gmail.com</div>
+                                <div class="username mt-3 mb-2">{{ user.username }}</div>
+                                <div class="email">{{ user.email }}</div>
                                 <img class="img-fluid" src="static/asset/worker.png" alt="">
-                                <div class="btn btn-danger fw-bold py-1 px-5 fs-3 rounded-4" style="margin-top: -63px;">
-                                    Logout
-                                </div>
+                                <form action="{{ url_for('logout') }}" method="POST">
+                                    <button class="btn btn-danger fw-bold py-1 px-5 fs-3 rounded-4" type="submit">Logout</button>
+                                </form>                                
                             </div>
                         </div>
                     </div>

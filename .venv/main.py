@@ -139,9 +139,15 @@ def contact():
     return "<p>Contact Us</p>"
 
 @app.route("/profil")
+@login_required
 def profil():
-    return render_template("profil.html")
+    return render_template("profil.html",user=current_user)
 
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
     app.run(debug=True)
