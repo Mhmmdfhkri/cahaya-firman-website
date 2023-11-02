@@ -9,7 +9,7 @@ from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = 'Cahayasyarif'
+app.config['SECRET_KEY'] = 'bq8ZSQd!.BB@'
 db = SQLAlchemy(app)
 app.app_context().push()
 bcrypt = Bcrypt(app)
