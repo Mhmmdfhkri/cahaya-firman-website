@@ -72,6 +72,17 @@ def register():
 def products():
     return render_template("product.html")
 
+# admin start
+@app.route("/admin-user")
+def adminuser():
+    return render_template("admin_user.html")
+@app.route("/admin-crud")
+def admincrud():
+    return render_template("admin_crud.html")
+@app.route("/admin-status")
+def adminstatus():
+    return render_template("admin_status.html")
+# admin end
 
 @app.route("/contact")
 def contact():

@@ -1,0 +1,54 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.navbar{
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: #004643;
+    height: 100px;
+    width: 100%;
+}
+
+h1{
+    margin-left: 50px;
+}
+
+.container{
+    display: flex;
+    width: 100%;
+    height: 700px;
+}
+
+.bar-left{
+    width: 15%;
+    background-color: #004643;
+}
+
+.nav-user{
+    background-color: #004643;
+    height: 80px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+a{
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+a:hover {
+    color: orange; /* Warna yang akan diaplikasikan saat hover */
+}
+
+.bar-right{
+    width: 85%;
+    background-color: #abd1c6;
+}
