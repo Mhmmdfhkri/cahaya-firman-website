@@ -77,7 +77,6 @@ def index():
 
 
 @app.route("/home")
-@login_required
 def home():
     return render_template("home.html")
 
@@ -93,8 +92,9 @@ def keranjang():
 
 
 @app.route("/Checkout")
+@login_required
 def Checkout():
-    return render_template("checkout.html")
+    return render_template("checkout.html",user=current_user)
 
 
 @app.route("/payment")
