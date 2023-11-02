@@ -73,14 +73,14 @@ def products():
     return render_template("product.html")
 
 # admin start
-@app.route("/admin-user")
-def adminuser():
+@app.route("/admin_user")
+def admin_user():
     return render_template("admin_user.html")
-@app.route("/admin-crud")
-def admincrud():
+@app.route("/admin_crud")
+def admin_crud():
     return render_template("admin_crud.html")
-@app.route("/admin-status")
-def adminstatus():
+@app.route("/admin_status")
+def admin_status():
     return render_template("admin_status.html")
 # admin end
 

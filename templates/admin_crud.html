@@ -13,14 +13,14 @@
     <div class="container">
         <div class="bar-left">
             <div class="nav-user">
-                <a href="admin_user.html">USER</a>
+                <a href="{{ url_for('admin_user') }}">USER</a>
             </div>
             <div class="nav-user">
-                <a href="admin_crud.html">CRUD</a>
+                <a href="{{ url_for('admin_crud') }}">CRUD</a>
             </div>
             <div class="nav-user">
-                <a href="admin_status.html">STATUS</a>
-            </div>
+                <a href="{{ url_for('admin_status') }}">STATUS</a>
+            </div>   
         </div>
         <div class="bar-right">
             <h1>
