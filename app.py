@@ -108,57 +108,65 @@ def add_barang():
         quantityInStock = request.form['quantityInStock']
         price = request.form['price']
 
-        # Proses upload gambar
+        # Check if a file is uploaded
         if 'picture' in request.files:
             picture = request.files['picture']
-            picture.save('static/unggah/' + secure_filename(picture.filename))
+            if picture.filename != '':
+                # Save the file to the "uploads" directory
+                picture_filename = secure_filename(picture.filename)
+                picture.save('static/unggah/' + picture_filename)
+            else:
+                picture_filename = None
         else:
-            picture = None
+            picture_filename = None
 
-        # Buat objek Barang dan simpan ke database
-        new_barang = Barang(name=name, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture, complete=False)
+        # Create a new Barang object and save it to the database
+        new_barang = Barang(name=name, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture_filename)
         db.session.add(new_barang)
         db.session.commit()
         return redirect(url_for("add"))
 
+    return render_template("add.html")
 
 
 
 
-@app.route("/edit")
-def edit():
-    return render_template("edit.html")
 
+@app.route("/edit/<int:id>", methods=['GET', 'POST'])
+def edit_barang(id):
+    barang = Barang.query.get_or_404(id)
+    if request.method == 'POST':
+        # Update the 'Barang' item with the new data
+        barang.name = request.form['name']
+        barang.desc = request.form['desc']
+        barang.category = request.form['category']
+        barang.quantityInStock = request.form['quantityInStock']
+        barang.price = request.form['price']
 
-# @app.route('/add_barang', methods=['POST'])
-# def add_barang():
-#     if request.method == 'POST':
-#         name = request.form['name']
-#         desc = request.form['desc']
-#         category = request.form['category']
-#         quantityInStock = request.form['quantityInStock']
-#         price = request.form['price']
+         # Check if a file is uploaded
+        if 'picture' in request.files:
+            picture = request.files['picture']
+            if picture.filename != '':
+                # Save the file to the "uploads" directory
+                picture_filename = secure_filename(picture.filename)
+                picture.save('static/unggah/' + picture_filename)
+            else:
+                picture_filename = None
+        else:
+            picture_filename = None
 
-#         # Proses upload gambar
-#         if 'picture' in request.files:
-#             picture = request.files['picture']
-#             picture.save('static/unggah/' + secure_filename(picture.filename))
-#         else:
-#             picture = None
+        db.session.commit()
+        flash('Barang updated successfully', 'success')
+        return redirect(url_for('admin_crud'))
+    return render_template("edit.html", barang=barang)
 
-#         # Buat objek Barang dan simpan ke database
-#         new_barang = Barang(name=name, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture)
-#         db.session.add(new_barang)
-#         db.session.commit()
-#         flash('Barang berhasil ditambahkan!', 'success')
-#         return redirect(url_for('admin_crud'))
-
-#     return render_template("add.html")
-
-
-
-# crud end
-
+@app.route("/delete/<int:id>", methods=['POST'])
+def delete_barang(id):
+    barang = Barang.query.get_or_404(id)
+    db.session.delete(barang)
+    db.session.commit()
+    flash('Barang deleted successfully', 'success')
+    return redirect(url_for('admin_crud'))
 
 
 @app.route("/contact")

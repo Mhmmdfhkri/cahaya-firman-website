@@ -47,7 +47,9 @@
             <td><img src="{{ url_for('static', filename=barang.picture) }}" width="100" height="100"></td>
             <td>
                 <a href="/edit/{{ barang.id }}">Edit</a>
-                <a href="/delete/{{ barang.id }}">Hapus</a>
+                <form method="POST" action="/delete/{{ barang.id }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <button type="submit">Hapus</button>
+                </form>
             </td>
         </tr>
         {% endfor %}
