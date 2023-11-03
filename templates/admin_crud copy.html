@@ -22,8 +22,7 @@
                 <a href="{{ url_for('admin_status') }}">STATUS</a>
             </div>   
         </div>
-        <!-- ... (bagian lain dari HTML Anda) ... -->
-<div class="bar-right">
+        <div class="bar-right">
     <h1>Daftar Barang</h1>
     <table>
         <tr>
@@ -46,15 +45,14 @@
             <td>{{ barang.price }}</td>
             <td><img src="{{ url_for('static', filename=barang.picture) }}" width="100" height="100"></td>
             <td>
-                <a href="/edit/{{ barang.id }}">Edit</a>
+                <a href="/edit">Edit</a>
                 <a href="/delete/{{ barang.id }}">Hapus</a>
             </td>
         </tr>
         {% endfor %}
     </table>
     <a href="/add">Tambah Barang Baru</a>
-</div>
-<!-- ... (bagian lain dari HTML Anda) ... -->
+        </div>
     </div>
 </body>
 </html>
