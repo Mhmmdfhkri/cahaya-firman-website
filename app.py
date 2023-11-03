@@ -1,10 +1,13 @@
 from main import app, db, bcrypt, login_manager
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, flash
 from werkzeug.utils import secure_filename
 from forms.auth_forms import RegisterForm, LoginForm
 from flask_login import login_user,login_required, logout_user, current_user
+from flask_wtf import FlaskForm
+from flask import flash
 from models.user import User
 from models.product import Barang
+
 
 
 @login_manager.user_loader
@@ -81,7 +84,9 @@ def admin_user():
 
 @app.route("/admin_crud")
 def admin_crud():
-    return render_template("admin_crud.html")
+    barang_list = Barang.query.all()
+    return render_template('admin_crud.html', barang_list=barang_list)
+
 
 @app.route("/admin_status")
 def admin_status():
@@ -94,42 +99,63 @@ def admin_status():
 def add():
     return render_template("add.html")
 
-# @app.route('/add', methods=['GET', 'POST'])
-# def add():
-#     if request.method == 'POST':
-#         namabarang = request.form['name']
-#         desc = request.form['desc']
-#         category = request.form['category']
-#         quantityInStock = request.form['quantityInStock']
-#         price = request.form['price']
+@app.route('/add_barang', methods=['POST'])
+def add_barang():
+    if request.method == 'POST':
+        name = request.form['name']
+        desc = request.form['desc']
+        category = request.form['category']
+        quantityInStock = request.form['quantityInStock']
+        price = request.form['price']
 
-        # Simpan gambar ke direktori yang sesuai dan simpan nama file dalam database
-#         if 'picture' in request.files:
-#             picture = request.files['picture']
-#             if picture:
-#                 picture_filename = secure_filename(picture.filename)
-#                 picture.save(os.path.join(app.config['UPLOAD_FOLDER'], picture_filename))
-#             else:
-#                 picture_filename = "default.jpg"
-#         else:
-#             picture_filename = "default.jpg"
+        # Proses upload gambar
+        if 'picture' in request.files:
+            picture = request.files['picture']
+            picture.save('static/unggah/' + secure_filename(picture.filename))
+        else:
+            picture = None
 
-#         new_barang = Barang(name=namabarang, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture_filename)
-#         db.session.add(new_barang)
-#         db.session.commit()
+        # Buat objek Barang dan simpan ke database
+        new_barang = Barang(name=name, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture, complete=False)
+        db.session.add(new_barang)
+        db.session.commit()
+        return redirect(url_for("add"))
 
-#     return redirect(url_for('admin_crud'))
 
-# @app.route('/admin_crud')
-# def admin_crud():
-#     barang_list = Barang.query.all()
-#     return render_template('admin_crud.html', barang_list=barang_list)
 
 
 
 @app.route("/edit")
 def edit():
     return render_template("edit.html")
+
+
+# @app.route('/add_barang', methods=['POST'])
+# def add_barang():
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         desc = request.form['desc']
+#         category = request.form['category']
+#         quantityInStock = request.form['quantityInStock']
+#         price = request.form['price']
+
+#         # Proses upload gambar
+#         if 'picture' in request.files:
+#             picture = request.files['picture']
+#             picture.save('static/unggah/' + secure_filename(picture.filename))
+#         else:
+#             picture = None
+
+#         # Buat objek Barang dan simpan ke database
+#         new_barang = Barang(name=name, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture)
+#         db.session.add(new_barang)
+#         db.session.commit()
+#         flash('Barang berhasil ditambahkan!', 'success')
+#         return redirect(url_for('admin_crud'))
+
+#     return render_template("add.html")
+
+
 
 # crud end
 
