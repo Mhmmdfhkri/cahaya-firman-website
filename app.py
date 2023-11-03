@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 from forms.auth_forms import RegisterForm, LoginForm
 from flask_login import login_user,login_required, logout_user, current_user
 from models.user import User
+from models.product import Barang
 
 
 @login_manager.user_loader
