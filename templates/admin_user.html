@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="crud_admin.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/crud_admin.css') }}">
     <title>Crud Admin</title>
 </head>
@@ -24,9 +23,21 @@
             </div>            
         </div>
         <div class="bar-right">
-            <h1>
-                ini user
-            </h1>
+            <h1>Daftar Pengguna</h1>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 </body>

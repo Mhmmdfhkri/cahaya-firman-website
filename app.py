@@ -80,7 +80,8 @@ def products():
 # admin start
 @app.route("/admin_user")
 def admin_user():
-    return render_template("admin_user.html")
+    users = User.query.all()
+    return render_template("admin_user.html", users=users)
 
 @app.route("/admin_crud")
 def admin_crud():
