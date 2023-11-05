@@ -44,7 +44,7 @@
             <td>{{ barang.category }}</td>
             <td>{{ barang.quantityInStock }}</td>
             <td>{{ barang.price }}</td>
-            <td><img src="{{ url_for('static', filename=barang.picture) }}" width="100" height="100"></td>
+            <td><img src="{{ url_for('static', filename='unggah/'+ barang.picture) }}" width="100" height="100"></td>
             <td>
                 <a href="/edit/{{ barang.id }}">Edit</a>
                 <form method="POST" action="/delete/{{ barang.id }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
