@@ -40,7 +40,7 @@
                     <div class="head-1">
                         <p class="title">{{ barang.name }}</p>
                         <div class="rating">
-                            <img src="star_rating.png" alt="">
+                            <img src="{{ url_for('static', filename='asset/star_rating.png') }}" alt="">
                             <p>5 | .</p>
                             <br>
                             <p>100 </p>
@@ -50,7 +50,7 @@
                     </div>
                     <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
                 </div>
-                <img class="item" src="{{ url_for('static', filename='unggah/' + barang.picture) }}" alt="picture">
+                <img  Id="image" class="item" src="{{ url_for('static', filename='unggah/' + barang.picture) }}" alt="picture">
                 <p class="des">{{ barang.desc }}</p>
                 <p class="price">{{ barang.price }}</p>
                 <div class="btn">
