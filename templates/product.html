@@ -34,342 +34,38 @@
             <img class="img-1" src="{{ url_for('static', filename='asset/search_img.png') }}" alt="">
         </div>
         <div class="product">
+            {% for barang in barang_list %}
             <div class="detail">
                 <div class="head">
                     <div class="head-1">
-                        <p class="title">Semen</p>
+                        <p class="title">{{ barang.name }}</p>
                         <div class="rating">
                             <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
+                            <p>5 | .</p>
                             <br>
-                            <p>100  </p>
+                            <p>100 </p>
                             <br>
-                            <p>.   Terjual</p>
+                            <p>. Terjual</p>
                         </div>
                     </div>
                     <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
                 </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
+                <img class="item" src="{{ url_for('static', filename='unggah/' + barang.picture) }}" alt="picture">
+                <p class="des">{{ barang.desc }}</p>
+                <p class="price">{{ barang.price }}</p>
                 <div class="btn">
                     <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
+                    <p>Add To Cart</p>
                 </div>
                 <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
+                    <form action="/buy/{{ barang.id }}" method="POST">
+                        <input type="hidden" name="_method" value="POST">
+                        <img src="" alt="">
+                        <button type="submit">Buy Now</button>
+                    </form>
                 </div>
             </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="head">
-                    <div class="head-1">
-                        <p class="title">Semen</p>
-                        <div class="rating">
-                            <img src="star_rating.png" alt="">
-                            <p>5 |     .</p>
-                            <br>
-                            <p>100  </p>
-                            <br>
-                            <p>.   Terjual</p>
-                        </div>
-                    </div>
-                    <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
-                </div>
-                <img class="item" src="{{ url_for('static', filename='asset/cemen.png') }}" alt="">
-                <p class="des">Semen is a vital building material used in 
-                    construction and various other applications</p>
-                <p class="price">Rp 61.000</p>
-                <div class="btn">
-                    <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
-                    <p>Add To Card</p>
-                </div>
-                <div class="btn">
-                    <img src="" alt="">
-                    <p>Buy Now</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 

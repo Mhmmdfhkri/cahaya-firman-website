@@ -73,9 +73,18 @@ def register():
     return render_template("daftar.html", form=form)
 
 
-@app.route("/products")
+@app.route("/products", methods=["GET", "POST"])
 def products():
-    return render_template("product.html")
+    if request.method == "POST":
+        # Handle adding to cart or purchasing the item here
+        # You can access the product's ID from the request
+        product_id = request.form.get("product_id")
+        # Logic to add the product to the cart or process the purchase
+        flash("Product added to cart successfully")
+        return redirect(url_for("products"))
+
+    barang_list = Barang.query.all()
+    return render_template("product.html", barang_list=barang_list)
 
 # admin start
 @app.route("/admin_user")
