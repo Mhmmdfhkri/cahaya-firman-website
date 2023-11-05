@@ -12,7 +12,7 @@
         <div class="logo">
             <div class="profile">
                 <img class="logo-1" src="{{ url_for('static', filename='asset/profile_user.png') }}" alt="profile">
-                <p>Username</p>
+                <p class="username" Id="username">Username</p>
             </div>
             <img class="logo-2" src="{{ url_for('static', filename='asset/Logofirman.png') }}" alt="logo">
             <img class="bucket" src="{{ url_for('static', filename='asset/bucket.png') }}" alt="bucket">
@@ -52,16 +52,16 @@
                 </div>
                 <img  Id="image" class="item" src="{{ url_for('static', filename='unggah/' + barang.picture) }}" alt="picture">
                 <p class="des">{{ barang.desc }}</p>
-                <p class="price">{{ barang.price }}</p>
+                <p class="price">Rp.{{ barang.price }}</p>
                 <div class="btn">
                     <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
                     <p>Add To Cart</p>
-                </div>
-                <div class="btn">
+                </div>  
+                <div class="btn-1">
                     <form action="/buy/{{ barang.id }}" method="POST">
                         <input type="hidden" name="_method" value="POST">
                         <img src="" alt="">
-                        <button type="submit">Buy Now</button>
+                        <button type="submit" class="sub">Buy Now</button>
                     </form>
                 </div>
             </div>
