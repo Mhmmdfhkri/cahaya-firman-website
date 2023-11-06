@@ -1,6 +1,7 @@
 from main import db
 
-class Barang(db.Model):
+class Product(db.Model):
+    __tablename__ = 'product'  
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     desc = db.Column(db.String(100))
@@ -8,5 +9,3 @@ class Barang(db.Model):
     quantityInStock = db.Column(db.Integer)
     price = db.Column(db.Float)
     picture = db.Column(db.String(100))
-
-    

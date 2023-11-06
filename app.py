@@ -6,7 +6,7 @@ from flask_login import login_user,login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from flask import flash
 from models.user import User
-from models.product import Barang
+from models.product import Product
 
 
 
@@ -27,7 +27,7 @@ def products():
         flash("Product added to cart successfully")
         return redirect(url_for("products"))
 
-    barang_list = Barang.query.all()
+    barang_list = Product.query.all()
     return render_template("product.html", barang_list=barang_list)
 
 
@@ -93,7 +93,7 @@ def admin_user():
 
 @app.route("/admin_crud")
 def admin_crud():
-    barang_list = Barang.query.all()
+    barang_list = Product.query.all()
     return render_template('admin_crud.html', barang_list=barang_list)
 
 
@@ -130,7 +130,7 @@ def add_barang():
             picture_filename = None
 
         # Create a new Barang object and save it to the database
-        new_barang = Barang(name=name, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture_filename)
+        new_barang = Product(name=name, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture_filename)
         db.session.add(new_barang)
         db.session.commit()
         return redirect(url_for("add"))
@@ -143,7 +143,7 @@ def add_barang():
 
 @app.route("/edit/<int:id>", methods=['GET', 'POST'])
 def edit_barang(id):
-    barang = Barang.query.get_or_404(id)
+    barang = Product.query.get_or_404(id)
     if request.method == 'POST':
         # Update the 'Barang' item with the new data
         barang.name = request.form['name']
@@ -171,7 +171,7 @@ def edit_barang(id):
 
 @app.route("/delete/<int:id>", methods=['POST'])
 def delete_barang(id):
-    barang = Barang.query.get_or_404(id)
+    barang = Product.query.get_or_404(id)
     db.session.delete(barang)
     db.session.commit()
     flash('Barang deleted successfully', 'success')
@@ -186,6 +186,24 @@ def contact():
 @login_required
 def profil():
     return render_template("profil.html",user=current_user)
+
+@app.route('/update_profile', methods=['POST'])
+@login_required
+def update_profile():
+    if request.method == 'POST':
+        user = current_user
+
+        # Update user data based on form input
+        user.fullname = request.form.get('fullname')
+        user.telephone = request.form.get('telephone')
+        user.email = request.form.get('email')
+        user.gender = request.form.get('gender')
+        user.address = request.form.get('address')
+
+        db.session.commit()
+        flash('Profile updated successfully', 'success')
+
+    return redirect(url_for('profil'))
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
