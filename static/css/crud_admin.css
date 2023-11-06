@@ -74,10 +74,14 @@ tr:nth-child(odd) {
     background-color: #fff; /* Warna latar belakang baris ganjil */
 }
 
+.button-main{
+    margin-left: 50px;
+}
+
 .button{
     border-radius: 20px;
     margin-top: 20px;
-    margin-left: 50px;
+    /* margin-left: 50px; */
     width: 200px;
     height: 35px;
     background-color: green;
@@ -89,3 +93,36 @@ a.button{
     align-items: center;
     font-size: 14px;
 }
+
+
+.button-1{
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left: 0px;
+    width: 200px;
+    height: 35px;
+    background-color: green;
+}
+
+a.button-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+/* .button-1 {
+    margin-right: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a.button-1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    text-align: center; /* Menambahkan perataan teks di tengah */
+/* } */ 

@@ -133,7 +133,7 @@ def add_barang():
         new_barang = Product(name=name, desc=desc, category=category, quantityInStock=quantityInStock, price=price, picture=picture_filename)
         db.session.add(new_barang)
         db.session.commit()
-        return redirect(url_for("add"))
+        return redirect(url_for("admin_crud"))
 
     return render_template("add.html")
 
