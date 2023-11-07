@@ -7,8 +7,6 @@ from flask_migrate import Migrate
 app = Flask(__name__)
 
 app.config.from_object('config')
-SECRET_KEY = 'bq8ZSQd!.BB@'
-SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 migrate = Migrate(app, db)
