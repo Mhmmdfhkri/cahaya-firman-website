@@ -8,8 +8,6 @@ from flask import flash
 from models.user import User
 from models.product import Product
 
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
