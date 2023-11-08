@@ -1,8 +1,10 @@
 from main import db
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 
 class Product(db.Model):
     __tablename__ = 'product'  
-    id = db.Column(db.Integer, primary_key=True)
+    id_product = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     desc = db.Column(db.String(100))
     category = db.Column(db.String(100))

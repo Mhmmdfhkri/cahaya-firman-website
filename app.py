@@ -7,6 +7,14 @@ from flask_wtf import FlaskForm
 from flask import flash
 from models.user import User
 from models.product import Product
+from models.cart_item import cart
+from models.order_detail import Order_detail
+from models.order_items import Order_items
+from models.payment_detail import Payment_detail
+from models.reviews import reviews
+from models.shopping_session import session
+
+
 
 @login_manager.user_loader
 def load_user(user_id):
