@@ -42,7 +42,7 @@
                 {% set end = offset + items_per_page %}
                 {% for barang in barang_list[start:end] %}
                 <tr>
-                    <td>{{ barang.id_product }}</td>
+                    <td>{{ barang.id }}</td>
                     <td>{{ barang.name }}</td>
                     <td>{{ barang.desc }}</td>
                     <td>{{ barang.category }}</td>

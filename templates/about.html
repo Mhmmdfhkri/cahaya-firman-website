@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Pridi' rel='stylesheet'>
     <style>
         .circle {
             background-color: #d4d8f0;
@@ -28,7 +31,8 @@
         }
 
         .teks-bold {
-            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
         }
 
         .container-satu {
@@ -41,6 +45,26 @@
         .layanan {
             width: 30%;
         }
+
+        p.m-2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+
+        p.fs-3.mb-3 {
+            font-family: 'Pridi', sans-serif;
+            font-weight: bold;
+        }
+
+        p.fs-4 {
+            font-family: 'Pridi', sans-serif;
+            font-weight: lighter;
+        }
+
+        h4 {
+            font-family: 'Pridi', sans-serif;
+            font-weight: bold;
+        }
     </style>
     <title>About</title>
 </head>
@@ -49,21 +73,21 @@
     <!-- Navbar Atas Garis -->
     <div class="container-satu">
         <div class="layanan satu d-flex align-items-center">
-            <div class="col d-flex justify-content-start">
+            <div class="col d-flex justify-content-start" id="profileContainer">
                 <div class="circle d-flex align-items-center p-1 me-2 ms-3">
                     <img src="../static/asset/Vector.png">
                 </div>
-                <p class="m-2">Username</p>
+                <p class="m-2" id="username">username</p>
             </div>
         </div>
         <div class="layanan dua">
-            <div class="col d-flex justify-content-center align-items-center">
+            <div class="col d-flex justify-content-center align-items-center" id="logoCahayaFirmanContainer">
                 <img src="../static/asset/Logo.png" class="img-fluid">
             </div>
         </div>
         <div class="layanan tiga d-flex align-items-center">
             <div class="col d-flex justify-content-end">
-                <div class="d-flex flex-column align-items-center">
+                <div class="d-flex flex-column align-items-center" id="keranjangContainer">
                     <img src="../static/asset/Shopping Bag.png" class="img-fluid me-3">
                 </div>
             </div>
@@ -72,18 +96,18 @@
     <!-- End Navbar Atas Garis -->
     <div class="garis"></div>
     <!-- Navbar Bawah Garis -->
-    <div class="container d-flex justify-content-center mt-3">
+    <div class="container d-flex justify-content-center">
         <div class="row">
-            <div class="col order-last">
+            <div class="col order-last mx-3 mt-2">
                 <img src="../static/asset/lucide_search.png" class="img-fluid">
             </div>
-            <div class="col">
-                <p class="teks-bold" style="color: #EEBBC3">About</p>
+            <div class="col mx-3 mt-3" id="aboutContainer">
+                <p class="teks-bold" style="color: #EEBBC3;">About</p>
             </div>
-            <div class="col">
+            <div class="col mx-3 mt-3">
                 <p class="teks-bold">Product</p>
             </div>
-            <div class="col order-first">
+            <div class="col order-first mx-3 mt-3" id="homeContainer">
                 <p class="teks-bold">Home</p>
             </div>
         </div>
@@ -92,27 +116,74 @@
     <!-- Main Content About-->
 
     <div class="d-flex bd-highlight" style="background-color: #D4D8F0;">
-        <div class="p-5 flex-fill bd-highlight" style="width: 40%;">
-            <p class="fs-4 mb-4"><b>WELCOME TO OUR WESITE</b></p>
-            <p class="fs-4 lh-base">Kami adalah mitra andal dalam mewujudkan
+        <div class="p-4 flex-fill bd-highlight ms-3" style="width: 50%;">
+            <p class="fs-3 mb-3 mt-5">WELCOME TO OUR WEBSITE</p>
+            <p class="fs-4">Kami adalah mitra andal dalam mewujudkan
                 impian Anda untuk memiliki rumah atau proyek
                 bangunan yang sempurna. Dengan komitmen
                 terhadap kualitas tertinggi, pelayanan pelanggan
                 yang ramah, dan berbagai produk bahan
                 bangunan terbaik, kami hadir untuk mendukung
                 setiap langkah perjalanan konstruksi Anda.</p>
-            <p class="fs-4 lh-base">Di sini, kami menganggap bangunan bukan hanya
+            <p class="fs-4">Di sini, kami menganggap bangunan bukan hanya
                 sebagai proyek fisik, tetapi sebagai ekspresi dari impian,
                 dedikasi, dan inovasi. Selamat datang di rumahnya
                 bahan bangunan berkualitas tinggi dan solusi
                 yang dapat diandalkan.</p>
             <h4>Selamat Datang di Cahaya Firman</h4>
         </div>
-        <div class="flex-fill bd-highlight mt-5">
-            <img src="../static/asset/pngwing 2.png" class="img-fluid float-end me-5">
+        <div class="flex-fill bd-highlight ms-5 mt-5">
+            <img src="../static/asset/pngwing 2.png" class="img-fluid ms-5 mt-5">
         </div>
     </div>
     <!-- End Main Content About-->
+
+    <script>
+        const urlToProfile = "{{ url_for('profil') }}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const profileContainer = document.getElementById('profileContainer');
+
+            profileContainer.addEventListener('click', function () {
+                window.location.href = urlToProfile;
+            });
+        });
+
+        const urlToHome = "{{ url_for('home') }}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const homeContainer = document.getElementById('homeContainer');
+
+            homeContainer.addEventListener('click', function () {
+                window.location.href = urlToHome;
+            });
+        });
+
+        const urlToAbout1 = "{{ url_for('about') }}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const aboutContainer = document.getElementById('aboutContainer');
+
+            aboutContainer.addEventListener('click', function () {
+                window.location.href = urlToAbout1;
+            });
+        });
+
+        const urlToAbout2 = "{{ url_for('about') }}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoCahayaFirmanContainer = document.getElementById('logoCahayaFirmanContainer');
+
+            logoCahayaFirmanContainer.addEventListener('click', function () {
+                window.location.href = urlToAbout2;
+            });
+        });
+
+        const urlToKeranjang = "{{ url_for('keranjang') }}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const keranjangContainer = document.getElementById('keranjangContainer');
+
+            keranjangContainer.addEventListener('click', function () {
+                window.location.href = urlToKeranjang;
+            });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
