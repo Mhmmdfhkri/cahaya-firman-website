@@ -42,7 +42,7 @@
                 {% set end = offset + items_per_page %}
                 {% for barang in barang_list[start:end] %}
                 <tr>
-                    <td>{{ barang.id }}</td>
+                    <td>{{ barang.id_product }}</td>
                     <td>{{ barang.name }}</td>
                     <td>{{ barang.desc }}</td>
                     <td>{{ barang.category }}</td>
@@ -50,8 +50,8 @@
                     <td>{{ barang.price }}</td>
                     <td><img src="{{ url_for('static', filename='unggah/'+ barang.picture) }}" width="100" height="100"></td>
                     <td>
-                        <a href="/edit/{{ barang.id }}">Edit</a>
-                        <form method="POST" action="/delete/{{ barang.id }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <a href="/edit/{{ barang.id_product }}">Edit</a>
+                        <form method="POST" action="/delete/{{ barang.id_product }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                             <button type="submit">Hapus</button>
                         </form>
                     </td>

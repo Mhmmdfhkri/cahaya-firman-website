@@ -50,7 +50,10 @@
                     </div>
                     <img class="love" src="{{ url_for('static', filename='asset/lovely.png') }}" alt="">
                 </div>
-                <img  Id="image" class="item" src="{{ url_for('static', filename='unggah/' + barang.picture) }}" alt="picture">
+                <a href="/detail_product/{{ barang.id_product }}">
+                    <img class="item" src="{{ url_for('static', filename='unggah/' + barang.picture) }}" alt="gambar">
+                </a>
+                
                 <p class="des">{{ barang.desc }}</p>
                 <p class="price">Rp.{{ barang.price }}</p>
                 <div class="btn">
@@ -68,10 +71,6 @@
             {% endfor %}
         </div>
     </div>
-
-
-    <!-- Add your custom JavaScript at the end of the body if needed -->
-    <script src="script.js"></script>
 </body>
 
 </html>

@@ -37,6 +37,30 @@ def products():
     return render_template("product.html", barang_list=barang_list)
 
 
+# Import lainnya ...
+
+# Import lainnya ...
+
+def get_product(id_product):
+    return Product.query.get(id_product)
+
+
+# Rute untuk menampilkan halaman detail produk berdasarkan ID produk
+@app.route('/detail_product/<int:id_product>')
+def detail_product(id_product):
+    # Dapatkan detail produk dan ulasan berdasarkan product_id
+    product = get_product(id_product)
+    return render_template('detail_product.html', product=product)
+
+# Rute dan fungsi lainnya ...
+
+
+
+
+
+
+
+
 @app.route("/home")
 def home():
     return render_template("home.html")
@@ -142,8 +166,6 @@ def add_barang():
         return redirect(url_for("admin_crud"))
 
     return render_template("add.html")
-
-
 
 
 

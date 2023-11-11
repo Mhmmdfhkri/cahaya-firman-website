@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Page Title</title>
+    <!-- Tambahkan link Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy2ncAyf4xgMyTDDx1xjOO5blGXyzE0w99" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>{{ product.name }} - Detail Produk</h1>
+
+    <div class="detail-product">
+        <img src="{{ url_for('static', filename='unggah/' + product.picture) }}" alt="{{ product.name }}">
+
+        <div class="info">
+            <p><strong>Nama:</strong> {{ product.name }}</p>
+            <p><strong>Jumlah dalam Stok:</strong> {{ product.quantityInStock }}</p>
+            <p><strong>Deskripsi:</strong> {{ product.desc }}</p>
+            <p><strong>Harga:</strong> Rp.{{ product.price }}</p>
+        </div>
+    </div>
+
+    <!-- Input quantity dengan Bootstrap -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" type="button" onclick="decrementQuantity()">-</button>
+        </div>
+        <input id="quantityInput" type="text" class="form-control" aria-label="Kuantitas" value="1" readonly>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" onclick="incrementQuantity()">+</button>
+        </div>
+    </div>
+
+    <div class="btn">
+        <img src="{{ url_for('static', filename='asset/add.png') }}" alt="">
+        <p>Add To Cart</p>
+    </div>  
+    <div class="btn-1">
+        <form method="POST">
+            <input type="hidden" name="_method" value="POST">
+            <img src="" alt="">
+            <button type="submit" class="sub">Buy Now</button>
+        </form>
+    </div>
+
+    <h2>Komentar Pengguna</h2>
+    <div class="comments">
+        {% for review in reviews %}
+            <p><strong>{{ review.user.username }}:</strong> {{ review.comment }} (Rating: {{ review.rating }})</p>
+        {% endfor %}
+    </div>
+
+    <h2>Beri Rating dan Komentar Anda</h2>
+    <form action="/submit_review" method="POST">
+        <label for="rating">Rating:</label>
+        <input type="number" name="rating" step="1" min="1" max="5" required>
+
+        <label for="comment">Komentar:</label>
+        <textarea name="comment" required></textarea>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <!-- Tambahkan link Bootstrap JS dan Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXgTyoU05bEL5HAg2Keg6bydMHo12XjcSDe1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy2ncAyf4xgMyTDDx1xjOO5blGXyzE0w99"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function incrementQuantity() {
+            var quantityInput = document.getElementById('quantityInput');
+            var currentQuantity = parseInt(quantityInput.value, 10);
+            quantityInput.value = currentQuantity + 1;
+        }
+
+        function decrementQuantity() {
+            var quantityInput = document.getElementById('quantityInput');
+            var currentQuantity = parseInt(quantityInput.value, 10);
+            if (currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        }
+    </script>
+</body>
+
+</html>
