@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Edit Barang</h1>
-    <form method="POST" action="/edit/{{ barang.id }}" enctype="multipart/form-data">
+    <form method="POST" action="/edit/{{ barang.id_product }}" enctype="multipart/form-data">
         <label for="namabarang">Nama Barang:</label>
         <input type="text" id="name" name="name" value="{{ barang.name }}" required><br>
 
