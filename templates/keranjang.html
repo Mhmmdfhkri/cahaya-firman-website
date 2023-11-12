@@ -10,14 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>Keranjang</title>
     <style>
-        .circle {
-            background-color: #d4d8f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .img-fluid {
             max-width: 80%;
             height: auto;
@@ -81,7 +73,7 @@
             height: 100%;
         }
 
-        p.m-2 {
+        p.mt-3 {
             font-family: 'Roboto', sans-serif;
             font-weight: bold;
         }
@@ -97,21 +89,23 @@
     <div class="container-satu">
         <div class="layanan satu d-flex align-items-center">
             <div class="col d-flex justify-content-start" id="profileContainer">
-                <div class="circle d-flex align-items-center p-1 me-2 ms-3">
-                    <img src="../static/asset/Vector.png">
+                <div class="d-flex align-items-center p-3 ms-1">
+                    <!-- <img src="../static/asset/Vector.png"> -->
+                    <img src="{{ url_for('static', filename='asset/Navbar/profile_user.png') }}" class="img-fluid me-3">
+                    <p class="mt-3">username</p>
                 </div>
-                <p class="m-2" id="username">username</p>
+
             </div>
         </div>
         <div class="layanan dua">
             <div class="col d-flex justify-content-center align-items-center" id="logoCahayaFirmanContainer">
-                <img src="../static/asset/Logo.png" class="img-fluid">
+                <img src="{{ url_for('static', filename='asset/Navbar/Logo.png') }}" class="img-fluid">
             </div>
         </div>
         <div class="layanan tiga d-flex align-items-center">
             <div class="col d-flex justify-content-end">
                 <div class="d-flex flex-column align-items-center" id="keranjangContainer">
-                    <img src="../static/asset/Shopping Bag.png" class="img-fluid me-3">
+                    <img src="{{ url_for('static', filename='asset/Navbar/Trolley.png') }}" class="img-fluid me-3">
                 </div>
             </div>
         </div>
@@ -121,30 +115,29 @@
     <!-- Navbar Bawah Garis -->
     <div class="container d-flex justify-content-center">
         <div class="row">
-            <div class="col order-last mx-3">
-                <img src="../static/asset/lucide_search.png" class="img-fluid">
+            <div class="col order-last mx-3 mt-2">
+                <img src="{{ url_for('static', filename='asset/Navbar/lucide_search.png') }}" class="img-fluid">
             </div>
             <div class="col mx-3 mt-3" id="aboutContainer">
                 <p class="teks-bold">About</p>
             </div>
-            <div class="col mx-3 mt-3">
+            <div class="col mx-3 mt-3" id="productContainer">
                 <p class="teks-bold">Product</p>
             </div>
             <div class="col order-first mx-3 mt-3" id="homeContainer">
-                <p class="teks-bold">Home</p>
+                <p class="teks-bold" style="color: #EEBBC3;">Home</p>
             </div>
         </div>
     </div>
     <!-- End Navbar Bawah Garis -->
     <!-- Main Content Keranjang Kiri -->
     <div class="d-flex bd-highlight p-4">
-        <!-- <h4>Card</h4> -->
         <div class="p-3 flex-fill bd-highlight m-4" style="background-color: #EFF1FB; width: 75%; border-radius: 4px;">
             <div class="p-2 m-4 bd-highlight" style="border-radius: 7px;">
                 <div class="row py-1 px-4">
                     <div class="col satu">
                         <div class="image-container">
-                            <img src="../static/asset/bata.png" class="img-fluid">
+                            <img src="{{ url_for('static', filename='asset/Keranjang/bata.png') }}" class="img-fluid">
                         </div>
                         <div class="col d-flex flex-column bd-highlight align-items-start ms-3">
                             <div class="bd-highlight mt-3">
@@ -158,27 +151,17 @@
                     <div class="col align-self-end">
                         <div class="row">
                             <div class="col">
-                                <img src="../static/asset/mdi_rubbish-bin-circle.png" class="img-fluid">
+                                <img src="{{ url_for('static', filename='asset/Keranjang/mdi_rubbish-bin-circle.png') }}"
+                                    class="img-fluid">
                             </div>
                             <div class="col">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                <!-- <img src="../static/asset/plus.png" class="img-fluid"> -->
+                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus (1).png') }}">
                             </div>
                             <div class="col">
                                 <p class="fw-bold">1</p>
                             </div>
                             <div class="col">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                                </svg>
-                                <!-- <img src="../static/asset/mines.png" class="img-fluid"> -->
+                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus.png') }}">
                             </div>
                         </div>
                     </div>
@@ -188,7 +171,7 @@
                 <div class="row py-1 px-4">
                     <div class="col satu">
                         <div class="image-container">
-                            <img src="../static/asset/semen.png" class="img-fluid">
+                            <img src="{{ url_for('static', filename='asset/Keranjang/semen.png') }}" class="img-fluid">
                         </div>
                         <div class="col d-flex flex-column bd-highlight align-items-start ms-3">
                             <div class="bd-highlight mt-3">
@@ -202,27 +185,17 @@
                     <div class="col align-self-end">
                         <div class="row">
                             <div class="col">
-                                <img src="../static/asset/mdi_rubbish-bin-circle.png" class="img-fluid">
+                                <img src="{{ url_for('static', filename='asset/Keranjang/mdi_rubbish-bin-circle.png') }}"
+                                    class="img-fluid">
                             </div>
                             <div class="col">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                <!-- <img src="../static/asset/plus.png" class="img-fluid"> -->
+                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus (1).png') }}">
                             </div>
                             <div class="col">
                                 <p class="fw-bold">1</p>
                             </div>
                             <div class="col">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                                </svg>
-                                <!-- <img src="../static/asset/mines.png" class="img-fluid"> -->
+                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus.png') }}">
                             </div>
                         </div>
                     </div>
@@ -232,7 +205,7 @@
                 <div class="row py-1 px-4">
                     <div class="col satu">
                         <div class="image-container">
-                            <img src="../static/asset/pasir.png" class="img-fluid">
+                            <img src="{{ url_for('static', filename='asset/Keranjang/pasir.png') }}" class="img-fluid">
                         </div>
                         <div class="col d-flex flex-column bd-highlight align-items-start ms-3">
                             <div class="bd-highlight mt-3">
@@ -246,27 +219,17 @@
                     <div class="col align-self-end">
                         <div class="row">
                             <div class="col">
-                                <img src="../static/asset/mdi_rubbish-bin-circle.png" class="img-fluid">
+                                <img src="{{ url_for('static', filename='asset/Keranjang/mdi_rubbish-bin-circle.png') }}"
+                                    class="img-fluid">
                             </div>
                             <div class="col">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                <!-- <img src="../static/asset/plus.png" class="img-fluid"> -->
+                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus (1).png') }}">
                             </div>
                             <div class="col">
                                 <p class="fw-bold">1</p>
                             </div>
                             <div class="col">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                                </svg>
-                                <!-- <img src="../static/asset/mines.png" class="img-fluid"> -->
+                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus.png') }}">
                             </div>
                         </div>
                     </div>
@@ -343,6 +306,15 @@
 
                 logoCahayaFirmanContainer.addEventListener('click', function () {
                     window.location.href = urlToAbout2;
+                });
+            });
+
+            const urlToProduct = "{{ url_for('products') }}";
+            document.addEventListener('DOMContentLoaded', function () {
+                const productContainer = document.getElementById('productContainer');
+
+                productContainer.addEventListener('click', function () {
+                    window.location.href = urlToProduct;
                 });
             });
 
