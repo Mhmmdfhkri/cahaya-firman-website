@@ -1,474 +1,229 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Product</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .circle {
+            background-color: #d4d8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body {
+            background-color: #D4D8F1 !important;
+        }
+
+        .border-bottom {
+            border-width: 3px !important;
+            border-color: black !important;
+        }
+
+        .card {
+            background-color: #EFF3FB;
+        }
+
+        .form-check-input {
+            width: 2em;
+            height: 2em;
+        }
+
+        .form-check-label {
+            margin-left: 10px;
+            margin-top: 7px;
+        }
+
+        .container-satu {
+            width: 100%;
+            margin: 0% auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .layanan {
+            width: 30%;
+        }
+
+        .garis {
+            height: 1px;
+            width: 98%;
+            margin: 0% auto;
+            background-color: black;
+        }
+
+        .img-fluid {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .teks-bold {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+        }
+
+        p.mt-3 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<style>
-    .img-fluid {
-        max-width: 80%;
-        height: auto;
-    }
-
-    .garis {
-        height: 1px;
-        width: 98%;
-        margin: 0% auto;
-        background-color: black;
-    }
-
-    .teks-bold {
-        font-family: 'Poppins', sans-serif;
-        font-weight: bold;
-    }
-
-    .container-satu {
-        width: 100%;
-        margin: 0% auto;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .layanan {
-        width: 30%;
-    }
-
-    p.mt-3 {
-        font-family: 'Roboto', sans-serif;
-        font-weight: bold;
-    }
-
-    p.searchProduct {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 300;
-    }
-
-    .p-3.bd-highlight.mx-4 {
-        width: 20%;
-        height: auto;
-        background-color: white;
-        border-radius: 10px;
-
-    }
-
-    .bd-highlight p {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 500;
-        color: #232946;
-    }
-
-    p.rating {
-        font-family: 'Poppins', sans-serif;
-        color: #232946;
-        font-size: small;
-    }
-
-    .custom-gradient-btn {
-        background-image: linear-gradient(to right, #232946, #B8C1EC);
-        color: #fff;
-        border-radius: 5px;
-    }
-</style>
 
 <body>
-    <!-- Navbar Atas Garis -->
-    <div class="container-satu">
-        <div class="layanan satu d-flex align-items-center">
-            <div class="col d-flex justify-content-start" id="profileContainer">
-                <div class="d-flex align-items-center p-3 ms-1">
-                    <!-- <img src="../static/asset/Vector.png"> -->
-                    <img src="{{ url_for('static', filename='asset/Navbar/profile_user.png') }}" class="img-fluid me-3">
-                    <p class="mt-3">username</p>
-                </div>
+    <div class="containernaNavbar" style="background-color: white;">
+        <!-- Navbar Atas Garis -->
+        <div class="container-satu">
+            <div class="layanan satu d-flex align-items-center">
+                <div class="col d-flex justify-content-start" id="profileContainer">
+                    <div class="d-flex align-items-center p-3 ms-1">
+                        <!-- <img src="../static/asset/Vector.png"> -->
+                        <img src="{{ url_for('static', filename='asset/Navbar/profile_user.png') }}"
+                            class="img-fluid me-3">
+                        <p class="mt-3">username</p>
+                    </div>
 
+                </div>
             </div>
-        </div>
-        <div class="layanan dua">
-            <div class="col d-flex justify-content-center align-items-center" id="logoCahayaFirmanContainer">
-                <img src="{{ url_for('static', filename='asset/Navbar/Logo.png') }}" class="img-fluid">
+            <div class="layanan dua">
+                <div class="col d-flex justify-content-center align-items-center" id="logoCahayaFirmanContainer">
+                    <img src="{{ url_for('static', filename='asset/Navbar/Logo.png') }}" class="img-fluid">
+                </div>
             </div>
-        </div>
-        <div class="layanan tiga d-flex align-items-center">
-            <div class="col d-flex justify-content-end">
-                <div class="d-flex flex-column align-items-center" id="keranjangContainer">
-                    <img src="{{ url_for('static', filename='asset/Navbar/Trolley.png') }}" class="img-fluid me-3">
+            <div class="layanan tiga d-flex align-items-center">
+                <div class="col d-flex justify-content-end">
+                    <div class="d-flex flex-column align-items-center" id="keranjangContainer">
+                        <img src="{{ url_for('static', filename='asset/Navbar/Trolley.png') }}" class="img-fluid me-3">
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- End Navbar Atas Garis -->
+        <div class="garis"></div>
+        <!-- Navbar Bawah Garis -->
+        <div class="container d-flex justify-content-center">
+            <div class="row">
+                <div class="col order-last mx-3 mt-2">
+                    <img src="{{ url_for('static', filename='asset/Navbar/lucide_search.png') }}" class="img-fluid">
+                </div>
+                <div class="col mx-3 mt-3" id="aboutContainer">
+                    <p class="teks-bold">About</p>
+                </div>
+                <div class="col mx-3 mt-3" id="productContainer">
+                    <p class="teks-bold">Product</p>
+                </div>
+                <div class="col order-first mx-3 mt-3" id="homeContainer">
+                    <p class="teks-bold">Home</p>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar Bawah Garis -->
     </div>
-    <!-- End Navbar Atas Garis -->
-    <div class="garis"></div>
-    <!-- Navbar Bawah Garis -->
-    <div class="container d-flex justify-content-center">
+
+    <div class="container mt-4">
         <div class="row">
-            <div class="col mx-3 mt-3" id="aboutContainer">
-                <p class="teks-bold">About</p>
-            </div>
-            <div class="col mx-3 mt-3">
-                <p class="teks-bold" style="color: #EEBBC3;">Product</p>
-            </div>
-            <div class="col order-first mx-3 mt-3" id="homeContainer">
-                <p class="teks-bold">Home</p>
-            </div>
-        </div>
-    </div>
-    <!-- End Navbar Bawah Garis -->
-    <!-- Search Product -->
-    <div class="d-flex justify-content-end align-items-center" style="background-color: #d4d8f0;">
-        <div class="p-2 bd-highlight mx-auto text-end mt-3" style="width: 40%;">
-            <p class="searchProduct fs-4 me-3">Search Product</p>
-        </div>
-        <div class="p-2 bd-highlight" style="width: 30%;">
-            <div class="p-2 d-flex justify-content-end" style="background-color: white;">
-                <img src="{{ url_for('static', filename='asset/Navbar/lucide_search.png') }}"
-                    style="width: 7%; height: auto;">
-            </div>
-        </div>
-        <div class="p-2 bd-highlight ms-3" style="width: 40%;">
-            <img class="img-fluid" src="{{ url_for('static', filename='asset/Product/search_img.png') }}"
-                style="width: 50%; height: auto;">
-        </div>
-    </div>
-    <!-- Search Product End-->
-    <!-- Product List -->
-    <div class="d-flex justify-content-center p-3" style="background-color: #d4d8f0;">
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight">
-                    <p class="fs-5">Semen</p>
-                </div>
-                <div class="bd-highlight d-flex flex-row">
-                    <div class="imgContainer">
-                        <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
-                    </div>
-                    <p class="rating fw-lighter p-1">5</p>
-                </div>
-                <div class="bd-highlight text-center">
-                    <img src="{{ url_for('static', filename='asset/Product/cemen.png') }}"
-                        style="width: 85%; height: auto;">
-                </div>
-                <div class="bd-highlight">
-                    <p class="rating fw-light p-1">Semen is a vital building material used in constroction and varios
-                        other applications</p>
-                </div>
-                <div class="bd-highlight">
-                    <p class="fs-6">Rp. 61.000</p>
-                </div>
-                <div class="bd-highlight mx-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light custom-gradient-btn" type="button">
-                            <div class="bd-highlight d-flex flex-row justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                Add to Cart
+            <div class="col-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col align-self-center text-center fw-bold">
+                                <img src="static/asset/profil.png" class="mt-2" width="40%" alt="">
+                                <div class="username mt-3 mb-2">{{ user.username }}</div>
+                                <div class="email">{{ user.email }}</div>
+                                <img class="img-fluid" src="static/asset/worker.png" alt="">
+                                <form action="{{ url_for('logout') }}" method="POST">
+                                    <button class="btn btn-danger fw-bold py-1 px-5 fs-3 rounded-4"
+                                        type="submit">Logout</button>
+                                </form>
                             </div>
-
-                        </button>
-                        <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight">
-                    <p class="fs-5">Batu Bata</p>
-                </div>
-                <div class="bd-highlight d-flex flex-row">
-                    <div class="imgContainer">
-                        <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
-                    </div>
-                    <p class="rating fw-lighter p-1">5</p>
-                </div>
-                <div class="bd-highlight text-center">
-                    <img src="{{ url_for('static', filename='asset/Product/bata.png') }}"
-                        style="width: 85%; height: auto;">
-                </div>
-                <div class="bd-highlight">
-                    <p class="rating fw-light p-1">Bricks are a fundamental building material that has been used for
-                        centuries in constroction</p>
-                </div>
-                <div class="bd-highlight">
-                    <p class="fs-6">Rp. 3.500</p>
-                </div>
-                <div class="bd-highlight mx-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light custom-gradient-btn" type="button">
-                            <div class="bd-highlight d-flex flex-row justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                Add to Cart
+            <div class="col-8">
+                <div class="card h-100 p-3">
+                    <div class="card-body fw-bold">
+                        <div class="h5 mb-4 fw-bold">Account Settings</div>
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="static/asset/profil.png" width="100%" alt="">
                             </div>
-
-                        </button>
-                        <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight">
-                    <p class="fs-5">Bata Abu-abu</p>
-                </div>
-                <div class="bd-highlight d-flex flex-row">
-                    <div class="imgContainer">
-                        <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
-                    </div>
-                    <p class="rating fw-lighter p-1">5</p>
-                </div>
-                <div class="bd-highlight text-center">
-                    <img src="{{ url_for('static', filename='asset/Product/pepping.png') }}"
-                        style="width: 85%; height: auto;">
-                </div>
-                <div class="bd-highlight">
-                    <p class="rating fw-light p-1">Gray bricks are widely used in constroction for their aesthetic
-                        appeal and versatility</p>
-                </div>
-                <div class="bd-highlight">
-                    <p class="fs-6">Rp. 5.500</p>
-                </div>
-                <div class="bd-highlight mx-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light custom-gradient-btn" type="button">
-                            <div class="bd-highlight d-flex flex-row justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                Add to Cart
+                            <div class="col-10">
+                                <div class="username">{{ user.username }}</div>
                             </div>
-
-                        </button>
-                        <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight">
-                    <p class="fs-5">Pasir</p>
-                </div>
-                <div class="bd-highlight d-flex flex-row">
-                    <div class="imgContainer">
-                        <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
-                    </div>
-                    <p class="rating fw-lighter p-1">5</p>
-                </div>
-                <div class="bd-highlight text-center">
-                    <img src="{{ url_for('static', filename='asset/Product/pasir.png') }}"
-                        style="width: 85%; height: auto;">
-                </div>
-                <div class="bd-highlight">
-                    <p class="rating fw-light p-1">Sand is a valuable resource, but its extraction can have
-                        environmental impacts, including habitat destruction and erosion</p>
-                </div>
-                <div class="bd-highlight">
-                    <p class="fs-6">Rp. 350.000</p>
-                </div>
-                <div class="bd-highlight mx-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light custom-gradient-btn" type="button">
-                            <div class="bd-highlight d-flex flex-row justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                Add to Cart
+                        </div>
+                        <form action="{{ url_for('update_profile') }}" method="POST">
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <label for="full-name" class="form-label">Full Name</label>
+                                    <input type="text" id="full-name" name="fullname"
+                                        value="{{ user.fullname if user.fullname is not none else '' }}"
+                                        class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="text" id="phone" name="telephone"
+                                        value="{{ user.telephone if user.telephone is not none else '' }}"
+                                        class="form-control">
+                                </div>
                             </div>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <label for="gender" class="form-label">Gender</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1"
+                                            value="M" {% if user.gender=='M' %} checked {% endif %}>
+                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"
+                                            value="F" {% if user.gender=='F' %} checked {% endif %}>
+                                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                                    </div>
 
-                        </button>
-                        <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" id="email" name="email"
+                                        value="{{ user.email if user.email is not none else '' }}" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="address" class="form-label">Address</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" id="address" name="address"
+                                            value="{{ user.address if user.address is not none else '' }}"
+                                            class="form-control">
+                                        <span class="input-group-text"><i
+                                                class="fa-solid fa-location-dot text-success"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col"></div>
+                                <div class="col">
+                                    <button type="submit"
+                                        class="w-100 btn btn-success fw-bold fs-3 rounded-4">Save</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-center p-3" style="background-color: #d4d8f0;">
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight">
-                    <p class="fs-5">Pipa Plastik</p>
-                </div>
-                <div class="bd-highlight d-flex flex-row">
-                    <div class="imgContainer">
-                        <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
-                    </div>
-                    <p class="rating fw-lighter p-1">5</p>
-                </div>
-                <div class="bd-highlight text-center">
-                    <img src="{{ url_for('static', filename='asset/Product/pipa.png') }}"
-                        style="width: 85%; height: auto;">
-                </div>
-                <div class="bd-highlight">
-                    <p class="rating fw-light p-1">Semen is a vital building material used in constroction and varios
-                        other applications</p>
-                </div>
-                <div class="bd-highlight">
-                    <p class="fs-6">Rp. 61.000</p>
-                </div>
-                <div class="bd-highlight mx-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light custom-gradient-btn" type="button">
-                            <div class="bd-highlight d-flex flex-row justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                Add to Cart
-                            </div>
 
-                        </button>
-                        <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight">
-                    <p class="fs-5">Batu Bata</p>
-                </div>
-                <div class="bd-highlight d-flex flex-row">
-                    <div class="imgContainer">
-                        <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
-                    </div>
-                    <p class="rating fw-lighter p-1">5</p>
-                </div>
-                <div class="bd-highlight text-center">
-                    <img src="{{ url_for('static', filename='asset/Product/kerikil.png') }}"
-                        style="width: 85%; height: auto;">
-                </div>
-                <div class="bd-highlight">
-                    <p class="rating fw-light p-1">Bricks are a fundamental building material that has been used for
-                        centuries in constroction</p>
-                </div>
-                <div class="bd-highlight">
-                    <p class="fs-6">Rp. 3.500</p>
-                </div>
-                <div class="bd-highlight mx-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light custom-gradient-btn" type="button">
-                            <div class="bd-highlight d-flex flex-row justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                Add to Cart
-                            </div>
-
-                        </button>
-                        <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight">
-                    <p class="fs-5">Balok Baja</p>
-                </div>
-                <div class="bd-highlight d-flex flex-row">
-                    <div class="imgContainer">
-                        <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
-                    </div>
-                    <p class="rating fw-lighter p-1">5</p>
-                </div>
-                <div class="bd-highlight text-center">
-                    <img src="{{ url_for('static', filename='asset/Product/besi.png') }}"
-                        style="width: 85%; height: auto;">
-                </div>
-                <div class="bd-highlight">
-                    <p class="rating fw-light p-1">Gray bricks are widely used in constroction for their aesthetic
-                        appeal and versatility</p>
-                </div>
-                <div class="bd-highlight">
-                    <p class="fs-6">Rp. 5.500</p>
-                </div>
-                <div class="bd-highlight mx-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light custom-gradient-btn" type="button">
-                            <div class="bd-highlight d-flex flex-row justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                Add to Cart
-                            </div>
-
-                        </button>
-                        <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight">
-                    <p class="fs-5">Kawat</p>
-                </div>
-                <div class="bd-highlight d-flex flex-row">
-                    <div class="imgContainer">
-                        <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
-                    </div>
-                    <p class="rating fw-lighter p-1">5</p>
-                </div>
-                <div class="bd-highlight text-center">
-                    <img src="{{ url_for('static', filename='asset/Product/kawat.png') }}"
-                        style="width: 85%; height: auto;">
-                </div>
-                <div class="bd-highlight">
-                    <p class="rating fw-light p-1">Sand is a valuable resource, but its extraction can have
-                        environmental impacts, including habitat destruction and erosion</p>
-                </div>
-                <div class="bd-highlight">
-                    <p class="fs-6">Rp. 350.000</p>
-                </div>
-                <div class="bd-highlight mx-3">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light custom-gradient-btn" type="button">
-                            <div class="bd-highlight d-flex flex-row justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                                Add to Cart
-                            </div>
-
-                        </button>
-                        <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Product List -->
+    <!-- Script Untuk Pindah Lewat Menu Navbar -->
     <script>
 
         const urlToProfile = "{{ url_for('profil') }}";
@@ -507,15 +262,6 @@
             });
         });
 
-        const urlToProduct = "{{ url_for('products') }}";
-        document.addEventListener('DOMContentLoaded', function () {
-            const productContainer = document.getElementById('productContainer');
-
-            productContainer.addEventListener('click', function () {
-                window.location.href = urlToProduct;
-            });
-        });
-
         const urlToKeranjang = "{{ url_for('keranjang') }}";
         document.addEventListener('DOMContentLoaded', function () {
             const keranjangContainer = document.getElementById('keranjangContainer');
@@ -525,8 +271,9 @@
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    <!-- Script Untuk Pindah Lewat Menu Navbar -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 </body>
 
