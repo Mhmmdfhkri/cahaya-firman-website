@@ -72,7 +72,7 @@
             font-weight: bold;
         }
 
-        p.m-2 {
+        p.mt-3 {
             font-family: 'Roboto', sans-serif;
             font-weight: bold;
         }
@@ -85,21 +85,24 @@
         <div class="container-satu">
             <div class="layanan satu d-flex align-items-center">
                 <div class="col d-flex justify-content-start" id="profileContainer">
-                    <div class="circle d-flex align-items-center p-1 me-2 ms-3">
-                        <img src="../static/asset/Vector.png">
+                    <div class="d-flex align-items-center p-3 ms-1">
+                        <!-- <img src="../static/asset/Vector.png"> -->
+                        <img src="{{ url_for('static', filename='asset/Navbar/profile_user.png') }}"
+                            class="img-fluid me-3">
+                        <p class="mt-3">username</p>
                     </div>
-                    <p class="m-2" id="username">username</p>
+
                 </div>
             </div>
             <div class="layanan dua">
                 <div class="col d-flex justify-content-center align-items-center" id="logoCahayaFirmanContainer">
-                    <img src="../static/asset/Logo.png" class="img-fluid">
+                    <img src="{{ url_for('static', filename='asset/Navbar/Logo.png') }}" class="img-fluid">
                 </div>
             </div>
             <div class="layanan tiga d-flex align-items-center">
                 <div class="col d-flex justify-content-end">
                     <div class="d-flex flex-column align-items-center" id="keranjangContainer">
-                        <img src="../static/asset/Shopping Bag.png" class="img-fluid me-3">
+                        <img src="{{ url_for('static', filename='asset/Navbar/Trolley.png') }}" class="img-fluid me-3">
                     </div>
                 </div>
             </div>
@@ -110,16 +113,16 @@
         <div class="container d-flex justify-content-center">
             <div class="row">
                 <div class="col order-last mx-3 mt-2">
-                    <img src="../static/asset/lucide_search.png" class="img-fluid">
+                    <img src="{{ url_for('static', filename='asset/Navbar/lucide_search.png') }}" class="img-fluid">
                 </div>
                 <div class="col mx-3 mt-3" id="aboutContainer">
                     <p class="teks-bold">About</p>
                 </div>
-                <div class="col mx-3 mt-3">
+                <div class="col mx-3 mt-3" id="productContainer">
                     <p class="teks-bold">Product</p>
                 </div>
                 <div class="col order-first mx-3 mt-3" id="homeContainer">
-                    <p class="teks-bold">Home</p>
+                    <p class="teks-bold" style="color: #EEBBC3;">Home</p>
                 </div>
             </div>
         </div>
@@ -256,6 +259,15 @@
 
             logoCahayaFirmanContainer.addEventListener('click', function () {
                 window.location.href = urlToAbout2;
+            });
+        });
+
+        const urlToProduct = "{{ url_for('products') }}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const productContainer = document.getElementById('productContainer');
+
+            productContainer.addEventListener('click', function () {
+                window.location.href = urlToProduct;
             });
         });
 
