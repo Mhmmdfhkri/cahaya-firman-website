@@ -78,9 +78,12 @@
         function incrementQuantity() {
             var quantityInput = document.getElementById('quantityInput');
             var currentQuantity = parseInt(quantityInput.value, 10);
-            quantityInput.value = currentQuantity + 1;
+            var maxQuantity = parseInt("{{ product.quantityInStock }}", 10); // Ambil nilai stok dari template
+            if (currentQuantity < maxQuantity) {
+                quantityInput.value = currentQuantity + 1;
+            }
         }
-
+    
         function decrementQuantity() {
             var quantityInput = document.getElementById('quantityInput');
             var currentQuantity = parseInt(quantityInput.value, 10);

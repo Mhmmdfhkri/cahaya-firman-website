@@ -1,0 +1,40 @@
+.product {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    align-content: center;
+}
+
+/* .product-1{
+    background-color: white;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 25%;
+    margin: 20px;
+    border-radius: 10px;
+} */
+
+
+.product-1 {
+    background-color: white;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    /* Menetapkan tata letak kolom */
+    align-items: center;
+    /* Menyusun elemen anak secara vertikal di tengah */
+    width: 50%;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+@media (max-width: 100%) {
+    .product-1 {
+        width: 25%;
+        /* Atur lebar menjadi 100% saat lebar layar lebih besar dari 100% */
+        justify-content: center;
+        flex-direction: column;
+    }
+}
