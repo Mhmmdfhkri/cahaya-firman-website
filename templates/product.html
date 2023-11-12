@@ -136,9 +136,9 @@
     </div>
     <!-- Search Product End-->
     <!-- Product List -->
+    <div class="d-flex flex-wrap justify-content-center p-3" style="background-color: #d4d8f0;">
     {% for barang in barang_list %}
-    <div class="d-flex justify-content-center p-3" style="background-color: #d4d8f0;">
-        <div class="p-3 bd-highlight mx-4 justify-content-around">
+        <div class="p-3 bd-highlight mx-4 mb-4 justify-content-around">
             <div class="d-flex flex-column bd-highlight">
                 <div class="bd-highlight">
                     <p class="fs-5">{{ barang.name }}</p>
@@ -152,7 +152,7 @@
                 <div class="bd-highlight text-center">
                     <a href="/detail_product/{{ barang.id_product }}">
                         <img src="{{ url_for('static', filename='unggah/' + barang.picture) }}"
-                            style="width: 85%; height: auto;" alt="item">
+                            style="width: 100px; height: 100px;" alt="item">
                     </a>
                 </div>
                 <div class="bd-highlight">
@@ -179,9 +179,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>  
     {% endfor %}
+    </div>
     <!-- Product List -->
     <script>
 
