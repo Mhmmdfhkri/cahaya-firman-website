@@ -34,7 +34,7 @@ def products():
         return redirect(url_for("products"))
 
     barang_list = Product.query.all()
-    return render_template("product.html", barang_list=barang_list)
+    return render_template("product.html", barang_list=barang_list,user = current_user)
 
 
 # Import lainnya ...
@@ -63,12 +63,12 @@ def detail_product(id_product):
 
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    return render_template("home.html",user = current_user)
 
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about.html",user = current_user)
 
 
 @app.route("/keranjang")

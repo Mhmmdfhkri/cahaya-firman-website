@@ -69,7 +69,11 @@
                 <div class="d-flex align-items-center p-3 ms-1">
                     <!-- <img src="../static/asset/Vector.png"> -->
                     <img src="{{ url_for('static', filename='asset/Navbar/profile_user.png') }}" class="img-fluid me-3">
-                    <p class="mt-3">username</p>
+                    <p class="mt-3"> {% if current_user.is_authenticated %}
+                        {{ current_user.username }}
+                    {% else %}
+                        guest
+                    {% endif %} </p>
                 </div>
 
             </div>
