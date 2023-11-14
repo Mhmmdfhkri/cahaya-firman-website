@@ -7,39 +7,25 @@ from flask_wtf import FlaskForm
 from flask import flash
 from models.user import User
 from models.product import Product
-from models.cart_item import cart
 from models.order_detail import Order_detail
 from models.order_items import Order_items
 from models.payment_detail import Payment_detail
 from models.reviews import reviews
 from models.shopping_session import session
-
+from sqlalchemy.orm.collections import InstrumentedList
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# @app.route("/")
-# def index():
-#     return render_template("first.html")
 @app.route("/", methods=["GET", "POST"])
 def products():
-    if request.method == "POST":
-        # Handle adding to cart or purchasing the item here
-        # You can access the product's ID from the request
-        product_id = request.form.get("product_id")
-        # Logic to add the product to the cart or process the purchase
-        flash("Product added to cart successfully")
-        return redirect(url_for("products"))
-
     barang_list = Product.query.all()
     return render_template("product.html", barang_list=barang_list,user = current_user)
 
 
-# Import lainnya ...
 
-# Import lainnya ...
 
 def get_product(id_product):
     return Product.query.get(id_product)
@@ -51,15 +37,6 @@ def detail_product(id_product):
     # Dapatkan detail produk dan ulasan berdasarkan product_id
     product = get_product(id_product)
     return render_template('detail_product.html', product=product)
-
-# Rute dan fungsi lainnya ...
-
-
-
-
-
-
-
 
 @app.route("/home")
 def home():
@@ -73,7 +50,23 @@ def about():
 
 @app.route("/keranjang")
 def keranjang():
-    return render_template("keranjang.html")
+    # Check if the user has an active session
+    active_session = None
+    if current_user.session:
+        for session in current_user.session:
+            if session.is_active:
+                active_session = session
+                break
+
+    # If there is an active session, get the order items
+    order_items = []
+    if active_session:
+        order_items = Order_items.query.filter_by(id_session=active_session.id_session).all()
+
+    # Calculate total price
+    total_price = sum(order_item.quantity * order_item.product.price for order_item in order_items)
+
+    return render_template("keranjang.html", order_items=order_items, user=current_user, total_price=total_price)
 
 
 @app.route("/Checkout")
@@ -238,6 +231,74 @@ def update_profile():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+@app.route('/add_to_cart/<int:id_product>', methods=['POST'])
+@login_required
+def add_to_cart(id_product):
+    # Get the product based on id_product
+    product = Product.query.get_or_404(id_product)
+
+    # Check if the user has an active session
+    if current_user.session is None or not any(sess.is_active for sess in current_user.session):
+        new_session = session(id_user=current_user.id_user, total=0)
+        db.session.add(new_session)
+        db.session.commit()
+
+    # Find the active session in the list
+    active_session = next(sess for sess in current_user.session if sess.is_active)
+
+    # Create a new order item and associate it with the current user's active session
+    order_item = Order_items(id_product=id_product, id_session=active_session.id_session, quantity=1)
+    db.session.add(order_item)
+    db.session.commit()
+
+    flash(f'{product.name} added to the cart', 'success')
+    return redirect(url_for('keranjang'))
+
+@app.route('/update_cart/<int:id_order_item>', methods=['POST'])
+@login_required
+def update_cart(id_order_item):
+    # Get the order item based on id_order_item
+    order_item = Order_items.query.get_or_404(id_order_item)
+
+    # Update the quantity or remove the item based on the form submission
+    if 'plus' in request.form:
+        order_item.quantity += 1
+    elif 'minus' in request.form:
+        if order_item.quantity > 1:
+            order_item.quantity -= 1
+        else:
+            # If the quantity is 1, consider removing the item from the cart
+            db.session.delete(order_item)
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Redirect back to the cart page
+    flash('Cart updated successfully', 'success')
+    return redirect(url_for('keranjang'))
+
+
+@app.route('/checkout_bt', methods=['POST'])
+@login_required
+def checkout():
+    # Check if the user has an active session
+    active_session = None
+    if current_user.session:
+        for sess in current_user.session:
+            if sess.is_active:
+                active_session = sess
+                break
+
+    if active_session:
+        # Update the session status to inactive
+        active_session.is_active = False
+        db.session.commit()
+        flash('Checkout successful', 'success')
+    else:
+        flash('No active session to checkout', 'danger')
+
+    return redirect(url_for('keranjang'))
 
 if __name__ == "__main__":
     app.run(debug=True)

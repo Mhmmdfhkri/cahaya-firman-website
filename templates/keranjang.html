@@ -136,20 +136,21 @@
     </div>
     <!-- End Navbar Bawah Garis -->
     <!-- Main Content Keranjang Kiri -->
-    <div class="d-flex bd-highlight p-4">
+    <div class="d-flex flex-column bd-highlight p-4">
+        {% for order_item in order_items %}
         <div class="p-3 flex-fill bd-highlight m-4" style="background-color: #EFF1FB; width: 75%; border-radius: 4px;">
             <div class="p-2 m-4 bd-highlight" style="border-radius: 7px;">
                 <div class="row py-1 px-4">
                     <div class="col satu">
                         <div class="image-container">
-                            <img src="{{ url_for('static', filename='asset/Keranjang/bata.png') }}" class="img-fluid">
+                            <img src="{{ url_for('static', filename='unggah/' + order_item.product.picture) }}" class="img-fluid">
                         </div>
                         <div class="col d-flex flex-column bd-highlight align-items-start ms-3">
                             <div class="bd-highlight mt-3">
-                                <p class="fw-bold fs-5">Batu Bata</p>
+                                <p class="fw-bold fs-5">{{ order_item.product.name }}</p>
                             </div>
                             <div class="bd-highlight mt-2">
-                                <p class="fw-bold text-xl text-start">Rp. 3.500</p>
+                                <p class="fw-bold text-xl text-start">Rp. {{ order_item.quantity * order_item.product.price }}</p>
                             </div>
                         </div>
                     </div>
@@ -160,89 +161,32 @@
                                     class="img-fluid">
                             </div>
                             <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus (1).png') }}">
+                                <form method="POST" action="{{ url_for('update_cart', id_order_item=order_item.id_order_item) }}">
+                                    <button type="submit" name="plus" class="btn btn-light">
+                                        <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus (1).png') }}" alt="plus" class="img-fluid">
+                                    </button>
+                                </form>
                             </div>
                             <div class="col">
-                                <p class="fw-bold">1</p>
+                                <p class="fw-bold">{{ order_item.quantity }}</p>
                             </div>
                             <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus.png') }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-2 m-4 bd-highlight" style="border-radius: 7px;">
-                <div class="row py-1 px-4">
-                    <div class="col satu">
-                        <div class="image-container">
-                            <img src="{{ url_for('static', filename='asset/Keranjang/semen.png') }}" class="img-fluid">
-                        </div>
-                        <div class="col d-flex flex-column bd-highlight align-items-start ms-3">
-                            <div class="bd-highlight mt-3">
-                                <p class="fw-bold fs-5">Semen</p>
-                            </div>
-                            <div class="bd-highlight mt-2 ">
-                                <p class="fw-bold text-xl">Rp. 61.000</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col align-self-end">
-                        <div class="row">
-                            <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/mdi_rubbish-bin-circle.png') }}"
-                                    class="img-fluid">
-                            </div>
-                            <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus (1).png') }}">
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">1</p>
-                            </div>
-                            <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus.png') }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-2 m-4 bd-highlight" style="border-radius: 7px;">
-                <div class="row py-1 px-4">
-                    <div class="col satu">
-                        <div class="image-container">
-                            <img src="{{ url_for('static', filename='asset/Keranjang/pasir.png') }}" class="img-fluid">
-                        </div>
-                        <div class="col d-flex flex-column bd-highlight align-items-start ms-3">
-                            <div class="bd-highlight mt-3">
-                                <p class="fw-bold fs-5">Pasir</p>
-                            </div>
-                            <div class="bd-highlight mt-2">
-                                <p class="fw-bold text-xl">Rp. 350.000</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col align-self-end">
-                        <div class="row">
-                            <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/mdi_rubbish-bin-circle.png') }}"
-                                    class="img-fluid">
-                            </div>
-                            <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus (1).png') }}">
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">1</p>
-                            </div>
-                            <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus.png') }}">
+                                <form method="POST" action="{{ url_for('update_cart', id_order_item=order_item.id_order_item) }}">
+                                    <button type="submit" name="minus" class="btn btn-light">
+                                        <img src="{{ url_for('static', filename='asset/Keranjang/ic_baseline-plus.png') }}" alt="minus" class="img-fluid">
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
+
         <!-- End Main Content Keranjang Kiri -->
         <!-- Main Content Keranjang Kanan -->
+        {% set tax = 0 %}
         <div class="flex-fill bd-highlight mt-4" style="width: 40%;">
             <div class="p-2 mt-4 ms-5 flex-fill bd-highlight" style="background-color: #EFF1FB; width: 80%;">
                 <div class="p-2 m-4 bd-highlight" style="border-radius: 7px;">
@@ -252,24 +196,26 @@
                                 <p class="fw-bolder fs-5">Subtotal:</p>
                             </div>
                             <div class="col">
-                                <p class="fw-bold">Rp. 414.500</p>
+                                <p class="fw-bold">Rp. {{ total_price }}</p> 
                             </div>
                             <div class="col">
                                 <p class="fw-bolder fs-5">Tax:</p>
                             </div>
                             <div class="col">
-                                <p class="fw-bold">Rp. 0</p>
+                                <p class="fw-bold">Rp. {{ tax }}</p>
                             </div>
                             <div class="col">
                                 <p class="fw-bolder fs-5">Total:</p>
                             </div>
                             <div class="col">
-                                <p class="fw-bold">Rp. 414.500</p>
+                                <p class="fw-bold">Rp. {{ total_price + tax }}</p>
                             </div>
                             <div class="garis m-3"></div>
                         </div>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-success" type="button">checkout</button>
+                            <form method="POST" action="{{ url_for('checkout') }}">
+                                <button type="submit" class="btn btn-success">Checkout</button>
+                            </form>
                         </div>
                     </div>
                 </div>
