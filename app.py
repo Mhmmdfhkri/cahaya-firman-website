@@ -247,9 +247,18 @@ def add_to_cart(id_product):
     # Find the active session in the list
     active_session = next(sess for sess in current_user.session if sess.is_active)
 
-    # Create a new order item and associate it with the current user's active session
-    order_item = Order_items(id_product=id_product, id_session=active_session.id_session, quantity=1)
-    db.session.add(order_item)
+    # Check if the product is already in the cart
+    existing_order_item = Order_items.query.filter_by(id_product=id_product, id_session=active_session.id_session).first()
+
+    if existing_order_item:
+        # If the item is already in the cart, increase the quantity
+        existing_order_item.quantity += 1
+    else:
+        # If the item is not in the cart, create a new order item
+        new_order_item = Order_items(id_product=id_product, id_session=active_session.id_session, quantity=1)
+        db.session.add(new_order_item)
+
+    # Commit the changes to the database
     db.session.commit()
 
     flash(f'{product.name} added to the cart', 'success')
@@ -299,6 +308,21 @@ def checkout():
         flash('No active session to checkout', 'danger')
 
     return redirect(url_for('keranjang'))
+
+@app.route('/delete_item/<int:id_order_item>', methods=['POST'])
+@login_required
+def delete_item(id_order_item):
+    # Get the order item based on id_order_item
+    order_item = Order_items.query.get_or_404(id_order_item)
+
+    # Delete the order item
+    db.session.delete(order_item)
+    db.session.commit()
+
+    # Redirect back to the cart page
+    flash('Item deleted successfully', 'success')
+    return redirect(url_for('keranjang'))
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -157,8 +157,11 @@
                     <div class="col align-self-end">
                         <div class="row">
                             <div class="col">
-                                <img src="{{ url_for('static', filename='asset/Keranjang/mdi_rubbish-bin-circle.png') }}"
-                                    class="img-fluid">
+                                <form method="POST" action="{{ url_for('delete_item', id_order_item=order_item.id_order_item) }}">
+                                    <button type="submit" name="delete" class="btn btn-light">
+                                        <img src="{{ url_for('static', filename='asset/Keranjang/mdi_rubbish-bin-circle.png') }}" class="img-fluid">
+                                    </button>
+                                </form>
                             </div>
                             <div class="col">
                                 <form method="POST" action="{{ url_for('update_cart', id_order_item=order_item.id_order_item) }}">
