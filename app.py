@@ -15,6 +15,24 @@ from models.shopping_session import session
 from sqlalchemy.orm.collections import InstrumentedList
 from datetime import datetime
 
+
+# Define the reduce_quantity_in_stock function
+def reduce_quantity_in_stock(product_id, quantity):
+    # Get the product based on product_id
+    product = Product.query.get_or_404(product_id)
+
+    # Check if there is enough quantity in stock
+    if product.quantityInStock >= quantity:
+        # Reduce the quantityInStock
+        product.quantityInStock -= quantity
+
+        # Commit the changes to the database
+        db.session.commit()
+
+        return True
+    else:
+        return False
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -349,13 +367,13 @@ def checkoutbt():
         order_items = Order_items.query.filter_by(id_session=active_session.id_session).all()
         total_price = sum(order_item.quantity * order_item.product.price for order_item in order_items)
 
-        # Create a new payment_detail object
-        new_payment = Payment_detail(amount=total_price, payment_method='Your Payment Method', payment_date=datetime.utcnow())
-        db.session.add(new_payment)
-        db.session.commit()
-
         # Check if there are order items to proceed
         if order_items:
+            # Create a new payment_detail object
+            new_payment = Payment_detail(amount=total_price, payment_method='Your Payment Method', payment_date=datetime.utcnow())
+            db.session.add(new_payment)
+            db.session.commit()
+
             # Create a new order_detail object
             new_order = Order_detail(total=total_price, order_status='Pending', id_payment=new_payment.id_payment, id_session=active_session.id_session)
 
@@ -365,6 +383,13 @@ def checkoutbt():
             for order_item in order_items:
                 print(f'Appending order_item with id {order_item.id_order_item} to new_order.order_items')
                 new_order.order_items.append(order_item)
+
+                # Reduce the quantityInStock
+                product_id = order_item.product.id_product
+                quantity = order_item.quantity
+                if not reduce_quantity_in_stock(product_id, quantity):
+                    flash(f'Not enough quantity in stock for {order_item.product.name}', 'danger')
+                    return redirect(url_for('keranjang'))
 
             # Mark the session as inactive
             active_session.is_active = False
@@ -382,7 +407,7 @@ def checkoutbt():
     else:
         flash('No active session to checkout', 'danger')
 
-    return redirect(url_for('Checkout'))
+    return redirect(url_for('products'))
 
 
 @app.route('/delete_item/<int:id_order_item>', methods=['POST'])
