@@ -7,3 +7,5 @@ class Payment_detail(db.Model):
     amount = db.Column(db.Integer) 
     payment_method = db.Column(db.String(100))
     payment_date = db.Column(db.DateTime, default=datetime.utcnow) 
+
+    order_detail = db.relationship('Order_detail', back_populates='payment_detail')

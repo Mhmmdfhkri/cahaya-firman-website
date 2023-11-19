@@ -1,5 +1,5 @@
 from main import app, db, bcrypt, login_manager
-from flask import render_template, url_for, redirect, request, flash
+from flask import render_template, url_for, redirect, request, flash,session as flask_session,g
 from werkzeug.utils import secure_filename
 from forms.auth_forms import RegisterForm, LoginForm
 from flask_login import login_user,login_required, logout_user, current_user
@@ -13,7 +13,7 @@ from models.payment_detail import Payment_detail
 from models.reviews import reviews
 from models.shopping_session import session
 from sqlalchemy.orm.collections import InstrumentedList
-
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -69,10 +69,25 @@ def keranjang():
     return render_template("keranjang.html", order_items=order_items, user=current_user, total_price=total_price)
 
 
-@app.route("/Checkout")
+@app.route("/Checkout", methods=["GET", "POST"])
 @login_required
 def Checkout():
-    return render_template("checkout.html",user=current_user)
+    # Check if the user has an active session
+    if current_user.session is None or not any(sess.is_active for sess in current_user.session):
+        new_session = session(id_user=current_user.id_user, total=0)
+        db.session.add(new_session)
+        db.session.commit()
+
+    # Find the active session in the list
+    active_session = next(sess for sess in current_user.session if sess.is_active)
+
+    if active_session:
+        order_items = Order_items.query.filter_by(id_session=active_session.id_session).all()
+        total_price = sum(order_item.quantity * order_item.product.price for order_item in order_items)
+        return render_template("Checkout.html", user=current_user, order_items=order_items, total_price=total_price)
+
+    flash("No active session to checkout", "danger")
+    return redirect(url_for("keranjang"))
 
 
 @app.route("/payment")
@@ -250,6 +265,9 @@ def add_to_cart(id_product):
     # Check if the product is already in the cart
     existing_order_item = Order_items.query.filter_by(id_product=id_product, id_session=active_session.id_session).first()
 
+    # Define new_order_item outside the if block
+    new_order_item = None
+
     if existing_order_item:
         # If the item is already in the cart, increase the quantity
         existing_order_item.quantity += 1
@@ -260,6 +278,10 @@ def add_to_cart(id_product):
 
     # Commit the changes to the database
     db.session.commit()
+
+    # Store the order items in flask.g only if new_order_item is defined
+    if new_order_item:
+        g.setdefault('order_items', []).append(new_order_item)
 
     flash(f'{product.name} added to the cart', 'success')
     return redirect(url_for('keranjang'))
@@ -287,10 +309,33 @@ def update_cart(id_order_item):
     flash('Cart updated successfully', 'success')
     return redirect(url_for('keranjang'))
 
+@app.route('/update_checkout/<int:id_order_item>', methods=['POST'])
+@login_required
+def update_checkout(id_order_item):
+    # Get the order item based on id_order_item
+    order_item = Order_items.query.get_or_404(id_order_item)
+
+    # Update the quantity or remove the item based on the form submission
+    if 'plus' in request.form:
+        order_item.quantity += 1
+    elif 'minus' in request.form:
+        if order_item.quantity > 1:
+            order_item.quantity -= 1
+        else:
+            # If the quantity is 1, consider removing the item from the cart
+            db.session.delete(order_item)
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Redirect back to the cart page
+    flash('item updated successfully', 'success')
+    return redirect(url_for('Checkout'))
+
 
 @app.route('/checkout_bt', methods=['POST'])
 @login_required
-def checkout():
+def checkoutbt():
     # Check if the user has an active session
     active_session = None
     if current_user.session:
@@ -300,14 +345,45 @@ def checkout():
                 break
 
     if active_session:
-        # Update the session status to inactive
-        active_session.is_active = False
+        # Calculate total price
+        order_items = Order_items.query.filter_by(id_session=active_session.id_session).all()
+        total_price = sum(order_item.quantity * order_item.product.price for order_item in order_items)
+
+        # Create a new payment_detail object
+        new_payment = Payment_detail(amount=total_price, payment_method='Your Payment Method', payment_date=datetime.utcnow())
+        db.session.add(new_payment)
         db.session.commit()
-        flash('Checkout successful', 'success')
+
+        # Check if there are order items to proceed
+        if order_items:
+            # Create a new order_detail object
+            new_order = Order_detail(total=total_price, order_status='Pending', id_payment=new_payment.id_payment, id_session=active_session.id_session)
+
+            new_order.order_items = []
+
+            # Link the order_detail to the order_items
+            for order_item in order_items:
+                print(f'Appending order_item with id {order_item.id_order_item} to new_order.order_items')
+                new_order.order_items.append(order_item)
+
+            # Mark the session as inactive
+            active_session.is_active = False
+
+            # Commit changes to the database
+            db.session.add(new_order)
+            db.session.commit()
+
+            # Clear the order items from the current session
+            flask_session.pop('order_items', None)
+
+            flash('Checkout successful', 'success')
+        else:
+            flash('No items in the cart to checkout', 'danger')
     else:
         flash('No active session to checkout', 'danger')
 
-    return redirect(url_for('keranjang'))
+    return redirect(url_for('Checkout'))
+
 
 @app.route('/delete_item/<int:id_order_item>', methods=['POST'])
 @login_required
@@ -322,6 +398,8 @@ def delete_item(id_order_item):
     # Redirect back to the cart page
     flash('Item deleted successfully', 'success')
     return redirect(url_for('keranjang'))
+
+
 
 
 if __name__ == "__main__":

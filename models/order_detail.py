@@ -6,8 +6,7 @@ class Order_detail(db.Model):
     total = db.Column(db.Float)
     order_status = db.Column(db.String(100)) 
     id_payment = db.Column(db.Integer, db.ForeignKey('payment_detail.id_payment', name='fk_oDetail_payment'))
-    id_order_item = db.Column(db.Integer, db.ForeignKey('order_items.id_order_item', name='fk_oDetail_Oitem'))  
-    
+    id_session = db.Column(db.Integer, db.ForeignKey('session.id_session', name='fk_oDetail_session'))
 
-    payment_detail = db.relationship('Payment_detail', backref='Order_detail', foreign_keys=[id_payment])
-    order_items = db.relationship('Order_items', backref='Order_detail', foreign_keys=[id_order_item]) 
+    payment_detail = db.relationship('Payment_detail', back_populates='order_detail')
+    session = db.relationship('session', back_populates='Order_detail')

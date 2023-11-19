@@ -7,7 +7,5 @@ class Order_items(db.Model):
     id_session = db.Column(db.Integer, db.ForeignKey('session.id_session', name='fk_order_session'))  # Foreign key ke tabel session
     quantity = db.Column(db.Integer, nullable=False, default=1)
     
-
-    # Anda juga dapat menambahkan hubungan dengan objek Orders dan Products untuk mengakses data terkait.
-    product = db.relationship('Product', backref='Order_items')
-    session = db.relationship('session', backref='order_items')
+    product = db.relationship('Product', backref='order_items')
+    session = db.relationship('session', back_populates='order_items')

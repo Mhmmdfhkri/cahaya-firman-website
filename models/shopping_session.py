@@ -8,7 +8,9 @@ class session(db.Model):
     id_user = db.Column(db.Integer, db.ForeignKey('user.id_user'), nullable=False)
     total = db.Column(db.Float, nullable=False, default=0)
     is_active = db.Column(db.Boolean, default=True)
-    orders = db.relationship('Order_items', backref='order_session', lazy=True)
 
-    user = relationship("User", backref="session")  
+
+    order_items = db.relationship('Order_items', back_populates='session')
+    user = relationship("User", backref="session")
+    Order_detail = relationship("Order_detail", back_populates="session", uselist=False)
 

@@ -23,12 +23,17 @@
  <div class="container bg-light rounded-4 top_content">
   <h3 class="ur-address">Alamat Anda</h3>
   <div class="d-flex bd-highlight mb-0">
-    <div class="me-auto p-2 bd-highlight"><p class="user-name">'Nama pengguna'</p></div>
+    {% if order_items %}
+  <div class="me-auto p-2 bd-highlight"><p class="user-name">{{ order_items[0].session.user.fullname }}</p></div>
+{% endif %}
     <div class="align-self-end"><p class ="ch-address">UBAH ALAMAT</p></div>
     <div class="align-self-start" ><img src="{{ url_for('static', filename='asset/ep_success-filled.png') }}" alt="check" class="success-img"></div>
   </div>
-  <p class="user-address">'Alamat pengguna'</p>
+  {% if order_items %}
+  <p class="user-address">{{ order_items[0].session.user.address }}</p>
+  {% endif %}
  </div>
+
 
 <div class="container mt-5 p-3 bg-light rounded-4">
   <div class="d-flex bd-highlight mb-3">
@@ -37,28 +42,38 @@
     <div class="p-2 bd-highlight"><H3>Kuantitas</H3></div>
     <div class="p-2 bd-highlight"><H3>Total Harga</H3></div>
   </div>
+  {% for order_item in order_items %}
   <div class=".container m-3 bg-light rounded-3 shadow-lg">
     <div class="d-flex bd-highlight mb-3">
-      <div class="p-2 bd-highlight"><img src="{{ url_for('static', filename='asset/pngegg (1) 3.png') }}" alt="item" class="item-img"></div>
+      <div class="p-2 bd-highlight"><img src="{{ url_for('static', filename='unggah/' + order_item.product.picture) }}" alt="item" class="item-img"></div>
       <div class="me-auto py-5 bd-highlight">
-        <div class="col-offset-1"><p class="item-name">Semen 40kg</p></div>
-        <div class='col-offset-1'><p class="item-stock">Stok: 500</p></div>
+        <div class="col-offset-1"><p class="item-name">{{ order_item.product.name }}</p></div>
+        <div class='col-offset-1'><p class="item-stock">Stok: {{ order_item.product.quantityInStock }}</p></div>
       </div>
-      <div class="p-2 me-5 bd-highlight align-self-center"><p class="item-price">61.000</p></div>
+      <div class="p-2 me-5 bd-highlight align-self-center"><p class="item-price">{{ order_item.product.price }}</p></div>
       <div class="p-2 me-5 bd-highlight align-self-center"><div class="row align-items-center">
         <div class="col">
+          <form  method="POST" action="{{ url_for('update_checkout', id_order_item=order_item.id_order_item)}}" >
+            <button type="submit" name="minus" class="btn btn-light">
           <img src="{{ url_for('static', filename='asset/ic_baseline-plus.png') }}" alt="min" class="min-item">
+            </button>
+        </form>
         </div>
         <div class="col">
-          1
+          {{ order_item.quantity }}
         </div>
         <div class="col">
+          <form  method="POST" action="{{ url_for('update_checkout', id_order_item=order_item.id_order_item)}}">
+            <button type="submit" name="plus" class="btn btn-light">
           <img src="{{ url_for('static', filename='asset/ic_baseline-plus (1).png') }}" alt="add" class="add-item">
+            </button>
+        </form>
         </div>
       </div></div>
-      <div class="p-2 me-5 bd-highlight align-self-center"><p class="total-item-price">61.000</p></div>
+      <div class="p-2 me-5 bd-highlight align-self-center"><p class="total-item-price">{{ order_item.quantity * order_item.product.price }}</p></div>
     </div>
   </div>
+  {% endfor %}
 </div>
 
 <div class="container mt-5 p-1 bg-light rounded-4">
@@ -70,6 +85,10 @@
   </div>
 </div>
 
+
+{% set SubPengiriman = 20000 %}
+{% set layanan = 1000 %}
+{% set Penanganan = 1000 %}
 <div class="container mt-5 p-1 bg-light rounded-4 bottom_content">
   <div class="d-flex bd-highlight">
     <div class="p-2 bd-highlight"> <img src="{{ url_for('static', filename='asset/fluent-mdl2_product-list.png') }}" alt="box sign" class="box-sign"></div>
@@ -80,7 +99,7 @@
       <p class="Subtotal">Subtotal Untuk Produk</p>
     </div>
     <div class="col-md-auto">
-      <p class="Subtotal-Product">Rp61.000</p>
+      <p class="Subtotal-Product">Rp{{ total_price }}</p>
     </div>  
   </div>
   <div class="row ps-4 pe-4">
@@ -88,7 +107,7 @@
       <p class="Subtotal">Subtotal Untuk Pengiriman</p>
     </div>
     <div class="col-md-auto">
-      <p class="Subtotal-delivery">Rp20.000</p>
+      <p class="Subtotal-delivery">Rp{{ SubPengiriman }}</p>
     </div>  
   </div>
   <div class="row ps-4 pe-4">
@@ -96,7 +115,7 @@
       <p class="Subtotal">Biaya Layanan</p>
     </div>
     <div class="col-md-auto">
-      <p class="service-fee">Rp1.000</p>
+      <p class="service-fee">Rp{{ layanan }}</p>
     </div>  
   </div>
   <div class="row ps-4 pe-4">
@@ -104,7 +123,7 @@
       <p class="Subtotal">Biaya Penanganan</p>
     </div>
     <div class="col-md-auto">
-      <p class="handling-fee">Rp1.000</p>
+      <p class="handling-fee">Rp{{ Penanganan }}</p>
     </div>  
   </div>
   <div class="row ps-4 pe-4">
@@ -112,7 +131,7 @@
       <p class="tvTotal-pay">Total Pembayaran</p>
     </div>
     <div class="col-md-auto">
-      <p class="Total-pay">Rp83.000</p>
+      <p class="Total-pay">Rp{{ total_price + SubPengiriman + layanan + Penanganan }}</p>
     </div>  
   </div>
 </div>
@@ -124,8 +143,10 @@
     <div class="d-flex" style="height: 80px;">
       <div class="vr bg-black"></div>
     </div>
-    <div class="px-2 d-flex"> <p class="Total-pay2">83.000</p></div>
-    <button type="button" class="btn btn-secondary btn-lg me-3 px-5 py-3 rounded-4 bt_checkout">Checkout Now</button>
+    <div class="px-2 d-flex"> <p class="Total-pay2">{{ total_price + SubPengiriman + layanan + Penanganan }}</p></div>
+    <form method="POST" action="{{ url_for('checkoutbt') }}">
+    <button type="submit" class="btn btn-secondary btn-lg me-3 px-5 py-3 rounded-4 bt_checkout">Checkout Now</button>
+  </form>
   </div>
 </nav>
 
