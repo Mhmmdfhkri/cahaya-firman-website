@@ -48,7 +48,6 @@ def products():
 def get_product(id_product):
     return Product.query.get(id_product)
 
-
 # Rute untuk menampilkan halaman detail produk berdasarkan ID produk
 @app.route('/detail_product/<int:id_product>')
 def detail_product(id_product):
@@ -60,11 +59,13 @@ def detail_product(id_product):
 def home():
     return render_template("home.html",user = current_user)
 
+@app.route("/loginadmin")
+def loginadmin():
+    return render_template("loginadmin.html",user = current_user)
 
 @app.route("/about")
 def about():
     return render_template("about.html",user = current_user)
-
 
 @app.route("/keranjang")
 def keranjang():
