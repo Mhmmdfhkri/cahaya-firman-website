@@ -11,3 +11,6 @@ class Product(db.Model):
     quantityInStock = db.Column(db.Integer)
     price = db.Column(db.Float)
     picture = db.Column(db.String(100))
+
+
+reviews = relationship("reviews", backref="product")

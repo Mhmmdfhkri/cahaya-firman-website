@@ -49,11 +49,38 @@ def get_product(id_product):
     return Product.query.get(id_product)
 
 # Rute untuk menampilkan halaman detail produk berdasarkan ID produk
-@app.route('/detail_product/<int:id_product>')
+@app.route('/detail_product/<int:id_product>', methods=["GET", "POST"])
 def detail_product(id_product):
-    # Dapatkan detail produk dan ulasan berdasarkan product_id
     product = get_product(id_product)
-    return render_template('detail_product.html', product=product)
+    print("Product Reviews:", product.reviews)
+    if request.method == "POST":
+        # Check if the user is logged in
+        if not current_user.is_authenticated:
+            flash("You must log in to submit a review.", "danger")
+            return redirect(url_for("login"))
+
+        # Get user input from the form
+        rating = int(request.form.get("rating"))
+        comment = request.form.get("comment")
+
+        # Create a new review object
+        new_review = reviews(id_user=current_user.id_user, id_product=id_product, rating=rating, comment=comment)
+
+        # Commit the review to the database
+        db.session.add(new_review)
+        db.session.commit()
+
+    # Get all reviews for the product
+    product_reviews = reviews.query.filter_by(id_product=id_product).all()
+
+    # Calculate average rating
+    average_rating = 0.0
+    if product_reviews:
+        total_ratings = sum(review.rating for review in product_reviews)
+        average_rating = total_ratings / len(product_reviews)
+
+    return render_template('detail_product.html', product=product, reviews=product_reviews, user=current_user,average_rating=average_rating)
+
 
 @app.route("/home")
 def home():
