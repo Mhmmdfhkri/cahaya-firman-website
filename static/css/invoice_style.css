@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&family=Poppins:wght@300&family=Roboto:wght@300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container{
+    background-color: antiquewhite;
+    height: 500px;
+    margin-top: 50px;
+    margin-left: 450px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #232946; /* Ketebalan 1px, solid style, warna hitam (#000) */
+    border-radius: 10px;
+    width: 30%;
+    text-align: justify;
+}
+
+.satu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.dua{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tiga{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.empat{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
