@@ -153,19 +153,21 @@ p.stock{
 	transform: scale(1.1);
 }
 textarea {
-	width: 100%;
+	width: 80%;
 	background: var(--light);
 	padding: 1rem;
 	border-radius: .5rem;
 	border: none;
 	outline: none;
 	resize: none;
+	margin-left: 100px;
 	margin-bottom: .5rem;
 }
 .btn-group {
 	display: flex;
 	grid-gap: .5rem;
 	align-items: center;
+	margin-left: 545px;
 }
 .btn-group .btn {
 	padding: .75rem 1rem;
@@ -189,4 +191,61 @@ textarea {
 }
 .btn-group .btn.cancel:hover {
 	background: var(--light);
+}
+
+h3{
+	margin-top: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+div.review{
+
+	border-radius: 10px;
+	background-color: aqua;
+	width: 83%;
+	background: aqua;
+	margin-left: 100px;
+}
+
+div.review p{
+	margin-left: 10px;
+}
+
+div.review p#user{
+	margin-top: 20px;
+}
+div.add{
+	display: flex;
+}
+
+div#add-card{
+	font-family: 'Poppins', sans-serif;
+	margin-top: 20px;
+	border-radius: 10px;
+	width: 200px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #FFF;
+	border: 1px solid #000;
+	font-weight: bold;
+}
+
+div.buy-now{
+	font-family: 'Poppins', sans-serif;
+	margin-left: 20px;
+	margin-top: 20px;
+	border-radius: 10px;
+	width: 200px;
+	height: 40px;
+	display: flex;
+	font-weight: bold;
+	align-items: center;
+	justify-content: center;
+	background-color: #232946;
+	color: #EEBBC3;
+	border: 1px solid #000;
 }

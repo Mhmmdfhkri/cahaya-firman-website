@@ -28,8 +28,7 @@
             <div class="rating-1"> <!--show average rating-->
                 <img src="{{ url_for('static', filename='asset/staaaar.png') }}" alt="">
                 {% if reviews %}
-                <p class="rating_avg">{{ "{:.1f}".format(average_rating) }}/5</p>
-                <p>Total Reviews: {{ reviews|length }}</p>
+                <p class="rating_avg">{{ "{:.1f}".format(average_rating) }}</p>
             {% else %}
                 <p class="rating_avg">No Ratings Yet</p>
             {% endif %}
@@ -42,6 +41,14 @@
                 <img src="{{ url_for('static', filename='asset/btn-adda.png') }}" alt="">
             </div>
             <p class="stock"><strong>Stok: </strong> {{ product.quantityInStock }}</p>
+            <div class="add">
+                <div id="add-card">
+                    Add To Card
+                </div>
+                <div class="buy-now">
+                    Buy Now
+                </div>
+            </div>
         </div>
     </div>
 
@@ -50,15 +57,6 @@
     </div>
 
     <div class="reviews">
-        <h3>Product Reviews</h3>
-        {% for review in reviews %}
-        <div class="review" style="background-color: white;">
-            <p><strong>User:</strong> {{ review.user.username }}</p>
-            <p><strong>Rating:</strong> {{ review.rating }}/5</p>
-            <p><strong>Comment:</strong> {{ review.comment }}</p>
-        </div>
-    {% endfor %}
-
         <!-- Form to submit a new review -->
         <form method="post">
             <div class="rating"> <!--memberi rating-->
@@ -73,6 +71,18 @@
                 <button class="btn cancel">Cancel</button>
             </div>
         </form>
+
+
+        <h3>Product Reviews</h3>
+        {% for review in reviews %}
+        <div class="review" style="background-color: white;">
+            <p id="user"><strong>User:</strong> {{ review.user.username }}</p>
+            <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+            <p><strong>Comment:</strong> {{ review.comment }}</p>
+        </div>
+    {% endfor %}
+
+        
     </div>
 
     <script>
