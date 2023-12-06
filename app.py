@@ -130,7 +130,11 @@ def Checkout():
     if active_session:
         order_items = Order_items.query.filter_by(id_session=active_session.id_session).all()
         total_price = sum(order_item.quantity * order_item.product.price for order_item in order_items)
-        return render_template("Checkout.html", user=current_user, order_items=order_items, total_price=total_price)
+        SubPengiriman = 20000
+        layanan = 1000
+        Penanganan = 1000
+        overall_pay = total_price + SubPengiriman + layanan + Penanganan
+        return render_template("Checkout.html", user=current_user, order_items=order_items, total_price=total_price, overall_pay=overall_pay)
 
     flash("No active session to checkout", "danger")
     return redirect(url_for("keranjang"))
@@ -394,16 +398,20 @@ def checkoutbt():
         # Calculate total price
         order_items = Order_items.query.filter_by(id_session=active_session.id_session).all()
         total_price = sum(order_item.quantity * order_item.product.price for order_item in order_items)
+        SubPengiriman = 20000
+        layanan = 1000
+        Penanganan = 1000
+        overall_pay = total_price + SubPengiriman + layanan + Penanganan
 
         # Check if there are order items to proceed
         if order_items:
             # Create a new payment_detail object
-            new_payment = Payment_detail(amount=total_price, payment_method='Your Payment Method', payment_date=datetime.utcnow())
+            new_payment = Payment_detail(amount=overall_pay, payment_method=request.form.get('paymentMethod'), payment_date=datetime.utcnow())
             db.session.add(new_payment)
             db.session.commit()
 
             # Create a new order_detail object
-            new_order = Order_detail(total=total_price, order_status='Pending', id_payment=new_payment.id_payment, id_session=active_session.id_session)
+            new_order = Order_detail(total=overall_pay, order_status='Pending', id_payment=new_payment.id_payment, id_session=active_session.id_session)
 
             new_order.order_items = []
 

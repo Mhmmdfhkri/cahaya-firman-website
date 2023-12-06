@@ -80,8 +80,10 @@
   <div class="d-flex bd-highlight mb-3">
     <div class="p-2 bd-highlight"> <img src="{{ url_for('static', filename='asset/Group.png') }}" alt="dollar sign" class="dollar-sign"></div>
     <div class="me-auto p-0 bd-highlight align-self-end"><p class="tv-payment">Metode Pembayaran</p></div>
-    <div class="p-0 bd-highlight align-self-end"><p class ="payment-method">Pilih Metode Pembayaran</p></div>
-    <div class="p-0 bd-highlight align-self-end "> <img src="{{ url_for('static', filename='asset/mingcute_down-line.png') }}" alt="drop sign" class="drop-sign"></div>
+    <!-- Fix the data-bs-target attribute here -->
+    <div class="p-0 bd-highlight align-self-end">
+      <p id="payment_method" data-bs-toggle="modal" data-bs-target="#paymentModal">Pilih Metode Pembayaran</p>
+   </div>
   </div>
 </div>
 
@@ -89,6 +91,7 @@
 {% set SubPengiriman = 20000 %}
 {% set layanan = 1000 %}
 {% set Penanganan = 1000 %}
+
 <div class="container mt-5 p-1 bg-light rounded-4 bottom_content">
   <div class="d-flex bd-highlight">
     <div class="p-2 bd-highlight"> <img src="{{ url_for('static', filename='asset/fluent-mdl2_product-list.png') }}" alt="box sign" class="box-sign"></div>
@@ -131,7 +134,7 @@
       <p class="tvTotal-pay">Total Pembayaran</p>
     </div>
     <div class="col-md-auto">
-      <p class="Total-pay">Rp{{ total_price + SubPengiriman + layanan + Penanganan }}</p>
+      <p class="Total-pay">Rp{{ overall_pay }}</p>
     </div>  
   </div>
 </div>
@@ -145,14 +148,115 @@
     </div>
     <div class="px-2 d-flex"> <p class="Total-pay2">{{ total_price + SubPengiriman + layanan + Penanganan }}</p></div>
     <form method="POST" action="{{ url_for('checkoutbt') }}">
-    <button type="submit" class="btn btn-secondary btn-lg me-3 px-5 py-3 rounded-4 bt_checkout">Checkout Now</button>
+      <!-- Include a hidden input field for the payment method -->
+      <input type="hidden" name="paymentMethod" id="paymentMethodInput" value="">
+      <button type="submit" id="checkoutButton" class="btn btn-secondary btn-lg me-3 px-5 py-3 rounded-4 bt_checkout" disabled>
+          Checkout Now
+      </button>
   </form>
   </div>
 </nav>
 
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentModalLabel">Pilih Metode Pembayaran</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Add your radio buttons for payment methods here -->
+        <form id="paymentForm">
+          <div class="mb-3">
+            <input type="radio" id="cashOnDelivery" name="paymentMethod" value="COD">
+            <label for="cashOnDelivery">Cash on Delivery</label>
+          </div>
+          <div class="mb-3">
+            <input type="radio" id="bankTransfer" name="paymentMethod" value="Transfer Bank">
+            <label for="bankTransfer">Transfer Bank</label>
+            <hr class="border  mx-1 my-1 my-0 ">
+            <div id="bankTransferFields">
+              <label for="bankName">Nama Bank:</label>
+              <select id="bankName" name="bankName" class="form-control">
+                <option value="BNI">BNI</option>
+                <option value="BRI">BRI</option>
+                <option value="BCA">BCA</option>
+                <option value="Mandiri">Mandiri</option>
+              </select>
+              <p style="size: 12px;">No Rekening</p> <!-- Display these after choosing bank -->
+              <!-- Display the account number based on the selected bank -->
+              <p id="accountNumber"></p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="selectPaymentMethod()">Pilih</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
+<script>
+  // Add this script to handle the modal and form visibility
+  function selectPaymentMethod() {
+    var selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+    if (selectedMethod) {
+      document.getElementById('payment_method').innerText = 'Your Payment Method: ' + selectedMethod.value;
+      document.getElementById('paymentMethodInput').value = selectedMethod.value;
+
+      // Show additional form fields for bank transfer if selected
+      if (selectedMethod.value === 'Transfer Bank') {
+        document.getElementById('bankTransferFields').style.display = 'block';
+
+        // Display the account number based on the selected bank
+        var selectedBank = document.getElementById('bankName').value;
+        var accountNumber = getAccountNumber(selectedBank);
+        document.getElementById('accountNumber').innerText = 'No Rekening: ' + accountNumber;
+      } else {
+        document.getElementById('bankTransferFields').style.display = 'none';
+      }
+      document.getElementById('checkoutButton').removeAttribute('disabled');
+      // Close the modal
+      $('#paymentModal').modal('hide');
+    } else {
+      alert('Please select a payment method');
+    }
+  }
+
+  // Function to get the account number based on the selected bank
+  function getAccountNumber(bank) {
+    // You can replace this with your logic to retrieve the account number
+    // based on the selected bank
+    switch (bank) {
+      case 'BNI':
+        return '1234567890';
+      case 'BRI':
+        return '9876543210';
+      case 'BCA':
+        return '5678901234';
+      case 'Mandiri':
+        return '0123456789';
+      default:
+        return '';
+    }
+  }
+
+
+  function updateAccountNumber() {
+    var bankName = document.getElementById('bankName').value;
+    var accountNumber = getAccountNumber(bankName);
+    document.getElementById('accountNumber').innerText = accountNumber;
+  }
+
+  // Add an event listener to update the account number when the bank name changes
+  document.getElementById('bankName').addEventListener('change', updateAccountNumber);
+
+  // Initial update when the page loads
+  updateAccountNumber();
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

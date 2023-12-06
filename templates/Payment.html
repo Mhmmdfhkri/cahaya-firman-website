@@ -24,7 +24,7 @@
         <div class="d-flex bd-highlight mb-0">
           <div class="px-3 ms-5 pt-5 bd-highlight"><img src="{{ url_for('static', filename='asset/mdi_account-cash-outline.png') }}" alt="COD" class="COD-Sign"></div>
           <div class="me-auto ms-3 pt-5 bd-highlight">
-            <div class="col-offset-1 p-0 m-0"><p class="COD">COD</p></div>
+            <div class="col-offset-1 p-0 m-0"><p class="COD">COD</p></div> <!--first method-->
             <div class='col-offset-1 p-0 m-0'><p class="COD2">Cash on Delivery</p></div>
           </div>
         </div>
@@ -32,19 +32,10 @@
         <div class="d-flex bd-highlight mb-0">
             <div class="px-3 ms-5 py-5 bd-highlight"><img src="{{ url_for('static', filename='asset/solar_round-transfer-horizontal-bold.png') }}" alt="Bank" class="Bank-Sign"></div>
             <div class="me-auto ms-3 pt-5 bd-highlight">
-                <p class="tv-transfer">Transfer Bank</p>
+                <p class="tv-transfer">Transfer Bank</p> <!--ssecond method-->
             </div>
             <div class="pt-4 me-5 bd-highlight align-self-center">
-              <a class="ch-bank" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Bank</a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">BRI</a>
-                <div class="dropdown-divider bg-info mx-1"></div>
-                <a class="dropdown-item" href="#">BNI</a>
-                <div class="dropdown-divider bg-info mx-1"></div>
-                <a class="dropdown-item" href="#">BCA</a>
-                <div class="dropdown-divider bg-info mx-1"></div>
-                <a class="dropdown-item" href="#">Mandiri</a>
-              </div>
+              <p class="ch-bank">Pilih Bank</p>
             </div>
             <div class="pt-4 me-5 bd-highlight align-self-center">
               <div class="dropdown">
@@ -65,13 +56,6 @@
             </div>
         </div>
         <hr class="border border-primary mx-5  my-0 ">
-        <div class="d-flex bd-highlight mb-0">
-            <div class="px-3 ms-5 py-5 bd-highlight"><img src="{{ url_for('static', filename='asset/bi_cash-coin.png') }}" alt="Cash" class="Cash-Sign"></div>
-            <div class="me-auto ms-3 pt-5 bd-highlight">
-                <p class="pay-cash">Bayar Tunai</p>
-            </div>
-        </div>
-        <hr class="border border-primary mx-5 mt-0 ">
       </div>
 
       <nav class="navbar bg-light fixed-bottom shadow">

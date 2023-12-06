@@ -64,10 +64,11 @@ p{
     font-weight: 600;
 }
 
-.payment-method{
+#payment_method{
     font-size: 24px;
     color: #FF8C98;
     font-family: 'Poppins', sans-serif;
+    cursor: default;
 }
 
 .detail-payment{
