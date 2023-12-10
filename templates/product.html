@@ -148,7 +148,11 @@
                     <div class="imgContainer">
                         <img src="{{ url_for('static', filename='asset/Product/star_rating.png') }}">
                     </div>
-                    <p class="rating fw-lighter p-1">5</p>
+                    {% if product_avg_ratings[barang.id_product] > 0 %}
+                    <p class="rating fw-lighter p-1">{{ "{:.1f}".format(product_avg_ratings[barang.id_product]) }}</p>
+                {% else %}
+                    <p class="rating fw-lighter p-1">No Ratings Yet</p>
+                {% endif %}
                 </div>
                 <div class="bd-highlight text-center">
                     <a href="/detail_product/{{ barang.id_product }}">
@@ -165,8 +169,8 @@
                 <div class="bd-highlight mx-3">
                     <div class="d-grid gap-2">
                         <form method="POST" action="{{ url_for('add_to_cart', id_product=barang.id_product) }}">
-                            <button type="submit" class="btn btn-light custom-gradient-btn">
-                                <div class="bd-highlight d-flex flex-row justify-content-center" id="add">
+                            <button type="submit" class="btn btn-light custom-gradient-btn w-100">
+                                <div class="d-flex flex-row justify-content-center align-items-center w-100" id="add">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-plus-circle m-1" viewBox="0 0 16 16">
                                         <path
@@ -176,7 +180,7 @@
                                     </svg>
                                     Add to Cart
                                 </div>
-                            </button>
+                            </button>                            
                         </form>
                         <button class="btn btn-light custom-gradient-btn" type="button">Buy Now</button>
                     </div>

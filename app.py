@@ -14,6 +14,7 @@ from models.reviews import reviews
 from models.shopping_session import session
 from sqlalchemy.orm.collections import InstrumentedList
 from datetime import datetime
+from sqlalchemy import func
 
 
 # Define the reduce_quantity_in_stock function
@@ -32,6 +33,9 @@ def reduce_quantity_in_stock(product_id, quantity):
         return True
     else:
         return False
+    
+def get_product(id_product):
+    return Product.query.get(id_product)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -39,14 +43,21 @@ def load_user(user_id):
 
 @app.route("/", methods=["GET", "POST"])
 def products():
+    # Get all products
     barang_list = Product.query.all()
-    return render_template("product.html", barang_list=barang_list,user = current_user)
 
+    # Calculate average rating for each product
+    product_avg_ratings = {}
+    for product in barang_list:
+        product_reviews = reviews.query.filter_by(id_product=product.id_product).all()
+        if product_reviews:
+            total_ratings = sum(review.rating for review in product_reviews)
+            average_rating = total_ratings / len(product_reviews)
+            product_avg_ratings[product.id_product] = average_rating
+        else:
+            product_avg_ratings[product.id_product] = 0.0
 
-
-
-def get_product(id_product):
-    return Product.query.get(id_product)
+    return render_template("product.html", barang_list=barang_list, user=current_user, product_avg_ratings=product_avg_ratings)
 
 # Rute untuk menampilkan halaman detail produk berdasarkan ID produk
 @app.route('/detail_product/<int:id_product>', methods=["GET", "POST"])
