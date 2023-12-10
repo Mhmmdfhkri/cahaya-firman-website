@@ -19,19 +19,21 @@
         <hr>
         <div class="dua">
             <h3>
-                Muhammad Fikri
+                {{ order.session.user.fullname }}
             </h3>
             <p>
-                Alamat
+                {{ order.session.user.address }}
             </p>
         </div>
         <hr>
         
         <div class="tiga">
             <div class="judul">
+                {% for order_item in order.session.order_items %}
                 <h3>
-                    Semen
+                    {{ order_item.product.name }}
                 </h3>
+                {% endfor %}
                 <h3>
                     Total
                 </h3>
@@ -40,14 +42,16 @@
                 </h3>
             </div>
             <div class="value">
+                {% for order_item in order.session.order_items %}
                 <p>
-                    1
+                    {{ order_item.quantity }}   |    Rp. {{ order_item.quantity * order_item.product.price }}
+                </p>
+                {% endfor %}
+                <p>
+                    {{ total_quantity }}    |   Rp. {{ total_price }}
                 </p>
                 <p>
-                    Rp. 61.000
-                </p>
-                <p>
-                    Rp. 61.000
+                    Rp. {{ overall_pay }}
                 </p>
             </div>
         </div>
@@ -55,14 +59,18 @@
         <hr>
         <div class="empat">
             <h3>
-                Transfer - BRI
+                Metode Pembayaran
             </h3>
             <p>
-                No.Rek. 00011000
+                {{ order.payment_detail.payment_method }}
             </p>
         </div>
 
     </div>
+
+    <form action="{{ url_for('products') }}" class="btn"> 
+    <button >Home</button>
+    </form>
 
 </body>
 

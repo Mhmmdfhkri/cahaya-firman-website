@@ -454,7 +454,7 @@ def checkoutbt():
     else:
         flash('No active session to checkout', 'danger')
 
-    return redirect(url_for('products'))
+    return redirect(url_for('invoice', order_id=new_order.id_order))
 
 
 @app.route('/delete_item/<int:id_order_item>', methods=['POST'])
@@ -471,6 +471,21 @@ def delete_item(id_order_item):
     flash('Item deleted successfully', 'success')
     return redirect(url_for('keranjang'))
 
+@app.route('/invoice/<int:order_id>', methods=['GET'])
+@login_required
+def invoice(order_id):
+    # Get the order details based on order_id
+    order = Order_detail.query.get_or_404(order_id)
+    
+    total_price = sum(order_item.quantity * order_item.product.price for order_item in order.session.order_items)
+    total_quantity = sum(order_item.quantity for order_item in order.session.order_items)
+    SubPengiriman = 20000
+    layanan = 1000
+    Penanganan = 1000
+    overall_pay = total_price + SubPengiriman + layanan + Penanganan
+
+    # Render the invoice template and pass the necessary data
+    return render_template('invoice.html', order=order, user=current_user, overall_pay=overall_pay, total_price=total_price, total_quantity=total_quantity )
 
 
 
