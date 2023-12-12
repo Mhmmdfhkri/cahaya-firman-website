@@ -56,7 +56,7 @@ def load_user(user_id):
 @app.route("/", methods=["GET", "POST"])
 def products():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
     
@@ -80,7 +80,7 @@ def products():
 @app.route('/detail_product/<int:id_product>', methods=["GET", "POST"])
 def detail_product(id_product):
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -118,7 +118,7 @@ def detail_product(id_product):
 @app.route("/home")
 def home():
 
-    if  current_user.is_admin:
+    if current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -143,7 +143,7 @@ def loginadmin():
 @app.route("/about")
 def about():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -152,7 +152,7 @@ def about():
 @app.route("/keranjang")
 def keranjang():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -179,7 +179,7 @@ def keranjang():
 @login_required
 def Checkout():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -208,7 +208,7 @@ def Checkout():
 @app.route("/payment")
 def Payment():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -344,7 +344,7 @@ def delete_barang(id):
 @app.route("/contact")
 def contact():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -354,7 +354,7 @@ def contact():
 @login_required
 def profil():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -364,7 +364,7 @@ def profil():
 @login_required
 def update_profile():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -387,7 +387,7 @@ def update_profile():
 @login_required
 def logout():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -404,7 +404,7 @@ def logoutadmin():
 @login_required
 def add_to_cart(id_product):
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -448,7 +448,7 @@ def add_to_cart(id_product):
 @login_required
 def update_cart(id_order_item):
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -476,7 +476,7 @@ def update_cart(id_order_item):
 @login_required
 def update_checkout(id_order_item):
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -505,7 +505,7 @@ def update_checkout(id_order_item):
 @login_required
 def checkoutbt():
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -573,7 +573,7 @@ def checkoutbt():
 @login_required
 def delete_item(id_order_item):
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
 
@@ -592,7 +592,7 @@ def delete_item(id_order_item):
 @login_required
 def invoice(order_id):
 
-    if  current_user.is_admin:
+    if  current_user.is_authenticated and current_user.is_admin:
             flash("You need to log in as a user to access this page.", "danger")
             abort(403)
             
