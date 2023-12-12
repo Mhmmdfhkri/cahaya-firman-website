@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     gender = db.Column(db.CHAR(1), nullable=True, unique=False)
     telephone = db.Column(db.Integer, nullable=True, unique=False)
     address = db.Column(db.String(60), nullable=True, unique=False)
+    is_admin = db.Column(db.Boolean, default=False)
     def get_id(self):
            return (self.id_user)
 

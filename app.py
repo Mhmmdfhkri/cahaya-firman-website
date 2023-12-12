@@ -1,5 +1,5 @@
 from main import app, db, bcrypt, login_manager
-from flask import render_template, url_for, redirect, request, flash,session as flask_session,g
+from flask import render_template, url_for, redirect, request, flash,session as flask_session,g,abort
 from werkzeug.utils import secure_filename
 from forms.auth_forms import RegisterForm, LoginForm
 from flask_login import login_user,login_required, logout_user, current_user
@@ -15,7 +15,19 @@ from models.shopping_session import session
 from sqlalchemy.orm.collections import InstrumentedList
 from datetime import datetime
 from sqlalchemy import func
+from functools import wraps
 
+
+
+def admin_required(func):
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        # Check if the current user is logged in and is an admin
+        if not current_user.is_authenticated or not current_user.is_admin:
+            flash("You need to log in as an admin to access this page.", "danger")
+            return redirect(url_for('loginadmin'))
+        return func(*args, **kwargs)
+    return decorated_view
 
 # Define the reduce_quantity_in_stock function
 def reduce_quantity_in_stock(product_id, quantity):
@@ -43,6 +55,11 @@ def load_user(user_id):
 
 @app.route("/", methods=["GET", "POST"])
 def products():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+    
     # Get all products
     barang_list = Product.query.all()
 
@@ -62,6 +79,11 @@ def products():
 # Rute untuk menampilkan halaman detail produk berdasarkan ID produk
 @app.route('/detail_product/<int:id_product>', methods=["GET", "POST"])
 def detail_product(id_product):
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     product = get_product(id_product)
     print("Product Reviews:", product.reviews)
     if request.method == "POST":
@@ -95,18 +117,45 @@ def detail_product(id_product):
 
 @app.route("/home")
 def home():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     return render_template("home.html",user = current_user)
 
-@app.route("/loginadmin")
+@app.route("/loginadmin", methods=['GET', 'POST'])
 def loginadmin():
-    return render_template("loginadmin.html",user = current_user)
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            if user.is_admin:
+                login_user(user)
+                print("Admin logged in successfully")
+                return redirect(url_for('admin_crud'))
+            else:
+                flash("Invalid login credentials for admin", "danger")
+        else:
+            flash("Invalid login credentials", "danger")
+    return render_template("loginadmin.html", form=form)
 
 @app.route("/about")
 def about():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     return render_template("about.html",user = current_user)
 
 @app.route("/keranjang")
 def keranjang():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     # Check if the user has an active session
     active_session = None
     if current_user.session:
@@ -129,6 +178,11 @@ def keranjang():
 @app.route("/Checkout", methods=["GET", "POST"])
 @login_required
 def Checkout():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     # Check if the user has an active session
     if current_user.session is None or not any(sess.is_active for sess in current_user.session):
         new_session = session(id_user=current_user.id_user, total=0)
@@ -153,6 +207,11 @@ def Checkout():
 
 @app.route("/payment")
 def Payment():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     return render_template("Payment.html")
 
 
@@ -186,28 +245,33 @@ def register():
 
 # admin start
 @app.route("/admin_user")
+@admin_required
 def admin_user():
     users = User.query.all()
     return render_template("admin_user.html", users=users)
 
 @app.route("/admin_crud")
+@admin_required
 def admin_crud():
     barang_list = Product.query.all()
     return render_template('admin_crud.html', barang_list=barang_list)
 
-
 @app.route("/admin_status")
+@admin_required
 def admin_status():
     return render_template("admin_status.html")
+
 # admin end
 
 # crud
 
 @app.route("/add")
+@admin_required
 def add():
     return render_template("add.html")
 
 @app.route('/add_barang', methods=['POST'])
+@admin_required
 def add_barang():
     if request.method == 'POST':
         name = request.form['name']
@@ -239,6 +303,7 @@ def add_barang():
 
 
 @app.route("/edit/<int:id>", methods=['GET', 'POST'])
+@admin_required
 def edit_barang(id):
     barang = Product.query.get_or_404(id)
     if request.method == 'POST':
@@ -267,6 +332,7 @@ def edit_barang(id):
     return render_template("edit.html", barang=barang)
 
 @app.route("/delete/<int:id>", methods=['POST'])
+@admin_required
 def delete_barang(id):
     barang = Product.query.get_or_404(id)
     db.session.delete(barang)
@@ -277,16 +343,31 @@ def delete_barang(id):
 
 @app.route("/contact")
 def contact():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     return "<p>Contact Us</p>"
 
 @app.route("/profil")
 @login_required
 def profil():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     return render_template("profil.html",user=current_user)
 
 @app.route('/update_profile', methods=['POST'])
 @login_required
 def update_profile():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     if request.method == 'POST':
         user = current_user
 
@@ -305,12 +386,28 @@ def update_profile():
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/logoutadmin', methods=['GET', 'POST'])
+@admin_required
+def logoutadmin():
     logout_user()
     return redirect(url_for('login'))
 
 @app.route('/add_to_cart/<int:id_product>', methods=['POST'])
 @login_required
 def add_to_cart(id_product):
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     # Get the product based on id_product
     product = Product.query.get_or_404(id_product)
 
@@ -350,6 +447,11 @@ def add_to_cart(id_product):
 @app.route('/update_cart/<int:id_order_item>', methods=['POST'])
 @login_required
 def update_cart(id_order_item):
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     # Get the order item based on id_order_item
     order_item = Order_items.query.get_or_404(id_order_item)
 
@@ -373,6 +475,11 @@ def update_cart(id_order_item):
 @app.route('/update_checkout/<int:id_order_item>', methods=['POST'])
 @login_required
 def update_checkout(id_order_item):
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     # Get the order item based on id_order_item
     order_item = Order_items.query.get_or_404(id_order_item)
 
@@ -397,6 +504,11 @@ def update_checkout(id_order_item):
 @app.route('/checkout_bt', methods=['POST'])
 @login_required
 def checkoutbt():
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     # Check if the user has an active session
     active_session = None
     if current_user.session:
@@ -460,6 +572,11 @@ def checkoutbt():
 @app.route('/delete_item/<int:id_order_item>', methods=['POST'])
 @login_required
 def delete_item(id_order_item):
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+
     # Get the order item based on id_order_item
     order_item = Order_items.query.get_or_404(id_order_item)
 
@@ -474,6 +591,11 @@ def delete_item(id_order_item):
 @app.route('/invoice/<int:order_id>', methods=['GET'])
 @login_required
 def invoice(order_id):
+
+    if  current_user.is_admin:
+            flash("You need to log in as a user to access this page.", "danger")
+            abort(403)
+            
     # Get the order details based on order_id
     order = Order_detail.query.get_or_404(order_id)
     
