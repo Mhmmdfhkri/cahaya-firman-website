@@ -112,7 +112,7 @@ def detail_product(id_product):
         total_ratings = sum(review.rating for review in product_reviews)
         average_rating = total_ratings / len(product_reviews)
 
-    return render_template('detail_product.html', product=product, reviews=product_reviews, user=current_user,average_rating=average_rating)
+    return render_template('detail_product.html', product=product,  reviews=product_reviews, user=current_user, average_rating=average_rating)
 
 
 @app.route("/home")
@@ -447,11 +447,6 @@ def add_to_cart(id_product):
 @app.route('/update_cart/<int:id_order_item>', methods=['POST'])
 @login_required
 def update_cart(id_order_item):
-
-    if  current_user.is_authenticated and current_user.is_admin:
-            flash("You need to log in as a user to access this page.", "danger")
-            abort(403)
-
     # Get the order item based on id_order_item
     order_item = Order_items.query.get_or_404(id_order_item)
 
@@ -471,6 +466,7 @@ def update_cart(id_order_item):
     # Redirect back to the cart page
     flash('Cart updated successfully', 'success')
     return redirect(url_for('keranjang'))
+
 
 @app.route('/update_checkout/<int:id_order_item>', methods=['POST'])
 @login_required
@@ -609,7 +605,45 @@ def invoice(order_id):
     # Render the invoice template and pass the necessary data
     return render_template('invoice.html', order=order, user=current_user, overall_pay=overall_pay, total_price=total_price, total_quantity=total_quantity )
 
+@app.route('/add_to_checkout/<int:id_product>', methods=['POST'])
+@login_required
+def add_to_checkout(id_product):
+    # Get the product based on id_product
+    product = Product.query.get_or_404(id_product)
 
+    # Check if the user has an active session
+    if current_user.session is None or not any(sess.is_active for sess in current_user.session):
+        new_session = session(id_user=current_user.id_user, total=0)
+        db.session.add(new_session)
+        db.session.commit()
+
+    # Find the active session in the list
+    active_session = next(sess for sess in current_user.session if sess.is_active)
+
+    # Check if the product is already in the checkout
+    existing_order_item = Order_items.query.filter_by(id_product=id_product, id_session=active_session.id_session).first()
+
+    # Define new_order_item outside the if block
+    new_order_item = None
+
+    if existing_order_item:
+        # If the item is already in the checkout, increase the quantity
+        existing_order_item.quantity += 1
+    else:
+        # If the item is not in the checkout, create a new order item
+        quantity = int(request.form.get('quantity', 1))  # Get the quantity from the form
+        new_order_item = Order_items(id_product=id_product, id_session=active_session.id_session, quantity=quantity)
+        db.session.add(new_order_item)
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Store the order items in flask.g only if new_order_item is defined
+    if new_order_item:
+        g.setdefault('order_items', []).append(new_order_item)
+
+    flash(f'{product.name} added to the checkout', 'success')
+    return redirect(url_for('Checkout'))
 
 if __name__ == "__main__":
     app.run(debug=True)

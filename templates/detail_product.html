@@ -42,12 +42,16 @@
             </div>
             <p class="stock"><strong>Stok: </strong> {{ product.quantityInStock }}</p>
             <div class="add">
-                <div id="add-card">
-                    Add To Card
-                </div>
-                <div class="buy-now">
-                    Buy Now
-                </div>
+                <form method="POST" action="{{ url_for('add_to_cart', id_product=product.id_product) }}" name="add-to-cart-form">
+                    <button type="submit"  id="add-card"> 
+                        Add To Cart
+                    </button> 
+                </form>
+                <form method="POST" action="{{ url_for('add_to_checkout', id_product=product.id_product) }}" name="buy-now-form">
+                    <button type="submit" class="buy-now">
+                        Buy Now
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -109,7 +113,7 @@
                 }
             });
         });
-    </script>
+    </script>   
 </body>
 
 </html>

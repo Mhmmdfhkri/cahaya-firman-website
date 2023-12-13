@@ -220,7 +220,7 @@ div.add{
 	display: flex;
 }
 
-div#add-card{
+button#add-card{
 	font-family: 'Poppins', sans-serif;
 	margin-top: 20px;
 	border-radius: 10px;
@@ -234,7 +234,7 @@ div#add-card{
 	font-weight: bold;
 }
 
-div.buy-now{
+button.buy-now{
 	font-family: 'Poppins', sans-serif;
 	margin-left: 20px;
 	margin-top: 20px;
