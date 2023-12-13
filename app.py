@@ -271,6 +271,14 @@ def approve_payment(payment_id):
     # Update order status to 'approve'
     order_detail.order_status = 'approve'
 
+    # Reduce quantity in stock when the admin approves the order
+    for order_item in order_detail.session.order_items:
+        product_id = order_item.product.id_product
+        quantity = order_item.quantity
+        if not reduce_quantity_in_stock(product_id, quantity):
+            flash(f'Not enough quantity in stock for {order_item.product.name}', 'danger')
+            return redirect(url_for('admin_status'))
+
     # Commit the changes to the database
     db.session.commit()
 
@@ -539,9 +547,9 @@ def update_checkout(id_order_item):
 @login_required
 def checkoutbt():
 
-    if  current_user.is_authenticated and current_user.is_admin:
-            flash("You need to log in as a user to access this page.", "danger")
-            abort(403)
+    if current_user.is_authenticated and current_user.is_admin:
+        flash("You need to log in as a user to access this page.", "danger")
+        abort(403)
 
     # Check if the user has an active session
     active_session = None
@@ -570,19 +578,7 @@ def checkoutbt():
             # Create a new order_detail object
             new_order = Order_detail(total=overall_pay, order_status='Pending', id_payment=new_payment.id_payment, id_session=active_session.id_session)
 
-            new_order.order_items = []
-
-            # Link the order_detail to the order_items
-            for order_item in order_items:
-                print(f'Appending order_item with id {order_item.id_order_item} to new_order.order_items')
-                new_order.order_items.append(order_item)
-
-                # Reduce the quantityInStock
-                product_id = order_item.product.id_product
-                quantity = order_item.quantity
-                if not reduce_quantity_in_stock(product_id, quantity):
-                    flash(f'Not enough quantity in stock for {order_item.product.name}', 'danger')
-                    return redirect(url_for('keranjang'))
+            new_order.order_items = order_items  # Link the order_detail to the order_items
 
             # Mark the session as inactive
             active_session.is_active = False

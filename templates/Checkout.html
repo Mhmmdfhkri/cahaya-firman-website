@@ -26,7 +26,7 @@
     {% if order_items %}
   <div class="me-auto p-2 bd-highlight"><p class="user-name">{{ order_items[0].session.user.fullname }}</p></div>
 {% endif %}
-    <div class="align-self-end"><p class ="ch-address">UBAH ALAMAT</p></div>
+    <div class="align-self-end" id="cgaddress"><p class ="ch-address">UBAH ALAMAT</p></div>
     <div class="align-self-start" ><img src="{{ url_for('static', filename='asset/ep_success-filled.png') }}" alt="check" class="success-img"></div>
   </div>
   {% if order_items %}
@@ -242,7 +242,6 @@
     }
   }
 
-
   function updateAccountNumber() {
     var bankName = document.getElementById('bankName').value;
     var accountNumber = getAccountNumber(bankName);
@@ -254,6 +253,17 @@
 
   // Initial update when the page loads
   updateAccountNumber();
+
+
+  const urlToProfile = "{{ url_for('profil') }}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const profileContainer = document.getElementById('cgaddress');
+
+            profileContainer.addEventListener('click', function () {
+                window.location.href = urlToProfile;
+            });
+        });
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
