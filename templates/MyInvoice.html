@@ -52,7 +52,7 @@
                         <tr>
                             {% for invoice in invoices %}
                             <td>{{ invoice.id_order }}</td> <!--order id-->
-                            <td><a href="{{ url_for('cust_view_invoice', payment_id=invoice.id_payment) }}">Check</a></td>> <!--check invoice-->
+                            <td><a href="{{ url_for('cust_view_invoice', payment_id=invoice.id_payment) }}">Check</a></td> <!--check invoice-->
                             <td>
                                 {{ invoice.order_status }} 
                             </td>

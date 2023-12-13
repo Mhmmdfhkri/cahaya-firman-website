@@ -15,7 +15,9 @@
 
 <body>
     <div class="nav-back">
-        <img src="{{ url_for('static', filename='asset/back-to-product.png') }}" alt="">
+        <a href="{{ url_for('products') }}" class="btn"> 
+            <img src="{{ url_for('static', filename='asset/back-to-product.png') }}" alt="">
+        </a>
         <h1>{{ product.name }}</h1>
     </div>
 
@@ -34,12 +36,6 @@
             {% endif %}
             </div>
             <p class="price">Rp. {{ product.price }}</p>
-            <p class="jmlh"><strong>Jumlah</strong></p>
-            <div class="quantity">
-                <img src="{{ url_for('static', filename='asset/miness.png') }}" alt="">
-                <p>0</p>
-                <img src="{{ url_for('static', filename='asset/btn-adda.png') }}" alt="">
-            </div>
             <p class="stock"><strong>Stok: </strong> {{ product.quantityInStock }}</p>
             <div class="add">
                 <form method="POST" action="{{ url_for('add_to_cart', id_product=product.id_product) }}" name="add-to-cart-form">

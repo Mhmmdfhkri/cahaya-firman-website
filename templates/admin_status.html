@@ -104,7 +104,7 @@
                             <td>N/A</td>
                         {% endif %}
                             <td>{{ order.id_order }}</td> <!--order id-->
-                            <td><a href="{{ url_for('view_invoice', payment_id=order.id_payment) }}">Check</a></td>> <!--check invoice-->
+                            <td><a href="{{ url_for('view_invoice', payment_id=order.id_payment) }}">Check</a></td> <!--check invoice-->
                             <td>
                                 {{ order.order_status }}  <!--order status-->
                             </td>
