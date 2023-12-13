@@ -1,5 +1,5 @@
 from main import app, db, bcrypt, login_manager
-from flask import render_template, url_for, redirect, request, flash,session as flask_session,g,abort
+from flask import render_template, url_for, redirect, request, flash,session as flask_session,g,abort,jsonify
 from werkzeug.utils import secure_filename
 from forms.auth_forms import RegisterForm, LoginForm
 from flask_login import login_user,login_required, logout_user, current_user
@@ -16,6 +16,7 @@ from sqlalchemy.orm.collections import InstrumentedList
 from datetime import datetime
 from sqlalchemy import func
 from functools import wraps
+from sqlalchemy.orm import joinedload
 
 
 
@@ -256,10 +257,47 @@ def admin_crud():
     barang_list = Product.query.all()
     return render_template('admin_crud.html', barang_list=barang_list)
 
-@app.route("/admin_status")
+@app.route('/admin_status')
 @admin_required
 def admin_status():
-    return render_template("admin_status.html")
+    orders = Order_detail.query.join(Payment_detail).all()
+    return render_template("admin_status.html", orders=orders)
+
+@app.route('/approve_payment/<int:payment_id>', methods=['POST'])
+@admin_required
+def approve_payment(payment_id):
+    order_detail = Order_detail.query.filter_by(id_payment=payment_id).first_or_404()
+
+    # Update order status to 'approve'
+    order_detail.order_status = 'approve'
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    flash('Payment approved successfully', 'success')
+    return redirect(url_for('admin_status'))
+
+@app.route('/disapprove_payment/<int:payment_id>', methods=['POST'])
+@admin_required
+def disapprove_payment(payment_id):
+    order_detail = Order_detail.query.filter_by(id_payment=payment_id).first_or_404()
+
+    # Update order status to 'disapprove'
+    order_detail.order_status = 'disapprove'
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    flash('Payment disapproved successfully', 'success')
+    return redirect(url_for('admin_status'))
+
+@app.route('/view_invoice/<int:payment_id>')
+@admin_required
+def view_invoice(payment_id):
+    order_detail = Order_detail.query.filter_by(id_payment=payment_id).options(joinedload(Order_detail.session)).first_or_404()
+
+    # Render the invoice template and pass the necessary data
+    return render_template('invoice.html', order=order_detail, user=current_user, overall_pay=order_detail.total, total_price=order_detail.total, total_quantity=1)
 
 # admin end
 
@@ -588,9 +626,6 @@ def delete_item(id_order_item):
 @login_required
 def invoice(order_id):
 
-    if  current_user.is_authenticated and current_user.is_admin:
-            flash("You need to log in as a user to access this page.", "danger")
-            abort(403)
             
     # Get the order details based on order_id
     order = Order_detail.query.get_or_404(order_id)

@@ -78,34 +78,47 @@
                 <button class="btn btn-danger fw-bold py-1 px-5 fs-3 rounded-4 mb-1" type="submit">Logout</button>
             </form>
         </div>
-        <div class="bd-highlight d-flex p-3" style="flex: 0 0 75%; background-color: #eeeeee;">
-            <div class="d-flex flex-column bd-highlight" style="background-color: white;">
-                <div class="p-2 bd-highlight me-3">
+        <div class="bd-highlight d-flex p-3 w-100" style="flex: 0 0 75%; background-color: #eeeeee;">
+            <div class="d-flex flex-column bd-highlight w-100" style="background-color: white;">
+                <div class="p-2 bd-highlight me-3 w-100">
                     <h1>Daftar Pengguna</h1>
                     <table>
                         <tr>
                             <th>ID</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Order ID</th>
+                            <th>invoice</th>
                             <th>Status</th>
+                            <th>Payment Date</th>
                             <th>Action</th>
                         </tr>
+                        {% for order in orders %}
                         <tr>
-                            <td>1</td>
-                            <td>Besse</td>
-                            <td>besse@gmail.com</td>
+                            <td>{{ order.session.id_user }}</td> <!--user id-->
+                            {% if order.session %}
+                            <td>{{ order.session.user.username }}</td> <!--username-->
+                            <td>{{ order.session.user.email }}</td> <!--user email-->
+                        {% else %}
+                            <td>N/A</td>
+                            <td>N/A</td>
+                        {% endif %}
+                            <td>{{ order.id_order }}</td> <!--order id-->
+                            <td><a href="{{ url_for('view_invoice', payment_id=order.id_payment) }}">Check</a></td>> <!--check invoice-->
                             <td>
-                                Onprogress
+                                {{ order.order_status }}  <!--order status-->
                             </td>
+                            <td>{{ order.payment_detail.payment_date }}</td> <!--payment date-->
                             <td id="action"> 
-                                <button>
-                                    Setujui
-                                </button>
-                                <button>
-                                    Hapus
-                                </button>
+                                <form action="{{ url_for('approve_payment', payment_id=order.id_payment) }}" method="POST">
+                                    <button type="submit" class="btn btn-success">Setujui</button>
+                                </form>
+                                <form action="{{ url_for('disapprove_payment', payment_id=order.id_payment) }}" method="POST">
+                                    <button type="submit" class="btn btn-danger">Batalkan</button>
+                                </form>
                             </td>
                         </tr>
+                        {% endfor %}
                     </table>
                 </div>
             </div>
