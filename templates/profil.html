@@ -76,6 +76,11 @@
             font-family: 'Roboto', sans-serif;
             font-weight: bold;
         }
+        a {
+            color: #232946;
+            text-decoration: none; /* Menghilangkan garis bawah default pada tautan */
+        }
+        
     </style>
 </head>
 
@@ -123,7 +128,7 @@
                     <p class="teks-bold">About</p>
                 </div>
                 <div class="col mx-3 mt-3" id="productContainer">
-                    <p class="teks-bold">Product</p>
+                    <a href="{{ url_for('products') }}"> <p class="teks-bold">Product</p> </a>
                 </div>
                 <div class="col order-first mx-3 mt-3" id="homeContainer">
                     <p class="teks-bold">Home</p>
