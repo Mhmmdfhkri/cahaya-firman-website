@@ -551,6 +551,8 @@ def checkoutbt():
         flash("You need to log in as a user to access this page.", "danger")
         abort(403)
 
+    new_order = None  # Define new_order outside the if block
+
     # Check if the user has an active session
     active_session = None
     if current_user.session:
@@ -593,10 +595,12 @@ def checkoutbt():
             flash('Checkout successful', 'success')
         else:
             flash('No items in the cart to checkout', 'danger')
+
     else:
         flash('No active session to checkout', 'danger')
 
-    return redirect(url_for('invoice', order_id=new_order.id_order))
+    # Use new_order variable here, even if it's not set in the if block
+    return redirect(url_for('invoice', order_id=new_order.id_order if new_order else None))
 
 
 @app.route('/delete_item/<int:id_order_item>', methods=['POST'])
