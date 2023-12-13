@@ -82,7 +82,7 @@
                         </div>
                         <div class="bd-highlight me-5" style="flex: 0 0 25%;">
                             <button type="button" class="btn btn-primary" style="background-color: #232946;">
-                                <img class="me-3" src="../static/asset/tambahProduct.png" alt="">Tambah Product</button>
+                                <img class="me-3" src="../static/asset/tambahProduct.png" alt=""> <a href="/add">Tambah Product</a></button>
                         </div>
                     </div>
                 </div>
@@ -124,10 +124,9 @@
                 </table>
 
                 <div class="button-main">
-                    <a class="button-1" href="/add">Tambah Barang Baru</a>
                     {% if end < barang_list|length %} <a class="button" href="{{ url_for('admin_crud', offset=end) }}">
                         Selanjutnya</a>
-                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </div>

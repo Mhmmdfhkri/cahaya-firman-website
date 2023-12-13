@@ -37,13 +37,10 @@ h1 {
 
 a {
   color: white;
-  font-size: 30px;
+  font-size: 15px;
   text-decoration: none;
 }
 
-a:hover {
-  color: orange; /* Warna yang akan diaplikasikan saat hover */
-}
 
 .bar-right {
   width: 85%;
@@ -80,12 +77,12 @@ tr:nth-child(odd) {
 }
 
 .button {
-  border-radius: 20px;
+  border-radius: 10px;
   margin-top: 20px;
   /* margin-left: 50px; */
   width: 200px;
   height: 35px;
-  background-color: green;
+  background-color: #232946;
 }
 
 a.button {

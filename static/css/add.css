@@ -29,24 +29,4 @@ input[type="file"] {
     border-radius: 4px;
 }
 
-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
-a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
