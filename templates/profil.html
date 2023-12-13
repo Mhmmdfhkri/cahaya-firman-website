@@ -143,6 +143,8 @@
                                 <img src="static/asset/profil.png" class="mt-2" width="40%" alt="">
                                 <div class="username mt-3 mb-2">{{ user.username }}</div>
                                 <div class="email">{{ user.email }}</div>
+                                <button class="btn btn-info fw-bold py-1 px-5 fs-3 rounded-4 w-75 "
+                                        type="submit" id="see-invoice">See Invoice</button>
                                 <img class="img-fluid" src="static/asset/worker.png" alt="">
                                 <form action="{{ url_for('logout') }}" method="POST">
                                     <button class="btn btn-danger fw-bold py-1 px-5 fs-3 rounded-4"
@@ -272,6 +274,15 @@
 
             keranjangContainer.addEventListener('click', function () {
                 window.location.href = urlToKeranjang;
+            });
+        });
+
+        const urlToInvoice = "{{ url_for('myinvoice') }}";
+        document.addEventListener('DOMContentLoaded', function () {
+            const keranjangContainer = document.getElementById('see-invoice');
+
+            keranjangContainer.addEventListener('click', function () {
+                window.location.href = urlToInvoice;
             });
         });
     </script>

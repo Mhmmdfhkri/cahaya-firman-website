@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/crud_admin.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Crud Admin</title>
+    <style>
+        .p-1.bd-highlight {
+            font-family: 'Poppins', sans-serif;
+            color: #EEBBC3;
+            font-size: medium;
+        }
+
+        p.fw-bold {
+            font-family: 'Poppins', sans-serif;
+            color: #232946;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        table button {
+            display: flex;
+            flex-direction: row;
+            border-radius: 10px;
+            align-item: center;
+            justify-content: center;
+        }        
+    </style>
+</head>
+
+<body>
+    <div class="d-flex bd-highlight">
+        <div class="bd-highlight d-flex p-3 w-100" style="flex: 0 0 100%; background-color: #eeeeee;">
+            <div class="d-flex flex-column bd-highlight w-100" style="background-color: white;">
+                <div class="p-2 bd-highlight me-3 w-100">
+                    <h1>List Invoice</h1>
+                    <table>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>invoice</th>
+                            <th>Status</th>
+                            <th>Payment Date</th>
+                        </tr>
+                        <tr>
+                            {% for invoice in invoices %}
+                            <td>{{ invoice.id_order }}</td> <!--order id-->
+                            <td><a href="{{ url_for('cust_view_invoice', payment_id=invoice.id_payment) }}">Check</a></td>> <!--check invoice-->
+                            <td>
+                                {{ invoice.order_status }} 
+                            </td>
+                            <td>{{ invoice.payment_detail.payment_date }}</td> <!--payment date-->
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

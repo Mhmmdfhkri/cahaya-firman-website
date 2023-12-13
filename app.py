@@ -311,6 +311,14 @@ def view_invoice(payment_id):
 
 # crud
 
+@app.route('/cust_view_invoice/<int:payment_id>')
+@login_required
+def cust_view_invoice(payment_id):
+    order_detail = Order_detail.query.filter_by(id_payment=payment_id).options(joinedload(Order_detail.session)).first_or_404()
+
+    # Render the invoice template and pass the necessary data
+    return render_template('invoice.html', order=order_detail, user=current_user, overall_pay=order_detail.total, total_price=order_detail.total, total_quantity=1)
+
 @app.route("/add")
 @admin_required
 def add():
@@ -679,6 +687,14 @@ def add_to_checkout(id_product):
 
     flash(f'{product.name} added to the checkout', 'success')
     return redirect(url_for('Checkout'))
+
+@app.route('/myinvoice')
+@login_required
+def myinvoice():
+
+    user_invoices = db.session.query(Order_detail).join(Order_detail.session).filter(session.id_user == current_user.id_user).all()
+
+    return render_template('myinvoice.html', invoices=user_invoices)
 
 if __name__ == "__main__":
     app.run(debug=True)
