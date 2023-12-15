@@ -92,6 +92,7 @@
                             <th>Status</th>
                             <th>Payment Date</th>
                             <th>Action</th>
+                            <th style="background-color:rgba(0, 0, 0, 0);"></th>
                         </tr>
                         {% for order in orders %}
                         <tr>
@@ -115,6 +116,11 @@
                                 </form>
                                 <form action="{{ url_for('disapprove_payment', payment_id=order.id_payment) }}" method="POST">
                                     <button type="submit" class="btn btn-danger">Batalkan</button>
+                                </form>
+                            </td>
+                            <td style="background-color:rgba(0, 0, 0, 0);">
+                                <form action="{{ url_for('delete_order', payment_id=order.id_payment) }}" method="POST">
+                                    <button type="submit" class="btn btn-danger">Hapus</button>
                                 </form>
                             </td>
                         </tr>

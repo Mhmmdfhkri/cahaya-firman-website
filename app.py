@@ -307,6 +307,18 @@ def view_invoice(payment_id):
     # Render the invoice template and pass the necessary data
     return render_template('invoice.html', order=order_detail, user=current_user, overall_pay=order_detail.total, total_price=order_detail.total, total_quantity=1)
 
+@app.route('/delete_order/<int:payment_id>', methods=['POST'])
+@admin_required
+def delete_order(payment_id):
+    order_detail = Order_detail.query.filter_by(id_payment=payment_id).first_or_404()
+
+    # Delete the order details
+    db.session.delete(order_detail)
+    db.session.commit()
+
+    flash('Order/payment history deleted successfully', 'success')
+    return redirect(url_for('admin_status'))
+
 # admin end
 
 # crud
