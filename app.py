@@ -562,6 +562,16 @@ def update_checkout(id_order_item):
     flash('item updated successfully', 'success')
     return redirect(url_for('Checkout'))
 
+@app.route('/update_account_number', methods=['POST'])
+def update_account_number():
+    data = request.get_json()
+    account_number = data.get('accountNumber')
+
+    # Store the account number in the session or another temporary storage
+    flask_session['account_number'] = account_number
+
+    return jsonify({'success': True}), 200
+
 
 @app.route('/checkout_bt', methods=['POST'])
 @login_required
@@ -657,8 +667,10 @@ def invoice(order_id):
     Penanganan = 1000
     overall_pay = total_price + SubPengiriman + layanan + Penanganan
 
+    account_number = flask_session.get('account_number', '')
+
     # Render the invoice template and pass the necessary data
-    return render_template('invoice.html', order=order, user=current_user, overall_pay=overall_pay, total_price=total_price, total_quantity=total_quantity )
+    return render_template('invoice.html', order=order, user=current_user, overall_pay=overall_pay, total_price=total_price, total_quantity=total_quantity,account_number=account_number )
 
 @app.route('/add_to_checkout/<int:id_product>', methods=['POST'])
 @login_required
