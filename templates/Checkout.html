@@ -1,272 +1,342 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
-    <title>Cahaya Firman</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/CheckoutUI.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <title>Cahaya Firman</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/CheckoutUI.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
+
 <body style="background-color: #D4D8F0;">
 
-  <div class="d-flex flex-row bg-white shadow fixed-top">
-    <div class="p-2" ><img src="{{ url_for('static', filename='asset/mingcute_left-line.png') }}" alt="arrow" class="arrow-left"> </img></div>
-    <div class="p-2"><img src="{{ url_for('static', filename='asset/logo.png') }}" alt="logo" class="Logo-Img"></div>
-    <div class="p-2"><div class="d-flex" style="height: 80px; color: black;">
-      <div class="vr"></div>
-    </div></div>
-    <div class="p-2"> <h1 class="topnav-hd">Checkout Belanja</h1></div>
+  <div class="d-flex bg-white shadow fixed-top align-items-center">
+    <div class="p-2">
+      <img src="{{ url_for('static', filename='asset/mingcute_left-line.png') }}" alt="arrow"
+        style="width: 60px; height: auto;" class="arrow-left">
+    </div>
+    <div class="p-2">
+      <img src="{{ url_for('static', filename='asset/logo.png') }}" alt="logo" class="Logo-Img"
+        style="width: 100px; height: auto;">
+    </div>
+    <div class="p-2">
+      <div class="d-flex" style="height: 80px; color: black;">
+        <div class="vr"></div>
+      </div>
+    </div>
+    <div class="p-2">
+      <h1 class="topnav-hd">Checkout Belanja</h1>
+    </div>
   </div>
-  
 
- <div class="container bg-light rounded-4 top_content">
-  <h3 class="ur-address">Alamat Anda</h3>
-  <div class="d-flex bd-highlight mb-0">
+  <div class="container bg-light rounded-4 top_content">
+    <h3 class="ur-address">Alamat Anda</h3>
+    <div class="d-flex bd-highlight mb-0 align-items-center">
+      {% if order_items %}
+      <div class="me-auto p-2 bd-highlight">
+        <p class="user-name">{{ order_items[0].session.user.fullname }}</p>
+      </div>
+      {% endif %}
+      <div class="align-self-end" id="cgaddress" style="cursor: pointer;">
+        <p class="ch-address">UBAH ALAMAT</p>
+      </div>
+      <div class="align-self-start"><img src="{{ url_for('static', filename='asset/ep_success-filled.png') }}"
+          alt="check" class="success-img" style="width: 50px; height: auto;"></div>
+    </div>
     {% if order_items %}
-  <div class="me-auto p-2 bd-highlight"><p class="user-name">{{ order_items[0].session.user.fullname }}</p></div>
-{% endif %}
-    <div class="align-self-end" id="cgaddress"><p class ="ch-address">UBAH ALAMAT</p></div>
-    <div class="align-self-start" ><img src="{{ url_for('static', filename='asset/ep_success-filled.png') }}" alt="check" class="success-img"></div>
+    <p class="user-address">{{ order_items[0].session.user.address }}</p>
+    {% endif %}
   </div>
-  {% if order_items %}
-  <p class="user-address">{{ order_items[0].session.user.address }}</p>
-  {% endif %}
- </div>
 
 
-<div class="container mt-5 p-3 bg-light rounded-4">
-  <div class="d-flex bd-highlight mb-3">
-    <div class="me-auto p-2 bd-highlight"><h3>Produk</h3></div>
-    <div class="p-2 bd-highlight"><H3>Harga Satuan</H3></div>
-    <div class="p-2 bd-highlight"><H3>Kuantitas</H3></div>
-    <div class="p-2 bd-highlight"><H3>Total Harga</H3></div>
-  </div>
-  {% for order_item in order_items %}
-  <div class=".container m-3 bg-light rounded-3 shadow-lg">
+  <div class="container mt-3 p-3 bg-light rounded-4">
     <div class="d-flex bd-highlight mb-3">
-      <div class="p-2 bd-highlight"><img src="{{ url_for('static', filename='unggah/' + order_item.product.picture) }}" alt="item" class="item-img"></div>
-      <div class="me-auto py-5 bd-highlight">
-        <div class="col-offset-1"><p class="item-name">{{ order_item.product.name }}</p></div>
-        <div class='col-offset-1'><p class="item-stock">Stok: {{ order_item.product.quantityInStock }}</p></div>
+      <div class="me-auto p-2 bd-highlight">
+        <h5>Produk</h5>
       </div>
-      <div class="p-2 me-5 bd-highlight align-self-center"><p class="item-price">{{ order_item.product.price }}</p></div>
-      <div class="p-2 me-5 bd-highlight align-self-center"><div class="row align-items-center">
-        <div class="col">
-          <form  method="POST" action="{{ url_for('update_checkout', id_order_item=order_item.id_order_item)}}" >
-            <button type="submit" name="minus" class="btn btn-light">
-          <img src="{{ url_for('static', filename='asset/ic_baseline-plus.png') }}" alt="min" class="min-item">
-            </button>
-        </form>
-        </div>
-        <div class="col">
-          {{ order_item.quantity }}
-        </div>
-        <div class="col">
-          <form  method="POST" action="{{ url_for('update_checkout', id_order_item=order_item.id_order_item)}}">
-            <button type="submit" name="plus" class="btn btn-light">
-          <img src="{{ url_for('static', filename='asset/ic_baseline-plus (1).png') }}" alt="add" class="add-item">
-            </button>
-        </form>
-        </div>
-      </div></div>
-      <div class="p-2 me-5 bd-highlight align-self-center"><p class="total-item-price">{{ order_item.quantity * order_item.product.price }}</p></div>
-    </div>
-  </div>
-  {% endfor %}
-</div>
-
-<div class="container mt-5 p-1 bg-light rounded-4">
-  <div class="d-flex bd-highlight mb-3">
-    <div class="p-2 bd-highlight"> <img src="{{ url_for('static', filename='asset/Group.png') }}" alt="dollar sign" class="dollar-sign"></div>
-    <div class="me-auto p-0 bd-highlight align-self-end"><p class="tv-payment">Metode Pembayaran</p></div>
-    <!-- Fix the data-bs-target attribute here -->
-    <div class="p-0 bd-highlight align-self-end">
-      <p id="payment_method" data-bs-toggle="modal" data-bs-target="#paymentModal">Pilih Metode Pembayaran</p>
-   </div>
-  </div>
-</div>
-
-
-{% set SubPengiriman = 20000 %}
-{% set layanan = 1000 %}
-{% set Penanganan = 1000 %}
-
-<div class="container mt-5 p-1 bg-light rounded-4 bottom_content">
-  <div class="d-flex bd-highlight">
-    <div class="p-2 bd-highlight"> <img src="{{ url_for('static', filename='asset/fluent-mdl2_product-list.png') }}" alt="box sign" class="box-sign"></div>
-    <div class="me-auto p-0 bd-highlight align-self-end"><p class="detail-payment">Rincian Pembayaran</p></div>
-  </div>
-  <div class="row ps-4 pe-4">
-    <div class="col">
-      <p class="Subtotal">Subtotal Untuk Produk</p>
-    </div>
-    <div class="col-md-auto">
-      <p class="Subtotal-Product">Rp{{ total_price }}</p>
-    </div>  
-  </div>
-  <div class="row ps-4 pe-4">
-    <div class="col">
-      <p class="Subtotal">Subtotal Untuk Pengiriman</p>
-    </div>
-    <div class="col-md-auto">
-      <p class="Subtotal-delivery">Rp{{ SubPengiriman }}</p>
-    </div>  
-  </div>
-  <div class="row ps-4 pe-4">
-    <div class="col">
-      <p class="Subtotal">Biaya Layanan</p>
-    </div>
-    <div class="col-md-auto">
-      <p class="service-fee">Rp{{ layanan }}</p>
-    </div>  
-  </div>
-  <div class="row ps-4 pe-4">
-    <div class="col">
-      <p class="Subtotal">Biaya Penanganan</p>
-    </div>
-    <div class="col-md-auto">
-      <p class="handling-fee">Rp{{ Penanganan }}</p>
-    </div>  
-  </div>
-  <div class="row ps-4 pe-4">
-    <div class="col">
-      <p class="tvTotal-pay">Total Pembayaran</p>
-    </div>
-    <div class="col-md-auto">
-      <p class="Total-pay">Rp{{ overall_pay }}</p>
-    </div>  
-  </div>
-</div>
-
-<nav class="navbar bg-light fixed-bottom shadow">
-  <div class="container-fluid">
-    <div class="bd-highlight car_signF ms-3"><img src="{{ url_for('static', filename='asset/pngwing 5.png') }}" alt="wing" class="car-sign"></img></div>
-    <div class="px-2 d-flex ms-auto"><p class="Total-payment">Total Pembayaran</p></div>
-    <div class="d-flex" style="height: 80px;">
-      <div class="vr bg-black"></div>
-    </div>
-    <div class="px-2 d-flex"> <p class="Total-pay2">{{ total_price + SubPengiriman + layanan + Penanganan }}</p></div>
-    <form method="POST" action="{{ url_for('checkoutbt') }}">
-      <!-- Include a hidden input field for the payment method -->
-      <input type="hidden" name="paymentMethod" id="paymentMethodInput" value="">
-      <input type="hidden" name="bankName" id="bankNameInput" value="">
-      <input type="hidden" name="accountNumber" id="accountNumberInput" value="">
-      <button type="submit" id="checkoutButton" class="btn btn-secondary btn-lg me-3 px-5 py-3 rounded-4 bt_checkout" disabled>
-          Checkout Now
-      </button>
-  </form>
-  </div>
-</nav>
-
-<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="paymentModalLabel">Pilih Metode Pembayaran</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="p-2 bd-highlight">
+        <h5>Harga Satuan</h5>
       </div>
-      <div class="modal-body">
-        <!-- Add your radio buttons for payment methods here -->
-        <form id="paymentForm">
-          <div class="mb-3">
-            <input type="radio" id="cashOnDelivery" name="paymentMethod" value="COD">
-            <label for="cashOnDelivery">Cash on Delivery</label>
+      <div class="p-2 bd-highlight">
+        <h5>Kuantitas</h5>
+      </div>
+      <div class="p-2 bd-highlight">
+        <h5>Total Harga</h5>
+      </div>
+    </div>
+    {% for order_item in order_items %}
+    <div class=".container m-3 bg-light rounded-3 shadow-lg">
+      <div class="d-flex bd-highlight mb-3">
+        <div class="p-2 bd-highlight"><img
+            src="{{ url_for('static', filename='unggah/' + order_item.product.picture) }}" alt="item" class="item-img">
+        </div>
+        <div class="me-auto py-5 bd-highlight">
+          <div class="col-offset-1">
+            <p class="item-name">{{ order_item.product.name }}</p>
           </div>
-          <div class="mb-3">
-            <input type="radio" id="bankTransfer" name="paymentMethod" value="Transfer Bank">
-            <label for="bankTransfer">Transfer Bank</label>
-            <hr class="border  mx-1 my-1 my-0 ">
-            <div id="bankTransferFields">
-              <label for="bankName">Nama Bank:</label>
-              <select id="bankName" name="bankName" class="form-control">
-                <option value="BNI">BNI</option>
-                <option value="BRI">BRI</option>
-                <option value="BCA">BCA</option>
-                <option value="Mandiri">Mandiri</option>
-              </select>
-              <p style="size: 12px;">No Rekening</p> <!-- Display these after choosing bank -->
-              <!-- Display the account number based on the selected bank -->
-              <p id="accountNumber"></p>
+          <div class='col-offset-1'>
+            <p class="item-stock">Stok: {{ order_item.product.quantityInStock }}</p>
+          </div>
+        </div>
+        <div class="p-2 me-5 bd-highlight align-self-center">
+          <p class="item-price">{{ order_item.product.price }}</p>
+        </div>
+        <div class="p-2 me-5 bd-highlight align-self-center">
+          <div class="row align-items-center">
+            <div class="col">
+              <form method="POST" action="{{ url_for('update_checkout', id_order_item=order_item.id_order_item)}}">
+                <button type="submit" name="minus" class="btn btn-light">
+                  <img src="{{ url_for('static', filename='asset/ic_baseline-plus.png') }}" alt="min" class="min-item">
+                </button>
+              </form>
+            </div>
+            <div class="col">
+              {{ order_item.quantity }}
+            </div>
+            <div class="col">
+              <form method="POST" action="{{ url_for('update_checkout', id_order_item=order_item.id_order_item)}}">
+                <button type="submit" name="plus" class="btn btn-light">
+                  <img src="{{ url_for('static', filename='asset/ic_baseline-plus (1).png') }}" alt="add"
+                    class="add-item">
+                </button>
+              </form>
             </div>
           </div>
-          <button type="button" class="btn btn-primary" onclick="selectPaymentMethod()">Pilih</button>
-        </form>
+        </div>
+        <div class="p-2 me-5 bd-highlight align-self-center">
+          <p class="total-item-price">{{ order_item.quantity * order_item.product.price }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="container mt-3 p-1 bg-light rounded-4">
+    <div class="d-flex bd-highlight mb-3 align-items-center">
+      <div class="p-2 bd-highlight"> <img src="{{ url_for('static', filename='asset/Group.png') }}" alt="dollar sign"
+          class="dollar-sign" style="width: 50px; height: auto;">
+      </div>
+      <div class="me-auto bd-highlight align-self-end">
+        <p class="tv-payment">Metode Pembayaran</p>
+      </div>
+      <!-- Fix the data-bs-target attribute here -->
+      <div class="bd-highlight align-self-end">
+        <p id="payment_method" data-bs-toggle="modal" data-bs-target="#paymentModal" style="font-size: large;">Pilih
+          Metode Pembayaran</p>
       </div>
     </div>
   </div>
-</div>
 
 
-<script>
-  // Add this script to handle the modal and form visibility
-  function selectPaymentMethod() {
-    var selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+  {% set SubPengiriman = 20000 %}
+  {% set layanan = 1000 %}
+  {% set Penanganan = 1000 %}
 
-    if (selectedMethod) {
+  <div class="container mt-3 p-1 bg-light rounded-4 bottom_content">
+    <div class="d-flex bd-highlight">
+      <div class="p-2 bd-highlight"> <img src="{{ url_for('static', filename='asset/fluent-mdl2_product-list.png') }}"
+          alt="box sign" class="box-sign"></div>
+      <div class="me-auto p-0 bd-highlight align-self-end">
+        <p class="detail-payment">Rincian Pembayaran</p>
+      </div>
+    </div>
+    <div class="row ps-4 pe-4">
+      <div class="col">
+        <p class="Subtotal">Subtotal Untuk Produk</p>
+      </div>
+      <div class="col-md-auto">
+        <p class="Subtotal-Product">Rp{{ total_price }}</p>
+      </div>
+    </div>
+    <div class="row ps-4 pe-4">
+      <div class="col">
+        <p class="Subtotal">Subtotal Untuk Pengiriman</p>
+      </div>
+      <div class="col-md-auto">
+        <p class="Subtotal-delivery">Rp{{ SubPengiriman }}</p>
+      </div>
+    </div>
+    <div class="row ps-4 pe-4">
+      <div class="col">
+        <p class="Subtotal">Biaya Layanan</p>
+      </div>
+      <div class="col-md-auto">
+        <p class="service-fee">Rp{{ layanan }}</p>
+      </div>
+    </div>
+    <div class="row ps-4 pe-4">
+      <div class="col">
+        <p class="Subtotal">Biaya Penanganan</p>
+      </div>
+      <div class="col-md-auto">
+        <p class="handling-fee">Rp{{ Penanganan }}</p>
+      </div>
+    </div>
+    <div class="row ps-4 pe-4">
+      <div class="col">
+        <p class="tvTotal-pay">Total Pembayaran</p>
+      </div>
+      <div class="col-md-auto">
+        <p class="Total-pay">Rp{{ overall_pay }}</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar bg-light fixed-bottom shadow">
+    <div class="container-fluid">
+      <div class="bd-highlight car_signF ms-3">
+        <img src="{{ url_for('static', filename='asset/pngwing 5.png') }}" alt="wing" class="car-sign"
+          style="width: 70px; height: auto;"></img>
+      </div>
+      <div class="px-2 d-flex ms-auto">
+        <p class="Total-payment">Total Pembayaran</p>
+      </div>
+      <div class="d-flex" style="height: 80px;">
+        <div class="vr bg-black"></div>
+      </div>
+      <div class="px-2 d-flex">
+        <p class="Total-pay2">{{ total_price + SubPengiriman + layanan + Penanganan }}</p>
+      </div>
+      <form method="POST" action="{{ url_for('checkoutbt') }}">
+        <!-- Include a hidden input field for the payment method -->
+        <input type="hidden" name="paymentMethod" id="paymentMethodInput" value="">
+        <button type="submit" id="checkoutButton" class="btn btn-secondary btn-sm me-3 px-5 py-3 rounded-4 bt_checkout"
+          disabled>
+          Checkout Now
+        </button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="paymentModalLabel">Pilih Metode Pembayaran</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Add your radio buttons for payment methods here -->
+          <form id="paymentForm">
+            <div class="mb-3">
+              <input type="radio" id="cashOnDelivery" name="paymentMethod" value="COD">
+              <label for="cashOnDelivery">Cash on Delivery</label>
+            </div>
+            <div class="mb-3">
+              <input type="radio" id="bankTransfer" name="paymentMethod" value="Transfer Bank">
+              <label for="bankTransfer">Transfer Bank</label>
+              <hr class="border  mx-1 my-1 my-0 ">
+              <div id="bankTransferFields">
+                <label for="bankName">Nama Bank:</label>
+                <select id="bankName" name="bankName" class="form-control">
+                  <option value="BNI">BNI</option>
+                  <option value="BRI">BRI</option>
+                  <option value="BCA">BCA</option>
+                  <option value="Mandiri">Mandiri</option>
+                </select>
+                <p style="size: 12px;">No Rekening</p> <!-- Display these after choosing bank -->
+                <!-- Display the account number based on the selected bank -->
+                <p id="accountNumber"></p>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="selectPaymentMethod()">Pilih</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // Add this script to handle the modal and form visibility
+    function selectPaymentMethod() {
+      var selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+      if (selectedMethod) {
         document.getElementById('payment_method').innerText = 'Your Payment Method: ' + selectedMethod.value;
         document.getElementById('paymentMethodInput').value = selectedMethod.value;
 
+        // Show additional form fields for bank transfer if selected
         if (selectedMethod.value === 'Transfer Bank') {
-            var bankName = document.getElementById('bankName').value;
-            var accountNumber = document.getElementById('accountNumber').innerText;
+          document.getElementById('bankTransferFields').style.display = 'block';
 
-            // Update the hidden input fields with bank name and account number
-            document.getElementById('bankNameInput').value = bankName;
-            document.getElementById('accountNumberInput').value = accountNumber;
+          // Display the account number based on the selected bank
+          var selectedBank = document.getElementById('bankName').value;
+          var accountNumber = getAccountNumber(selectedBank);
+
+          // Pass the account number to the server using an AJAX request
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '/update_account_number', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              console.log('Account number updated successfully');
+            }
+          };
+          var data = JSON.stringify({ accountNumber: selectedBank + " - " + accountNumber });
+          xhr.send(data);
+
+          document.getElementById('accountNumber').innerText = 'No Rekening: ' + accountNumber;
+        } else {
+          document.getElementById('bankTransferFields').style.display = 'none';
         }
-
         document.getElementById('checkoutButton').removeAttribute('disabled');
         // Close the modal
         $('#paymentModal').modal('hide');
-    } else {
+      } else {
         alert('Please select a payment method');
+      }
     }
-}
 
-  // Function to get the account number based on the selected bank
-  function getAccountNumber(bank) {
-    // You can replace this with your logic to retrieve the account number
-    // based on the selected bank
-    switch (bank) {
-      case 'BNI':
-        return '1234567890';
-      case 'BRI':
-        return '9876543210';
-      case 'BCA':
-        return '5678901234';
-      case 'Mandiri':
-        return '0123456789';
-      default:
-        return '';
+    // Function to get the account number based on the selected bank
+    function getAccountNumber(bank) {
+      // You can replace this with your logic to retrieve the account number
+      // based on the selected bank
+      switch (bank) {
+        case 'BNI':
+          return '1234567890';
+        case 'BRI':
+          return '9876543210';
+        case 'BCA':
+          return '5678901234';
+        case 'Mandiri':
+          return '0123456789';
+        default:
+          return '';
+      }
     }
-  }
 
-  function updateAccountNumber() {
-    var bankName = document.getElementById('bankName').value;
-    var accountNumber = getAccountNumber(bankName);
-    document.getElementById('accountNumber').innerText = accountNumber;
-  }
+    function updateAccountNumber() {
+      var bankName = document.getElementById('bankName').value;
+      var accountNumber = getAccountNumber(bankName);
+      document.getElementById('accountNumber').innerText = accountNumber;
+    }
 
-  // Add an event listener to update the account number when the bank name changes
-  document.getElementById('bankName').addEventListener('change', updateAccountNumber);
+    // Add an event listener to update the account number when the bank name changes
+    document.getElementById('bankName').addEventListener('change', updateAccountNumber);
 
-  // Initial update when the page loads
-  updateAccountNumber();
+    // Initial update when the page loads
+    updateAccountNumber();
 
 
-  const urlToProfile = "{{ url_for('profil') }}";
-        document.addEventListener('DOMContentLoaded', function () {
-            const profileContainer = document.getElementById('cgaddress');
+    const urlToProfile = "{{ url_for('profil') }}";
+    document.addEventListener('DOMContentLoaded', function () {
+      const profileContainer = document.getElementById('cgaddress');
 
-            profileContainer.addEventListener('click', function () {
-                window.location.href = urlToProfile;
-            });
-        });
+      profileContainer.addEventListener('click', function () {
+        window.location.href = urlToProfile;
+      });
+    });
 
-</script>
+  </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

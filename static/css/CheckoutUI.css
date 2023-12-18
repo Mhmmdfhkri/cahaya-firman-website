@@ -5,20 +5,19 @@ Body {
 
 
 .topnav-hd {
-    font-size: 32px;
+    font-size: 25px;
     color: #232946;
     font-family: 'Poppins', sans-serif;
     letter-spacing: 3px;
-    padding: 20px 0;
     font-weight: 600;
 }
 
 .d-flex > * {
-    margin: 20px; 
+    margin: 7px; 
 }
 
 .ur-address {
-    font-size: 24px;
+    font-size: 18px;
     color: #232946;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
@@ -27,10 +26,10 @@ Body {
 }
 
 h3 {
-    font-size: 24px;
+    font-size: 10px;
     color: #232946;
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 p{
@@ -45,6 +44,7 @@ p{
 
 .ch-address{
     color: #FF8C98;
+    font-size: 15px;
 }
 
 
@@ -53,12 +53,12 @@ p{
 }
 
 .item-stock{
-    font-size: 15px;
+    font-size: 20px;
     color: #787878;
 }
 
 .tv-payment{
-    font-size: 24px;
+    font-size: 18px;
     color: #000000;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
@@ -132,14 +132,14 @@ p{
     letter-spacing: 1px !important;
 }
 .Total-pay2{
-    font-size: 40px;
+    font-size: 18px;
     color: #FF8C98;
     font-family: 'Poppins', sans-serif; 
     font-weight: 500;
 }
 
 .Total-payment{
-    font-size: 24px;
+    font-size: 18px;
     color: #000000;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
