@@ -148,7 +148,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col align-self-center text-center fw-bold">
-                                <img src="static/asset/profil.png" class="mt-2" width="40%" alt="">
+                                <img src="{{ url_for('static', filename='asset/profile-user.png') }}" class="mt-2" width="40%" alt="">
                                 <div class="username mt-3 mb-2">{{ user.username }}</div>
                                 <div class="email">{{ user.email }}</div>
                                 <button class="btn btn-info fw-bold py-1 px-2 fs-2 rounded-3 w-75 text-center"
@@ -172,7 +172,7 @@
                         <div class="h5 mb-4 fw-bold">Account Settings</div>
                         <div class="row">
                             <div class="col-2">
-                                <img src="static/asset/profil.png" width="100%" alt="">
+                                <img src="{{ url_for('static', filename='asset/profile-user.png') }}" width="100%" alt="">
                             </div>
                             <div class="col-10">
                                 <div class="username">{{ user.username }}</div>
