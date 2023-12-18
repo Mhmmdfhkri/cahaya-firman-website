@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.ulasan{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0.1px solid #000;
+    border-radius: 5px;
+    background-color: antiquewhite;
+}
+
+.profile{
+    display: flex;
+    padding: 5px;
+}
+
+.img-profile{
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+p.user{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.komentar{
+    padding: 5px;
+    margin-top: 12px;
+    height: 40px;
+    width: 99%;
+    border: 0.1px solid #8e8e8e;
+    border-radius: 5px;
+}
+.komen-2{
+    margin-top: 12px;
+    font-size: 10px;
+}
+
+.rat{
+    display: flex;
+    font-size: 23px;
+}
