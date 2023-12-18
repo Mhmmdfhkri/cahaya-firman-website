@@ -150,6 +150,8 @@
     <form method="POST" action="{{ url_for('checkoutbt') }}">
       <!-- Include a hidden input field for the payment method -->
       <input type="hidden" name="paymentMethod" id="paymentMethodInput" value="">
+      <input type="hidden" name="bankName" id="bankNameInput" value="">
+      <input type="hidden" name="accountNumber" id="accountNumberInput" value="">
       <button type="submit" id="checkoutButton" class="btn btn-secondary btn-lg me-3 px-5 py-3 rounded-4 bt_checkout" disabled>
           Checkout Now
       </button>
@@ -199,42 +201,27 @@
 <script>
   // Add this script to handle the modal and form visibility
   function selectPaymentMethod() {
-  var selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+    var selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
 
-  if (selectedMethod) {
-    document.getElementById('payment_method').innerText = 'Your Payment Method: ' + selectedMethod.value;
-    document.getElementById('paymentMethodInput').value = selectedMethod.value;
+    if (selectedMethod) {
+        document.getElementById('payment_method').innerText = 'Your Payment Method: ' + selectedMethod.value;
+        document.getElementById('paymentMethodInput').value = selectedMethod.value;
 
-    // Show additional form fields for bank transfer if selected
-    if (selectedMethod.value === 'Transfer Bank') {
-      document.getElementById('bankTransferFields').style.display = 'block';
+        if (selectedMethod.value === 'Transfer Bank') {
+            var bankName = document.getElementById('bankName').value;
+            var accountNumber = document.getElementById('accountNumber').innerText;
 
-      // Display the account number based on the selected bank
-      var selectedBank = document.getElementById('bankName').value;
-      var accountNumber = getAccountNumber(selectedBank);
-
-      // Pass the account number to the server using an AJAX request
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/update_account_number', true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          console.log('Account number updated successfully');
+            // Update the hidden input fields with bank name and account number
+            document.getElementById('bankNameInput').value = bankName;
+            document.getElementById('accountNumberInput').value = accountNumber;
         }
-      };
-      var data = JSON.stringify({ accountNumber: selectedBank + " - "+ accountNumber });
-      xhr.send(data);
 
-      document.getElementById('accountNumber').innerText = 'No Rekening: ' + accountNumber;
+        document.getElementById('checkoutButton').removeAttribute('disabled');
+        // Close the modal
+        $('#paymentModal').modal('hide');
     } else {
-      document.getElementById('bankTransferFields').style.display = 'none';
+        alert('Please select a payment method');
     }
-    document.getElementById('checkoutButton').removeAttribute('disabled');
-    // Close the modal
-    $('#paymentModal').modal('hide');
-  } else {
-    alert('Please select a payment method');
-  }
 }
 
   // Function to get the account number based on the selected bank

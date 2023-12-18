@@ -65,7 +65,7 @@
                 {{ order.payment_detail.payment_method }}
             </p>
             {% if order.payment_detail.payment_method == 'Transfer Bank' %}
-            <p>{{ account_number }}</p>
+            <p>{{ order.payment_detail.bank_name }} - {{ order.payment_detail.account_number }} </p>
             {% endif %}
         </div>
 

@@ -328,6 +328,7 @@ def delete_order(payment_id):
 def cust_view_invoice(payment_id):
     order_detail = Order_detail.query.filter_by(id_payment=payment_id).options(joinedload(Order_detail.session)).first_or_404()
 
+
     # Render the invoice template and pass the necessary data
     return render_template('invoice.html', order=order_detail, user=current_user, overall_pay=order_detail.total, total_price=order_detail.total, total_quantity=1)
 
@@ -562,17 +563,6 @@ def update_checkout(id_order_item):
     flash('item updated successfully', 'success')
     return redirect(url_for('Checkout'))
 
-@app.route('/update_account_number', methods=['POST'])
-def update_account_number():
-    data = request.get_json()
-    account_number = data.get('accountNumber')
-
-    # Store the account number in the session or another temporary storage
-    flask_session['account_number'] = account_number
-
-    return jsonify({'success': True}), 200
-
-
 @app.route('/checkout_bt', methods=['POST'])
 @login_required
 def checkoutbt():
@@ -602,8 +592,22 @@ def checkoutbt():
 
         # Check if there are order items to proceed
         if order_items:
+
+            if request.form.get('paymentMethod') == 'Transfer Bank':
+                bank_name = request.form.get('bankName')
+                account_number = request.form.get('accountNumber')
+            else:
+                bank_name = None
+                account_number = None
+
             # Create a new payment_detail object
-            new_payment = Payment_detail(amount=overall_pay, payment_method=request.form.get('paymentMethod'), payment_date=datetime.utcnow())
+            new_payment = Payment_detail(
+                amount=overall_pay,
+                payment_method=request.form.get('paymentMethod'),
+                bank_name=bank_name,
+                account_number=account_number,
+                payment_date=datetime.utcnow()
+            )
             db.session.add(new_payment)
             db.session.commit()
 
@@ -667,10 +671,11 @@ def invoice(order_id):
     Penanganan = 1000
     overall_pay = total_price + SubPengiriman + layanan + Penanganan
 
-    account_number = flask_session.get('account_number', '')
+    bank_name = order.payment_detail.bank_name
+    account_number = order.payment_detail.account_number
 
     # Render the invoice template and pass the necessary data
-    return render_template('invoice.html', order=order, user=current_user, overall_pay=overall_pay, total_price=total_price, total_quantity=total_quantity,account_number=account_number )
+    return render_template('invoice.html', order=order, user=current_user, overall_pay=overall_pay, total_price=total_price, total_quantity=total_quantity,account_number=account_number,bank_name=bank_name )
 
 @app.route('/add_to_checkout/<int:id_product>', methods=['POST'])
 @login_required
