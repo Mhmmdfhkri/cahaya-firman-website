@@ -186,7 +186,7 @@ def Checkout():
 
     # Check if the user has an active session
     if current_user.session is None or not any(sess.is_active for sess in current_user.session):
-        new_session = session(id_user=current_user.id_user, total=0)
+        new_session = session(id_user=current_user.id_user)
         db.session.add(new_session)
         db.session.commit()
 
@@ -480,7 +480,7 @@ def add_to_cart(id_product):
 
     # Check if the user has an active session
     if current_user.session is None or not any(sess.is_active for sess in current_user.session):
-        new_session = session(id_user=current_user.id_user, total=0)
+        new_session = session(id_user=current_user.id_user)
         db.session.add(new_session)
         db.session.commit()
 
@@ -682,7 +682,7 @@ def add_to_checkout(id_product):
 
     # Check if the user has an active session
     if current_user.session is None or not any(sess.is_active for sess in current_user.session):
-        new_session = session(id_user=current_user.id_user, total=0)
+        new_session = session(id_user=current_user.id_user)
         db.session.add(new_session)
         db.session.commit()
 
