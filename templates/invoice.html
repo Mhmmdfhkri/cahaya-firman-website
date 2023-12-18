@@ -6,12 +6,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/invoice_style.css') }}">
     <link rel="stylesheet" type="text/css" href="invoice_style.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        .satu {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .dua,
+        .tiga,
+        .empat {
+            margin-bottom: 20px;
+        }
+
+        .dua h3 {
+            color: #333;
+        }
+
+        .judul,
+        .value {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .judul {
+            width: 50%;
+            padding-right: 10px;
+        }
+
+        .value {
+            width: 50%;
+        }
+
+        .judul h3 {
+            color: #3498db;
+        }
+
+        .value p {
+            color: #555;
+        }
+
+        hr {
+            border: 1px solid #eee;
+            margin: 10px 0;
+        }
+
+        .empat h3 {
+            color: #27ae60;
+        }
+
+        .btn {
+            text-align: center;
+            margin-top: 20px;
+            /* Add margin for spacing */
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            /* Add this line to make the button centered */
+        }
+
+        @media screen and (max-width: 600px) {
+
+            .judul,
+            .value {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        form.btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
     <title>Invoice</title>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="container" style="margin-top:50px;">
 
         <div class="satu">
             <h1>Invoice Pembelian</h1>
@@ -26,7 +132,7 @@
             </p>
         </div>
         <hr>
-        
+
         <div class="tiga">
             <div class="judul">
                 {% for order_item in order.session.order_items %}
@@ -44,11 +150,11 @@
             <div class="value">
                 {% for order_item in order.session.order_items %}
                 <p>
-                    {{ order_item.quantity }}   |    Rp. {{ order_item.quantity * order_item.product.price }}
+                    {{ order_item.quantity }} | Rp. {{ order_item.quantity * order_item.product.price }}
                 </p>
                 {% endfor %}
                 <p>
-                    {{ total_quantity }}    |   Rp. {{ total_price }}
+                    {{ total_quantity }} | Rp. {{ total_price }}
                 </p>
                 <p>
                     Rp. {{ overall_pay }}
@@ -65,14 +171,14 @@
                 {{ order.payment_detail.payment_method }}
             </p>
             {% if order.payment_detail.payment_method == 'Transfer Bank' %}
-            <p>{{ order.payment_detail.bank_name }} - {{ order.payment_detail.account_number }} </p>
+            <p>{{ account_number }}</p>
             {% endif %}
         </div>
 
     </div>
 
-    <form action="{{ url_for('products') }}" class="btn"> 
-    <button >Home</button>
+    <form action="{{ url_for('profil') }}" class="btn">
+        <button>Kembali</button>
     </form>
 
 </body>

@@ -86,7 +86,7 @@
             <div class="col d-flex justify-content-start" id="profileContainer">
                 <div class="d-flex align-items-center p-3 ms-1">
                     <!-- <img src="../static/asset/Vector.png"> -->
-                    <img src="{{ url_for('static', filename='asset/Navbar/profile_user.png') }}" class="img-fluid me-3">
+                    <img src="{{ url_for('static', filename='asset/profile-user.png') }}" class="img-fluid me-3" width="55px" height="55px">
                     <p class="mt-3"> {% if current_user.is_authenticated %}
                         {{ current_user.username }}
                         {% else %}
@@ -191,6 +191,11 @@
         </div>
         {% endfor %}
     </div>
+    <footer class="bg-dark text-light text-center py-3">
+        <div class="container">
+          <p class="mb-0">Website Cahaya Firman &copy; 2023. All rights reserved.</p>
+        </div>
+      </footer>
     <!-- Product List -->
     <script>
         const urlToProfile = "{{ url_for('profil') }}";
