@@ -671,11 +671,8 @@ def invoice(order_id):
     Penanganan = 1000
     overall_pay = total_price + SubPengiriman + layanan + Penanganan
 
-    bank_name = order.payment_detail.bank_name
-    account_number = order.payment_detail.account_number
-
     # Render the invoice template and pass the necessary data
-    return render_template('invoice.html', order=order, user=current_user, overall_pay=overall_pay, total_price=total_price, total_quantity=total_quantity,account_number=account_number,bank_name=bank_name )
+    return render_template('invoice.html', order=order, user=current_user, overall_pay=overall_pay, total_price=total_price, total_quantity=total_quantity)
 
 @app.route('/add_to_checkout/<int:id_product>', methods=['POST'])
 @login_required
